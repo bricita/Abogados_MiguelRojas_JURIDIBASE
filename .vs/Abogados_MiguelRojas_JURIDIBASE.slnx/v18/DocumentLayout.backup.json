@@ -1,0 +1,275 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|c:\\users\\vbrig\\onedrive - universidad privada del norte\\ciclo 7\\dise\u00F1o y arquitectura de software\\abogados_miguelrojas_juridibase\\abogados_miguelrojas_juridibase\\models\\abogado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|solutionrelative:abogados_miguelrojas_juridibase\\models\\abogado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|c:\\users\\vbrig\\onedrive - universidad privada del norte\\ciclo 7\\dise\u00F1o y arquitectura de software\\abogados_miguelrojas_juridibase\\abogados_miguelrojas_juridibase\\models\\abogadoarea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|solutionrelative:abogados_miguelrojas_juridibase\\models\\abogadoarea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|c:\\users\\vbrig\\onedrive - universidad privada del norte\\ciclo 7\\dise\u00F1o y arquitectura de software\\abogados_miguelrojas_juridibase\\abogados_miguelrojas_juridibase\\models\\abogadoservicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|solutionrelative:abogados_miguelrojas_juridibase\\models\\abogadoservicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|c:\\users\\vbrig\\onedrive - universidad privada del norte\\ciclo 7\\dise\u00F1o y arquitectura de software\\abogados_miguelrojas_juridibase\\abogados_miguelrojas_juridibase\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|solutionrelative:abogados_miguelrojas_juridibase\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|c:\\users\\vbrig\\onedrive - universidad privada del norte\\ciclo 7\\dise\u00F1o y arquitectura de software\\abogados_miguelrojas_juridibase\\abogados_miguelrojas_juridibase\\models\\serviciolegal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|solutionrelative:abogados_miguelrojas_juridibase\\models\\serviciolegal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|c:\\users\\vbrig\\onedrive - universidad privada del norte\\ciclo 7\\dise\u00F1o y arquitectura de software\\abogados_miguelrojas_juridibase\\abogados_miguelrojas_juridibase\\models\\pago.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|solutionrelative:abogados_miguelrojas_juridibase\\models\\pago.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|c:\\users\\vbrig\\onedrive - universidad privada del norte\\ciclo 7\\dise\u00F1o y arquitectura de software\\abogados_miguelrojas_juridibase\\abogados_miguelrojas_juridibase\\models\\notificacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|solutionrelative:abogados_miguelrojas_juridibase\\models\\notificacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|c:\\users\\vbrig\\onedrive - universidad privada del norte\\ciclo 7\\dise\u00F1o y arquitectura de software\\abogados_miguelrojas_juridibase\\abogados_miguelrojas_juridibase\\models\\expediente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|solutionrelative:abogados_miguelrojas_juridibase\\models\\expediente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|c:\\users\\vbrig\\onedrive - universidad privada del norte\\ciclo 7\\dise\u00F1o y arquitectura de software\\abogados_miguelrojas_juridibase\\abogados_miguelrojas_juridibase\\models\\especialista.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|solutionrelative:abogados_miguelrojas_juridibase\\models\\especialista.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|c:\\users\\vbrig\\onedrive - universidad privada del norte\\ciclo 7\\dise\u00F1o y arquitectura de software\\abogados_miguelrojas_juridibase\\abogados_miguelrojas_juridibase\\models\\documentoslegales.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|solutionrelative:abogados_miguelrojas_juridibase\\models\\documentoslegales.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|c:\\users\\vbrig\\onedrive - universidad privada del norte\\ciclo 7\\dise\u00F1o y arquitectura de software\\abogados_miguelrojas_juridibase\\abogados_miguelrojas_juridibase\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|solutionrelative:abogados_miguelrojas_juridibase\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|c:\\users\\vbrig\\onedrive - universidad privada del norte\\ciclo 7\\dise\u00F1o y arquitectura de software\\abogados_miguelrojas_juridibase\\abogados_miguelrojas_juridibase\\models\\cita.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|solutionrelative:abogados_miguelrojas_juridibase\\models\\cita.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|c:\\users\\vbrig\\onedrive - universidad privada del norte\\ciclo 7\\dise\u00F1o y arquitectura de software\\abogados_miguelrojas_juridibase\\abogados_miguelrojas_juridibase\\models\\caso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|solutionrelative:abogados_miguelrojas_juridibase\\models\\caso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|c:\\users\\vbrig\\onedrive - universidad privada del norte\\ciclo 7\\dise\u00F1o y arquitectura de software\\abogados_miguelrojas_juridibase\\abogados_miguelrojas_juridibase\\models\\audiencia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|solutionrelative:abogados_miguelrojas_juridibase\\models\\audiencia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|c:\\users\\vbrig\\onedrive - universidad privada del norte\\ciclo 7\\dise\u00F1o y arquitectura de software\\abogados_miguelrojas_juridibase\\abogados_miguelrojas_juridibase\\models\\areaderecho.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFDCAAED-CB2C-45C5-9C9C-DA728B6E6F80}|Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj|solutionrelative:abogados_miguelrojas_juridibase\\models\\areaderecho.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 169,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Usuario.cs",
+              "DocumentMoniker": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\Usuario.cs",
+              "RelativeDocumentMoniker": "Abogados_MiguelRojas_JURIDIBASE\\Models\\Usuario.cs",
+              "ToolTip": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\Usuario.cs",
+              "RelativeToolTip": "Abogados_MiguelRojas_JURIDIBASE\\Models\\Usuario.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-12T01:29:52.187Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Abogado.cs",
+              "DocumentMoniker": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\Abogado.cs",
+              "RelativeDocumentMoniker": "Abogados_MiguelRojas_JURIDIBASE\\Models\\Abogado.cs",
+              "ToolTip": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\Abogado.cs",
+              "RelativeToolTip": "Abogados_MiguelRojas_JURIDIBASE\\Models\\Abogado.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-12T01:05:13.354Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AbogadoArea.cs",
+              "DocumentMoniker": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\AbogadoArea.cs",
+              "RelativeDocumentMoniker": "Abogados_MiguelRojas_JURIDIBASE\\Models\\AbogadoArea.cs",
+              "ToolTip": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\AbogadoArea.cs",
+              "RelativeToolTip": "Abogados_MiguelRojas_JURIDIBASE\\Models\\AbogadoArea.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-12T01:05:43.275Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AbogadoServicio.cs",
+              "DocumentMoniker": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\AbogadoServicio.cs",
+              "RelativeDocumentMoniker": "Abogados_MiguelRojas_JURIDIBASE\\Models\\AbogadoServicio.cs",
+              "ToolTip": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\AbogadoServicio.cs",
+              "RelativeToolTip": "Abogados_MiguelRojas_JURIDIBASE\\Models\\AbogadoServicio.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-12T01:06:05.363Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ServicioLegal.cs",
+              "DocumentMoniker": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\ServicioLegal.cs",
+              "RelativeDocumentMoniker": "Abogados_MiguelRojas_JURIDIBASE\\Models\\ServicioLegal.cs",
+              "ToolTip": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\ServicioLegal.cs",
+              "RelativeToolTip": "Abogados_MiguelRojas_JURIDIBASE\\Models\\ServicioLegal.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-12T01:29:43.772Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Pago.cs",
+              "DocumentMoniker": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\Pago.cs",
+              "RelativeDocumentMoniker": "Abogados_MiguelRojas_JURIDIBASE\\Models\\Pago.cs",
+              "ToolTip": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\Pago.cs",
+              "RelativeToolTip": "Abogados_MiguelRojas_JURIDIBASE\\Models\\Pago.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-12T01:29:28.94Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Notificacion.cs",
+              "DocumentMoniker": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\Notificacion.cs",
+              "RelativeDocumentMoniker": "Abogados_MiguelRojas_JURIDIBASE\\Models\\Notificacion.cs",
+              "ToolTip": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\Notificacion.cs",
+              "RelativeToolTip": "Abogados_MiguelRojas_JURIDIBASE\\Models\\Notificacion.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-12T01:29:20.619Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Expediente.cs",
+              "DocumentMoniker": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\Expediente.cs",
+              "RelativeDocumentMoniker": "Abogados_MiguelRojas_JURIDIBASE\\Models\\Expediente.cs",
+              "ToolTip": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\Expediente.cs",
+              "RelativeToolTip": "Abogados_MiguelRojas_JURIDIBASE\\Models\\Expediente.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-12T01:29:09.049Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Especialista.cs",
+              "DocumentMoniker": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\Especialista.cs",
+              "RelativeDocumentMoniker": "Abogados_MiguelRojas_JURIDIBASE\\Models\\Especialista.cs",
+              "ToolTip": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\Especialista.cs",
+              "RelativeToolTip": "Abogados_MiguelRojas_JURIDIBASE\\Models\\Especialista.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-12T01:28:58.93Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DocumentosLegales.cs",
+              "DocumentMoniker": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\DocumentosLegales.cs",
+              "RelativeDocumentMoniker": "Abogados_MiguelRojas_JURIDIBASE\\Models\\DocumentosLegales.cs",
+              "ToolTip": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\DocumentosLegales.cs",
+              "RelativeToolTip": "Abogados_MiguelRojas_JURIDIBASE\\Models\\DocumentosLegales.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-12T01:11:33.161Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Cliente.cs",
+              "DocumentMoniker": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\Cliente.cs",
+              "RelativeDocumentMoniker": "Abogados_MiguelRojas_JURIDIBASE\\Models\\Cliente.cs",
+              "ToolTip": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\Cliente.cs",
+              "RelativeToolTip": "Abogados_MiguelRojas_JURIDIBASE\\Models\\Cliente.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-12T01:11:07.407Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Cita.cs",
+              "DocumentMoniker": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\Cita.cs",
+              "RelativeDocumentMoniker": "Abogados_MiguelRojas_JURIDIBASE\\Models\\Cita.cs",
+              "ToolTip": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\Cita.cs",
+              "RelativeToolTip": "Abogados_MiguelRojas_JURIDIBASE\\Models\\Cita.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-12T01:10:47.481Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Caso.cs",
+              "DocumentMoniker": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\Caso.cs",
+              "RelativeDocumentMoniker": "Abogados_MiguelRojas_JURIDIBASE\\Models\\Caso.cs",
+              "ToolTip": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\Caso.cs",
+              "RelativeToolTip": "Abogados_MiguelRojas_JURIDIBASE\\Models\\Caso.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-12T01:10:37.849Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Audiencia.cs",
+              "DocumentMoniker": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\Audiencia.cs",
+              "RelativeDocumentMoniker": "Abogados_MiguelRojas_JURIDIBASE\\Models\\Audiencia.cs",
+              "ToolTip": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\Audiencia.cs",
+              "RelativeToolTip": "Abogados_MiguelRojas_JURIDIBASE\\Models\\Audiencia.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-12T01:10:25.119Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "AreaDerecho.cs",
+              "DocumentMoniker": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\AreaDerecho.cs",
+              "RelativeDocumentMoniker": "Abogados_MiguelRojas_JURIDIBASE\\Models\\AreaDerecho.cs",
+              "ToolTip": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Dise\u00F1o y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Models\\AreaDerecho.cs",
+              "RelativeToolTip": "Abogados_MiguelRojas_JURIDIBASE\\Models\\AreaDerecho.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-12T01:09:43.929Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
