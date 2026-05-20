@@ -3089,23 +3089,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\vbrig\\.nuget\\packages\\": {},
+    "C:\\Users\\ma5ti\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Diseño y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj",
+      "projectUniqueName": "C:\\Users\\ma5ti\\OneDrive\\Documentos\\UPN Mauricio\\Ciclo 7\\Diseño y arquitectura\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj",
       "projectName": "Abogados_MiguelRojas_JURIDIBASE",
-      "projectPath": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Diseño y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj",
-      "packagesPath": "C:\\Users\\vbrig\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vbrig\\OneDrive - Universidad Privada del Norte\\Ciclo 7\\Diseño y Arquitectura de Software\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\obj\\",
+      "projectPath": "C:\\Users\\ma5ti\\OneDrive\\Documentos\\UPN Mauricio\\Ciclo 7\\Diseño y arquitectura\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE.csproj",
+      "packagesPath": "C:\\Users\\ma5ti\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ma5ti\\OneDrive\\Documentos\\UPN Mauricio\\Ciclo 7\\Diseño y arquitectura\\Abogados_MiguelRojas_JURIDIBASE\\Abogados_MiguelRojas_JURIDIBASE\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\vbrig\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ma5ti\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3114,7 +3114,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3181,7 +3180,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.203/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.202/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
