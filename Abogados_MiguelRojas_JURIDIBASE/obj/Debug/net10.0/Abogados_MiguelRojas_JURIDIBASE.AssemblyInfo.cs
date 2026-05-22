@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Abogados_MiguelRojas_JURIDIBASE")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f2ececa7754805a6089c615fb4e152aa18084a2b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f8da12acc33a98a95bfeeb1abc30af896fc12600")]
 [assembly: System.Reflection.AssemblyProductAttribute("Abogados_MiguelRojas_JURIDIBASE")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Abogados_MiguelRojas_JURIDIBASE")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
