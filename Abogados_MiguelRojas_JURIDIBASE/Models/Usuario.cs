@@ -8,11 +8,11 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int idUsuario {  get; set; }
         [Required, StringLength(100)]
-        public string nombre { get; set; }
+        public string nombreUsuario { get; set; }
         [Required, StringLength(50)]
-        public string rol {  get; set; }
+        public string rolUsuario {  get; set; }
         [Required, StringLength(50)]
-        public string password { get; set; }
+        public string passwordUsuario { get; set; }
 
     }
 }

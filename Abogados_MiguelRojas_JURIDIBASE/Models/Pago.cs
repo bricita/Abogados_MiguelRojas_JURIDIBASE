@@ -9,8 +9,11 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Models
         public int idPago { get; set; }
         [Required, StringLength(50)]
         public string metodoPago {  get; set; }
+        [Required]
         public float monto { get; set; }
+        [Required]
         public DateOnly fechaPago { get; set; }
+        public int id_Caso { get; set; }
         public Caso caso {  get; set; }
 
         
