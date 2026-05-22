@@ -25,5 +25,6 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Data
         public DbSet<ServicioLegal> servicios { get; set; }
         public DbSet<Usuario> usuarios { get; set; }
         
+
     }
 }
