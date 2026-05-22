@@ -1,17 +1,20 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Abogados_MiguelRojas_JURIDIBASE.Models
 {
     public class Notificacion
     {
-        public int IdNotificacion { get; set; }
-        public string asuntoNotificacion { get; set; }
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int idNotificacion { get; set; }
+        [Required, StringLength(70)]
+        public string tituloNotificacion { get; set; }
+        [Required, StringLength(500)]
         public string mensajeNotificacion { get; set; }
-        public DateTime fechaEnvioNotificacion { get; set; }
-        public bool leidaNotificacion { get; set; } 
-
-        // Relación con el Expediente al que pertenece la notificación
-        public int IdExpediente { get; set; }
-        public Expediente Expediente { get; set; }
+        [Required]
+        public bool leido { get;set; }
+        [Required]
+        public DateOnly fechaNotificacion { get; set; }
+        
     }
 }
