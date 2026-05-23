@@ -15,6 +15,10 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Models
         public bool leido { get;set; }
         [Required]
         public DateOnly fechaNotificacion { get; set; }
+
+        //Conexion de muchos a uno con usuario
+        public int id_Usuario { get; set; }
+        public Usuario usuario { get; set; }
         
     }
 }

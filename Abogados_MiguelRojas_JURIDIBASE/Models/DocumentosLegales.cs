@@ -14,5 +14,8 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Models
         [Required]
         public DateOnly fechaCreacion { get; set; }
         
+        //Conexion de muchos a uno con Expediente
+        public int id_Expediente { get; set; }
+        public Expediente expediente { get; set; }
     }
 }

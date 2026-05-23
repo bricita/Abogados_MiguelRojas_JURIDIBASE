@@ -18,5 +18,13 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Models
         public DateOnly fechaAudiencia { get; set; }
         [Required]
         public DateTime horaAudiencia { get; set; }
+
+        //Conexion de muchos a uno con Abogado
+        public int id_Abogado { get; set; }
+        public Abogado abogado { get; set; }
+
+        //Conexion de muchos a uno con Caso
+        public int id_Caso { get; set; }
+        public Caso caso { get; set; }
     }
 }

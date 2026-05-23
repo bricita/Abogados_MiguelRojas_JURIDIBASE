@@ -15,5 +15,8 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Models
         public string estadoServicio { get; set; }
         [Required]
         public float costoBase { get; set; }
+
+        //Conexion de uno a muchos con abogadoServicio
+        public ICollection<AbogadoServicio> abogadoServicio { get; set; }
     }
 }

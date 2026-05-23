@@ -13,5 +13,9 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Models
         public string descripcionAreaDerecho { get; set; }
         [Required]
         public bool estadoAreaDerecho { get; set; }
+
+        //Conexion de uno a muchos con AbogadoArea
+        public ICollection<AbogadoArea> abogadoArea { get; set; }
+
     }
 }

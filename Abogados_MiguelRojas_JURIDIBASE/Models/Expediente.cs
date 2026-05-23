@@ -24,5 +24,12 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Models
         [Required, StringLength(10)]
         public string fechaCierre { get; set; }
 
+        //Conexion de uno a uno con Caso
+        public int id_Caso { get; set; }
+        public Caso caso { get; set; }
+
+        //Conexion de uno a muchos con DocumentosLegales
+        public ICollection<DocumentosLegales> documentosLegales { get; set; }
+
     }
 }

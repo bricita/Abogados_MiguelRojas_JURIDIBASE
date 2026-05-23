@@ -6,7 +6,7 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Models
     public class Abogado
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdAbogado { get; set; }
+        public int idAbogado { get; set; }
         [Required, StringLength(150)]
         public string nombreAbogado { get; set; }
         [Required, StringLength(150)]
@@ -22,6 +22,23 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Models
         [Required]
         public bool estadoAbogado { get; set; }
 
+        //Conexion de uno a uno con usuario
+        public int id_Usuario { get; set; }
+        public Usuario usuario { get; set; }
 
+        //Conexion de uno a muchos con AbogadoArea
+        public ICollection<AbogadoArea> abogadoArea { get; set; }
+
+        //Conexion de uno a muchos con AbogadoServicio
+        public ICollection<AbogadoServicio> abogadoServicio { get; set; }
+
+        //Conexion de uno a muchos con Citas
+        public ICollection<Cita> cita { get; set; }
+
+        //Conexion de uno a muchos con Audiencia
+        public ICollection<Audiencia> audiencia { get; set; }
+
+        //Conexion de uno a muchos con caso
+        public ICollection<Caso> caso { get; set; }
     }
 }
