@@ -1,4 +1,26 @@
 ﻿@model Abogados_MiguelRojas_JURIDIBASE.Models.Usuario;
+@{
+    if (User.Identity.IsAuthenticated)
+    {
+        // Usamos los roles exactos definidos en tu switch del Login
+        if (User.IsInRole("Admin"))
+        {
+            Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+        }
+        else if (User.IsInRole("Abogado"))
+        {
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        else if (User.IsInRole("Asistente"))
+        {
+            Layout = "~/Views/Shared/_LayoutAsistente.cshtml";
+        }
+    }
+    else
+    {
+        Layout = null;
+    }
+}
 <div>
     <div class="col-sm-8 offset-1-sm-2">
         <h2>Editar Usuario</h2>
@@ -10,8 +32,13 @@
             </div>
             <div class="mb-3">
                 <label>Rol</label>
-                <input class="form-control" type="email" asp-for="rolUsuario" required />
+                <input class="form-control" type="text" asp-for="rolUsuario" required />
             </div>
+            <div class="mb-3">
+                <label>Contraseña</label>
+                <input class="form-control" type="text" asp-for="passwordUsuario" required />
+            </div>
+
             <div class="mb-3">
                 <button class="btn btn-success" type="submit">Guardar</button>
             </div>

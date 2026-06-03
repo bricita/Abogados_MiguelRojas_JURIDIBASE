@@ -81,6 +81,18 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
         {
             return View();
         }
+        public IActionResult Admin()
+        {
+            return View();
+        }
+        public IActionResult Usuario()
+        {
+            return View();
+        }
+        public IActionResult Asistente()
+        {
+            return View();
+        }
         
     }
 }

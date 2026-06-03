@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260525023124_M3")]
-    partial class M3
+    [Migration("20260603222151_M2")]
+    partial class M2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -283,8 +283,7 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
 
                     b.Property<string>("descripcionCliente")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("direccionCliente")
                         .IsRequired()
@@ -299,6 +298,9 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                     b.Property<bool>("estadoCliente")
                         .HasColumnType("bit");
 
+                    b.Property<int>("idAbogado")
+                        .HasColumnType("int");
+
                     b.Property<string>("nombreCliente")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -306,18 +308,20 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
 
                     b.Property<string>("rucCliente")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("telefonoCliente")
                         .IsRequired()
                         .HasMaxLength(9)
                         .HasColumnType("nvarchar(9)");
 
-                    b.Property<bool>("tipoCliente")
-                        .HasColumnType("bit");
+                    b.Property<string>("tipoCliente")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("idCliente");
+
+                    b.HasIndex("idAbogado");
 
                     b.ToTable("cliente");
                 });
@@ -501,6 +505,12 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                     b.Property<DateOnly>("fechaPago")
                         .HasColumnType("date");
 
+                    b.Property<int>("idAbogado")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idCliente")
+                        .HasColumnType("int");
+
                     b.Property<int>("id_Caso")
                         .HasColumnType("int");
 
@@ -513,6 +523,10 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                         .HasColumnType("real");
 
                     b.HasKey("idPago");
+
+                    b.HasIndex("idAbogado");
+
+                    b.HasIndex("idCliente");
 
                     b.HasIndex("id_Caso");
 
@@ -651,13 +665,13 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                     b.HasOne("Abogados_MiguelRojas_JURIDIBASE.Models.Abogado", "abogado")
                         .WithMany("caso")
                         .HasForeignKey("id_Abogado")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Abogados_MiguelRojas_JURIDIBASE.Models.Cliente", "cliente")
                         .WithMany("caso")
                         .HasForeignKey("id_Cliente")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("abogado");
@@ -670,18 +684,29 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                     b.HasOne("Abogados_MiguelRojas_JURIDIBASE.Models.Abogado", "abogado")
                         .WithMany("cita")
                         .HasForeignKey("id_Abogado")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Abogados_MiguelRojas_JURIDIBASE.Models.Cliente", "cliente")
                         .WithMany("cita")
                         .HasForeignKey("id_Cliente")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("abogado");
 
                     b.Navigation("cliente");
+                });
+
+            modelBuilder.Entity("Abogados_MiguelRojas_JURIDIBASE.Models.Cliente", b =>
+                {
+                    b.HasOne("Abogados_MiguelRojas_JURIDIBASE.Models.Abogado", "abogado")
+                        .WithMany("cliente")
+                        .HasForeignKey("idAbogado")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("abogado");
                 });
 
             modelBuilder.Entity("Abogados_MiguelRojas_JURIDIBASE.Models.DocumentosLegales", b =>
@@ -719,13 +744,29 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
 
             modelBuilder.Entity("Abogados_MiguelRojas_JURIDIBASE.Models.Pago", b =>
                 {
+                    b.HasOne("Abogados_MiguelRojas_JURIDIBASE.Models.Abogado", "abogado")
+                        .WithMany("pago")
+                        .HasForeignKey("idAbogado")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Abogados_MiguelRojas_JURIDIBASE.Models.Cliente", "cliente")
+                        .WithMany("pago")
+                        .HasForeignKey("idCliente")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Abogados_MiguelRojas_JURIDIBASE.Models.Caso", "caso")
                         .WithMany("pago")
                         .HasForeignKey("id_Caso")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("abogado");
+
                     b.Navigation("caso");
+
+                    b.Navigation("cliente");
                 });
 
             modelBuilder.Entity("Abogados_MiguelRojas_JURIDIBASE.Models.Abogado", b =>
@@ -739,6 +780,10 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                     b.Navigation("caso");
 
                     b.Navigation("cita");
+
+                    b.Navigation("cliente");
+
+                    b.Navigation("pago");
                 });
 
             modelBuilder.Entity("Abogados_MiguelRojas_JURIDIBASE.Models.AreaDerecho", b =>
@@ -761,6 +806,8 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                     b.Navigation("caso");
 
                     b.Navigation("cita");
+
+                    b.Navigation("pago");
                 });
 
             modelBuilder.Entity("Abogados_MiguelRojas_JURIDIBASE.Models.Expediente", b =>

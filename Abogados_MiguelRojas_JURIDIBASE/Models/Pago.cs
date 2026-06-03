@@ -13,6 +13,10 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Models
         public float monto { get; set; }
         [Required]
         public DateOnly fechaPago { get; set; }
+        public int idCliente  { get; set; }
+        public Cliente cliente { get; set; }
+        public int idAbogado { get; set; }
+        public Abogado abogado { get; set; }
 
         //Conexion de muchos a uno con Caso
         public int id_Caso { get; set; }

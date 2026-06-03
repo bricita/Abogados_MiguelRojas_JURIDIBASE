@@ -24,6 +24,11 @@
         <span asp-validation-for="dniCliente" class="text-danger"></span>
     </div>
     <div class="form-group">
+        <label asp-for="rucCliente">RUC</label>
+        <input asp-for="rucCliente" class="form-control" />
+        <span asp-validation-for="rucCliente" class="text-danger"></span>
+    </div>
+    <div class="form-group">
         <label asp-for="telefonoCliente">Telefono</label>
         <input asp-for="telefonoCliente" class="form-control" />
         <span asp-validation-for="telefonoCliente" class="text-danger"></span>
@@ -47,6 +52,22 @@
         <input asp-for="tipoCliente" class="form-control" />
         <span asp-validation-for="tipoCliente" class="text-danger"></span>
     </div>
+    @if (ViewBag.AbogadoActual != null)
+    {
+        <input asp-for="idAbogado" type="hidden" value="@ViewBag.AbogadoActual.idAbogado" />
+        <div class="form-group">
+            <label>Abogado</label>
+            <input class="form-control" value="@ViewBag.AbogadoActual.nombreAbogado @ViewBag.AbogadoActual.apellidoAbogado" readonly />
+        </div>
+    }
+    else
+    {
+        <div class="form-group">
+            <label asp-for="idAbogado">Abogado</label>
+            <select asp-for="idAbogado" class="form-control" asp-items="ViewBag.Abogados"></select>
+            <span asp-validation-for="idAbogado" class="text-danger"></span>
+        </div>
+    }
     <button type="submit" class="btn btn-primary">Guardar</button>
     <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
 </form>

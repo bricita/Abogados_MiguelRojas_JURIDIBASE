@@ -1,45 +1,112 @@
-﻿@model Abogados_MiguelRojas_JURIDIBASE.Models.Abogado;
+﻿@model Abogados_MiguelRojas_JURIDIBASE.Models.Abogado
 
-<div>
-    <div class=" col-sm-8 offset-sm-2">
-        <h2> Registro de Abogado</h2>
-        <form asp-controller="Abogado" asp-action="Nuevo" method="post">
-            <div class="mb-3">
-                <label>Nombres</label>
-                <input class="form-control" type="text" asp-for="nombreAbogado" required />
-            </div>
-            <div class="mb-3">
-                <label>Apellidos</label>
-                <input class="form-control" type="text" asp-for="apellidoAbogado" required />
-            </div>
-            <div class="mb-3">
-                <label>Teléfono</label>
-                <input class="form-control" type="text" asp-for="telefonoAbogado" required />
-            </div>
-            <div class="mb-3">
-                <label>DNI</label>
-                <input class="form-control" type="text" asp-for="dniAbogado" required />
-            </div>
-            <div class="mb-3">
-                <label>Correo</label>
-                <input class="form-control" type="email" asp-for="correoAbogado" required />
-            </div>
-            <div class="mb-3">
-                <label>Especialidad</label>
-                <input class="form-control" type="text" asp-for="especialidadAbogado" required />
-            </div>
+@{
+    if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole("Admin"))
+        {
+            Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+        }
+        else if (User.IsInRole("Abogado"))
+        {
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        else if (User.IsInRole("Asistente"))
+        {
+            Layout = "~/Views/Shared/_LayoutAsistente.cshtml";
+        }
+    }
+    else
+    {
+        Layout = null;
+    }
 
-            <div class="mb-3 form-check">
-                <input class="form-check-input" type="checkbox" asp-for="estadoAbogado" id="chkActivo" />
-                <label class="form-check-label" for="chkActivo">Activo</label>
-            </div>
-            <div class="mb-3">
-                <button class="btn btn-success" type="submit">
-                    Guardar
-                </button>
-            </div>
-            <a asp-controller="Abogado" asp-action="Listar" class="btn btn-danger">Volver</a>
-        </form>
+    ViewData["Title"] = "Registro de Abogado";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 col-lg-6">
+
+            <h1 class="mb-4">Nuevo Abogado</h1>
+
+            <form asp-controller="Abogado" asp-action="Nuevo" method="post" autocomplete="off">
+
+                <!-- Campo de Selección de Usuario Vinculado -->
+                <div class="mb-3">
+                    <label class="form-label">Asignar Usuario de Sistema</label>
+                    <select class="form-select" asp-for="id_Usuario" asp-items="ViewBag.Usuarios" required>
+                        <option value="" selected disabled>-- Seleccione el usuario correspondiente --</option>
+                    </select>
+                    <span asp-validation-for="id_Usuario" class="text-danger"></span>
+                    <div class="form-text text-muted small mt-1">
+                        ¿No encuentras el usuario?
+                        <a asp-controller="Usuario" asp-action="Nuevo" class="text-decoration-none fw-semibold">Crear nuevo usuario</a>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Nombres</label>
+                    <input class="form-control" type="text" placeholder="Ej: Miguel Ángel" required asp-for="nombreAbogado" />
+                    <span asp-validation-for="nombreAbogado" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Apellidos</label>
+                    <input class="form-control" type="text" placeholder="Ej: Rojas Flores" required asp-for="apellidoAbogado" />
+                    <span asp-validation-for="apellidoAbogado" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Teléfono</label>
+                    <input class="form-control" type="text" placeholder="Ej: 987654321" required asp-for="telefonoAbogado" />
+                    <span asp-validation-for="telefonoAbogado" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">DNI</label>
+                    <input class="form-control" type="text" placeholder="Número de documento de 8 dígitos" required asp-for="dniAbogado" />
+                    <span asp-validation-for="dniAbogado" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Correo Electrónico</label>
+                    <input class="form-control" type="email" placeholder="ejemplo@estudio.com" required asp-for="correoAbogado" />
+                    <span asp-validation-for="correoAbogado" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Especialidad Jurídica</label>
+                    <input class="form-control" type="text" placeholder="Ej: Derecho Penal, Civil, Laboral" required asp-for="especialidadAbogado" />
+                    <span asp-validation-for="especialidadAbogado" class="text-danger"></span>
+                </div>
+
+                <!-- Checkbox de Estado -->
+                <div class="mb-4 form-check">
+                    <input asp-for="estadoAbogado" type="checkbox" class="form-check-input" id="estadoAbogadoCheck" />
+                    <label class="form-check-label" for="estadoAbogadoCheck">Abogado Activo</label>
+                    <span asp-validation-for="estadoAbogado" class="text-danger"></span>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary me-2">Guardar</button>
+                    <a class="btn btn-secondary me-2" asp-action="Listar">Cancelar</a>
+                    <a asp-controller="Abogado" asp-action="Listar" class="btn btn-danger float-end">Volver</a>
+                </div>
+
+            </form>
+
+            @if (ViewData["Mensaje"] != null)
+            {
+                <div class="alert alert-danger mt-3" role="alert">
+                    @ViewData["Mensaje"]
+                </div>
+            }
+
+        </div>
     </div>
 </div>
 
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

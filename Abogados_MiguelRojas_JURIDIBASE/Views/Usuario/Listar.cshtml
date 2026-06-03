@@ -1,50 +1,82 @@
-﻿@model List<Abogados_MiguelRojas_JURIDIBASE.Models.Usuario>;
+﻿@model IEnumerable<Abogados_MiguelRojas_JURIDIBASE.Models.Usuario>
 
 @{
-    Layout = "_Layout";
+    if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole("Admin"))
+        {
+            Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+        }
+        else if (User.IsInRole("Abogado"))
+        {
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        else if (User.IsInRole("Asistente"))
+        {
+            Layout = "~/Views/Shared/_LayoutAsistente.cshtml";
+        }
+    }
+    else
+    {
+        Layout = null;
+    }
+
+    ViewData["Title"] = "Usuarios";
 }
-<div>
-    <div class="col col-sm-8 offset-sm-2">
-        <a asp-controller="Usuario" asp-action="Nuevo" class="btn btn-primary mb-3">
-            Nuevo Usuario
-        </a>
 
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Rol</th>
-                    <th>Opciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.idUsuario</td>
-                        <td>@item.nombreUsuario</td>
-                        <td>@item.rolUsuario</td>
-                        <td>
-                            <a asp-controller="Usuario" asp-action="Editar" asp-route-id="@item.idUsuario"
-                               class="btn btn-primary mb-3">Editar</a>
-                            <a asp-controller="Usuario" asp-action="Eliminar" asp-route-id="@item.idUsuario"
-                               class="btn btn-danger mb-3" onclick="return confirmar()">
-                                Eliminar
+<h1>Usuarios</h1>
 
-                            </a>
+<p>
+    <a class="btn btn-primary" asp-controller="Usuario" asp-action="Nuevo">Nuevo Usuario</a>
+</p>
 
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</div>
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre de Usuario</th>
+            <th>Rol de Sistema</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.idUsuario</td>
+                <td>@item.nombreUsuario</td>
+                <td>
+                    @if (item.rolUsuario == "Admin")
+                    {
+                        <span class="badge bg-danger">Administrador</span>
+                    }
+                    else if (item.rolUsuario == "Abogado")
+                    {
+                        <span class="badge bg-primary">Abogado</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">@item.rolUsuario</span>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-warning" asp-controller="Usuario" asp-action="Editar" asp-route-id="@item.idUsuario">Editar</a>
+                    <a class="btn btn-sm btn-danger" asp-controller="Usuario" asp-action="Eliminar" asp-route-id="@item.idUsuario" onclick="return confirmar()">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
 @section Scripts {
     <script>
         function confirmar(){
-            return confirm("¿Estás seguro que desea eliminar este usuario?")
+            return confirm("¿Estás seguro de que deseas eliminar este usuario?");
         }
     </script>
 }

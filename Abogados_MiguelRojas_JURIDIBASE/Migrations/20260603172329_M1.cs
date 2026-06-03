@@ -27,27 +27,6 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "cliente",
-                columns: table => new
-                {
-                    idCliente = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    nombreCliente = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    descripcionCliente = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    dniCliente = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
-                    rucCliente = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    telefonoCliente = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
-                    direccionCliente = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    correoCliente = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    estadoCliente = table.Column<bool>(type: "bit", nullable: false),
-                    tipoCliente = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_cliente", x => x.idCliente);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "especialista",
                 columns: table => new
                 {
@@ -89,6 +68,7 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                     idUsuario = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     nombreUsuario = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    rolUsuario = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     passwordUsuario = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
@@ -198,6 +178,34 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "cliente",
+                columns: table => new
+                {
+                    idCliente = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    nombreCliente = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    descripcionCliente = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    dniCliente = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
+                    rucCliente = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    telefonoCliente = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
+                    direccionCliente = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    correoCliente = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    estadoCliente = table.Column<bool>(type: "bit", nullable: false),
+                    tipoCliente = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    idAbogado = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_cliente", x => x.idCliente);
+                    table.ForeignKey(
+                        name: "FK_cliente_abogados_idAbogado",
+                        column: x => x.idAbogado,
+                        principalTable: "abogados",
+                        principalColumn: "idAbogado",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "caso",
                 columns: table => new
                 {
@@ -217,13 +225,13 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                         column: x => x.id_Abogado,
                         principalTable: "abogados",
                         principalColumn: "idAbogado",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_caso_cliente_id_Cliente",
                         column: x => x.id_Cliente,
                         principalTable: "cliente",
                         principalColumn: "idCliente",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -247,13 +255,13 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                         column: x => x.id_Abogado,
                         principalTable: "abogados",
                         principalColumn: "idAbogado",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_cita_cliente_id_Cliente",
                         column: x => x.id_Cliente,
                         principalTable: "cliente",
                         principalColumn: "idCliente",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -278,13 +286,13 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                         column: x => x.id_Abogado,
                         principalTable: "abogados",
                         principalColumn: "idAbogado",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_audiencia_caso_id_Caso",
                         column: x => x.id_Caso,
                         principalTable: "caso",
                         principalColumn: "idCaso",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -323,17 +331,31 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                     metodoPago = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     monto = table.Column<float>(type: "real", nullable: false),
                     fechaPago = table.Column<DateOnly>(type: "date", nullable: false),
+                    idCliente = table.Column<int>(type: "int", nullable: false),
+                    idAbogado = table.Column<int>(type: "int", nullable: false),
                     id_Caso = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_pago", x => x.idPago);
                     table.ForeignKey(
+                        name: "FK_pago_abogados_idAbogado",
+                        column: x => x.idAbogado,
+                        principalTable: "abogados",
+                        principalColumn: "idAbogado",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_pago_caso_id_Caso",
                         column: x => x.id_Caso,
                         principalTable: "caso",
                         principalColumn: "idCaso",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_pago_cliente_idCliente",
+                        column: x => x.idCliente,
+                        principalTable: "cliente",
+                        principalColumn: "idCliente",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -415,6 +437,11 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                 column: "id_Cliente");
 
             migrationBuilder.CreateIndex(
+                name: "IX_cliente_idAbogado",
+                table: "cliente",
+                column: "idAbogado");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_documento_id_Expediente",
                 table: "documento",
                 column: "id_Expediente");
@@ -434,6 +461,16 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                 name: "IX_pago_id_Caso",
                 table: "pago",
                 column: "id_Caso");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pago_idAbogado",
+                table: "pago",
+                column: "idAbogado");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pago_idCliente",
+                table: "pago",
+                column: "idCliente");
         }
 
         /// <inheritdoc />
@@ -476,10 +513,10 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                 name: "caso");
 
             migrationBuilder.DropTable(
-                name: "abogados");
+                name: "cliente");
 
             migrationBuilder.DropTable(
-                name: "cliente");
+                name: "abogados");
 
             migrationBuilder.DropTable(
                 name: "usuario");

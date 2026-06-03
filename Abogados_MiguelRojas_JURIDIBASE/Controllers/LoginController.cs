@@ -95,7 +95,17 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
             HttpContext.Session.SetString("Usuario", usuario_encontrado.nombreUsuario);
             HttpContext.Session.SetInt32("IdUsuario", usuario_encontrado.idUsuario);
 
-            return RedirectToAction("Index", "Home");
+            switch (usuario_encontrado.rolUsuario)
+            {
+                case "Admin":
+                    return RedirectToAction("Admin", "Usuario");
+                case "Abogado":
+                    return RedirectToAction("Index", "Home");
+                case "Asistente":
+                    return RedirectToAction("Index", "Asistente");
+                default:
+                    return RedirectToAction("Index", "Admin");
+            }
         }
         public async Task<IActionResult> Logout()
         {
@@ -105,6 +115,12 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
         }
         public IActionResult AccesoDenegado()
         {
+            return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            
             return View();
         }
     }

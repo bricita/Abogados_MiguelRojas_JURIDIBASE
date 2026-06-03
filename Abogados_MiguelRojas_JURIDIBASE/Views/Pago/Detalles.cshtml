@@ -1,0 +1,51 @@
+@model Abogados_MiguelRojas_JURIDIBASE.Models.Pago
+
+@{
+    if (User.Identity.IsAuthenticated)
+    {
+        // Usamos los roles exactos definidos en tu switch del Login
+        if (User.IsInRole("Admin"))
+        {
+            Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+        }
+        else if (User.IsInRole("Abogado"))
+        {
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        else if (User.IsInRole("Asistente"))
+        {
+            Layout = "~/Views/Shared/_LayoutAsistente.cshtml";
+        }
+    }
+    else
+    {
+        Layout = null;
+    }
+
+    ViewData["Title"] = "Detalle de Pago";
+}
+
+<h1>Detalle de Pago</h1>
+
+<dl class="row">
+    <dt class="col-sm-3">Cliente</dt>
+    <dd class="col-sm-9">@Model.cliente?.nombreCliente</dd>
+
+    <dt class="col-sm-3">Abogado</dt>
+    <dd class="col-sm-9">@(Model.abogado != null ? $"{Model.abogado.nombreAbogado} {Model.abogado.apellidoAbogado}" : "")</dd>
+
+    <dt class="col-sm-3">Caso</dt>
+    <dd class="col-sm-9">@Model.caso?.tituloCaso</dd>
+
+    <dt class="col-sm-3">Metodo</dt>
+    <dd class="col-sm-9">@Model.metodoPago</dd>
+
+    <dt class="col-sm-3">Monto</dt>
+    <dd class="col-sm-9">@Model.monto.ToString("N2")</dd>
+
+    <dt class="col-sm-3">Fecha</dt>
+    <dd class="col-sm-9">@Model.fechaPago</dd>
+</dl>
+
+<a class="btn btn-warning" asp-action="Editar" asp-route-id="@Model.idPago">Editar</a>
+<a class="btn btn-secondary" asp-action="Listar">Volver</a>
