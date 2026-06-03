@@ -1,6 +1,26 @@
 ﻿@model IEnumerable<Abogados_MiguelRojas_JURIDIBASE.Models.Especialista>
 
 @{
+    if (User.Identity.IsAuthenticated)
+    {
+        // Usamos los roles exactos definidos en tu switch del Login
+        if (User.IsInRole("Admin"))
+        {
+            Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+        }
+        else if (User.IsInRole("Abogado"))
+        {
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        else if (User.IsInRole("Asistente"))
+        {
+            Layout = "~/Views/Shared/_LayoutAsistente.cshtml";
+        }
+    }
+    else
+    {
+        Layout = "~/Views/Shared/Layout_Limpio.cshtml";
+    }
     ViewData["Title"] = "Especialistas";
 }
 

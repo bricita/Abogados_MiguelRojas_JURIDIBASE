@@ -6,7 +6,7 @@
         // Usamos los roles exactos definidos en tu switch del Login
         if (User.IsInRole("Admin"))
         {
-            Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+            Layout = "~/Views/Shared/_LayoutAsistente.cshtml";
         }
         else if (User.IsInRole("Abogado"))
         {
@@ -19,7 +19,7 @@
     }
     else
     {
-        Layout = null;
+        Layout = "~/Views/Shared/Layout_Limpio.cshtml";
     }
 
     ViewData["Title"] = "Nuevo Pago";
