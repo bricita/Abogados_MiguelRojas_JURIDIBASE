@@ -1,0 +1,54 @@
+﻿@model List<Abogados_MiguelRojas_JURIDIBASE.Models.Abogado>
+<div>
+    <div class="col_sm_B offset-sm-2">
+        <a asp-controller="Abogado" asp-action="Nuevo" class="btn btn-primary mb-3">Nuevo</a>
+        <table class=" table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Teléfono</th>
+                    <th>DNI</th>
+                    <th>Correo</th>
+                    <th>Especialidad</th>
+                    <th>Activo</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tboy>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.idAbogado</td>
+                        <td>@item.nombreAbogado</td>
+                        <td>@item.apellidoAbogado</td>
+                        <td>@item.telefonoAbogado</td>
+                        <td>@item.dniAbogado</td>
+                        <td>@item.correoAbogado</td>
+                        <td>@item.especialidadAbogado</td>
+                        <td>@(item.estadoAbogado ? "Si" : "No")</td>
+                        <td>
+                            <a asp-controller="Abogado" asp-action="Editar" asp-route-id="@item.idAbogado"
+                                   class=" btn btn-primary nm-3">
+                                Editar
+                            </a>
+                            <a asp-controller="Abogado" asp-action="Eliminar" asp-route-id="@item.idAbogado"
+                                   class=" btn btn-danger nm-3" onclick="return confirmar()">
+                                Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tboy>
+        </table>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        function confirmar() {
+            return confirm("¿Está seguro que desea eliminar este abogado?")
+        }
+    </script>
+}
+
