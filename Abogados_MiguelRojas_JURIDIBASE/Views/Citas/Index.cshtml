@@ -1,46 +1,99 @@
-@model IEnumerable<Abogados_MiguelRojas_JURIDIBASE.Models.Cita>
+@model List<Abogados_MiguelRojas_JURIDIBASE.Models.Cliente>
 
 @{
-    ViewData["Title"] = "Citas";
+    Layout = "_Layout";
+    ViewData["Title"] = "Listado de Clientes";
 }
 
-<h1>Citas</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
 
-<p>
-    <a class="btn btn-primary" href="@Url.Action("Create")">Nueva Cita</a>
-</p>
+            <!-- Encabezado alineado al estilo del bufete -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0 text-secondary-juridico">Listado de Clientes</h2>
+                <!-- CORREGIDO: Apunta a Clientes (Plural) y a la acción Create -->
+                <a asp-controller="Clientes" asp-action="Create" class="btn btn-juridico">
+                    <i class="bi bi-person-plus-fill me-2"></i>Nuevo Cliente
+                </a>
+            </div>
 
-@if (TempData["Success"] != null)
-{
-    <div class="alert alert-success">@TempData["Success"]</div>
+            <!-- Tabla responsiva adaptada a la paleta Gris Acero -->
+            <div class="table-responsive bg-white p-3 rounded shadow-sm border border-juridico">
+                <table class="table table-hover align-middle mb-0">
+                    <thead style="background-color: var(--deep-dark-blue); color: white;">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>DNI</th>
+                            <th>RUC</th>
+                            <th>Teléfono</th>
+                            <th>Dirección</th>
+                            <th>Correo</th>
+                            <th>Estado</th>
+                            <th>Tipo</th>
+                            <th class="text-center">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="fw-semibold">@item.idCliente</td>
+                                <td>@item.nombreCliente</td>
+                                <td class="text-muted small">@item.descripcionCliente</td>
+                                <td>@item.dniCliente</td>
+                                <td>@item.rucCliente</td>
+                                <td>@item.telefonoCliente</td>
+                                <td>@item.direccionCliente</td>
+                                <td>@item.correoCliente</td>
+                                <td>
+                                    @if (item.estadoCliente)
+                                    {
+                                        <span class="badge bg-success">Activo</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">Inactivo</span>
+                                    }
+                                </td>
+                                <td>@item.tipoCliente</td>
+                                <td>
+                                    <div class="d-flex gap-1 justify-content-center">
+                                        <!-- BOTÓN DETAILS: Para abrir los detalles del cliente -->
+                                        <a asp-controller="Clientes" asp-action="Details" asp-route-id="@item.idCliente"
+                                           class="btn btn-sm btn-outline-secondary" title="Ver Detalles">
+                                            <i class="bi bi-eye-fill"></i>
+                                        </a>
+
+                                        <!-- CORREGIDO: Apunta a Clientes y a Edit -->
+                                        <a asp-controller="Clientes" asp-action="Edit" asp-route-id="@item.idCliente"
+                                           class="btn btn-sm btn-outline-primary" title="Editar">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </a>
+
+                                        <!-- CORREGIDO: Apunta a Clientes y a Delete -->
+                                        <a asp-controller="Clientes" asp-action="Delete" asp-route-id="@item.idCliente"
+                                           class="btn btn-sm btn-outline-danger" title="Eliminar" onclick="return confirmar()">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function confirmar(){
+            return confirm("¿Estás seguro de que deseas eliminar este cliente del sistema?");
+        }
+    </script>
 }
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Asunto</th>
-            <th>Abogado</th>
-            <th>Cliente</th>
-            <th>Fecha</th>
-            <th>Estado</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model)
-{
-    <tr>
-        <td>@item.asuntoLegalCita</td>
-        <td>@(item.abogado != null ? item.abogado.nombreAbogado : "-")</td>
-        <td>@(item.cliente != null ? item.cliente.nombreCliente : "-")</td>
-        <td>@item.fechaHoraCita.ToString()</td>
-        <td>@(item.estadoCita ? "Activa" : "Inactiva")</td>
-        <td>
-            <a class="btn btn-sm btn-info" href="@Url.Action("Details", new { id = item.idCita })">Ver</a>
-            <a class="btn btn-sm btn-warning" href="@Url.Action("Edit", new { id = item.idCita })">Editar</a>
-            <a class="btn btn-sm btn-danger" href="@Url.Action("Delete", new { id = item.idCita })">Eliminar</a>
-        </td>
-    </tr>
-}
-    </tbody>
-</table>

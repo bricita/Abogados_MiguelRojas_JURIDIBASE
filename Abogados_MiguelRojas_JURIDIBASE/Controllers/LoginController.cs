@@ -69,7 +69,7 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM model)
         {
-            Usuario? usuario_encontrado = await _dbconext.usuario.Where(u => u.nombreUsuario == model.Email && u.passwordUsuario == model.Password).FirstOrDefaultAsync();
+            Usuario? usuario_encontrado = await _dbconext.usuario.Where(u => u.nombreUsuario == model.NombreUser && u.passwordUsuario == model.Password).FirstOrDefaultAsync();
             if (usuario_encontrado == null)
             {
                 ViewData["Mensaje"] = "No se encontraron usuarios";
@@ -78,7 +78,7 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.Name, usuario_encontrado.nombreUsuario),
-                new Claim(ClaimTypes.Email, usuario_encontrado.passwordUsuario),
+                new Claim(ClaimTypes.Role, usuario_encontrado.rolUsuario),
                 new Claim("IdUsuario", usuario_encontrado.idUsuario.ToString())
             };
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

@@ -1,6 +1,6 @@
 ﻿using Abogados_MiguelRojas_JURIDIBASE.Data;
 using Abogados_MiguelRojas_JURIDIBASE.Models;
-using Abogados_MiguelRojas_JURIDIBASE.ViewModel;
+using Abogados_MiguelRojas_JURIDIBASE.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,32 +19,41 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
             List<Usuario> lista = await _context.usuario.ToListAsync(); 
             return View(lista);
         }
+        
         [HttpGet]
-        public async Task<IActionResult> Nuevo()
+        public IActionResult Nuevo()
         {
-            // Cargamos los roles desde la base de datos para el select de la vista
             
-            return View();
+            return View(new Abogados_MiguelRojas_JURIDIBASE.ViewModels.UsuarioVM());
         }
 
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Nuevo(Usuario usuario, string RepPassword)
+        public async Task<IActionResult> Nuevo(UsuarioVM model)
         {
-            // 1. Validación de contraseñas en el controlador
-            if (usuario.passwordUsuario != RepPassword)
+            
+            if (model.password != model.RepPassword)
             {
                 ViewData["Mensaje"] = "Las contraseñas no coinciden";
 
-                // Retornamos el objeto 'usuario' para no perder lo que ya escribió el usuario
-                return View(usuario);
+            
+                return View(model);
             }
 
-            // 2. Tu código principal exacto de inserción
+            
+            Usuario usuario = new Usuario()
+            {
+                nombreUsuario = model.nombreUsuario,
+                passwordUsuario = model.password,
+                rolUsuario = model.rolUsuario
+            };
+
+            
             await _context.usuario.AddAsync(usuario);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Listar));
+            return RedirectToAction("Login", "Login");
         }
         [HttpGet]
         public async Task<IActionResult> Editar(int id)

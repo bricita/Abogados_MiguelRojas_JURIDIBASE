@@ -1,32 +1,65 @@
-@model Abogados_MiguelRojas_JURIDIBASE.Models.Cliente
+@model List<Abogados_MiguelRojas_JURIDIBASE.Models.Cliente>;
 
 @{
-    ViewData["Title"] = "Detalle Cliente";
+    Layout = "_Layout";
 }
-
-<h1>Detalle Cliente</h1>
-
 <div>
-    <h4>Cliente</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">Nombre</dt>
-        <dd class="col-sm-10">@Model.nombreCliente</dd>
+    <div class="col col-sm-8 offset-sm-2">
+        <a asp-controller="Cliente" asp-action="Details" class="btn btn-primary mb-3">
+            Nuevo Cliente
+        </a>
 
-        <dt class="col-sm-2">Descripción</dt>
-        <dd class="col-sm-10">@Model.descripcionCliente</dd>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Rol</th>
+                    <th>Descripcion</th>
+                    <th>DNI</th>
+                    <th>RUC</th>
+                    <th>Telefono</th>
+                    <th>Dirección</th>
+                    <th>Correo</th>
+                    <th>Estado</th>
+                    <th>Tipo</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.idCliente</td>
+                        <td>@item.nombreCliente</td>
+                        <td>@item.descripcionCliente</td>>
+                        <td>@item.dniCliente</td>
+                        <td>@item.rucCliente</td>
+                        <td>@item.telefonoCliente</td>>
+                        <td>@item.direccionCliente</td>
+                        <td>@item.correoCliente</td>
+                        <td>@item.estadoCliente</td>>
+                        <td>@item.tipoCliente</td>
+                        <td>
+                            <a asp-controller="Usuario" asp-action="Editar" asp-route-id="@item.idCliente"
+                               class="btn btn-primary mb-3">Editar</a>
+                            <a asp-controller="Usuario" asp-action="Eliminar" asp-route-id="@item.idCliente"
+                               class="btn btn-danger mb-3" onclick="return confirmar()">
+                                Eliminar
 
-        <dt class="col-sm-2">DNI</dt>
-        <dd class="col-sm-10">@Model.dniCliente</dd>
+                            </a>
 
-        <dt class="col-sm-2">Teléfono</dt>
-        <dd class="col-sm-10">@Model.telefonoCliente</dd>
-
-        <dt class="col-sm-2">Correo</dt>
-        <dd class="col-sm-10">@Model.correoCliente</dd>
-    </dl>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
-
-<p>
-    <a class="btn btn-secondary" asp-action="Index">Volver</a>
-</p>
+@section Scripts {
+    <script>
+        function confirmar(){
+            return confirm("¿Estás seguro que desea eliminar este usuario?")
+        }
+    </script>
+}
