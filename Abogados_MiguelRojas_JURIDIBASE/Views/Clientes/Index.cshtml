@@ -1,0 +1,48 @@
+@model IEnumerable<Abogados_MiguelRojas_JURIDIBASE.Models.Cliente>
+
+@{
+    ViewData["Title"] = "Clientes";
+}
+
+<h1>Clientes</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Nuevo Cliente</a>
+</p>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>DNI</th>
+            <th>Teléfono</th>
+            <th>Correo</th>
+            <th>Estado</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@item.nombreCliente</td>
+        <td>@item.descripcionCliente</td>
+        <td>@item.dniCliente</td>
+        <td>@item.telefonoCliente</td>
+        <td>@item.correoCliente</td>
+        <td>@(item.estadoCliente ? "Activo" : "Inactivo")</td>
+        <td>
+            <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.idCliente">Ver</a>
+            <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.idCliente">Editar</a>
+            <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.idCliente">Eliminar</a>
+        </td>
+    </tr>
+}
+    </tbody>
+</table>

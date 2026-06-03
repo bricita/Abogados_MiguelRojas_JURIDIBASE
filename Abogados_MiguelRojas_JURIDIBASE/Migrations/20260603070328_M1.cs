@@ -89,7 +89,6 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                     idUsuario = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     nombreUsuario = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    rolUsuario = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     passwordUsuario = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>

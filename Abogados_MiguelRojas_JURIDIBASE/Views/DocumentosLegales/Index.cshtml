@@ -1,0 +1,41 @@
+@model IEnumerable<Abogados_MiguelRojas_JURIDIBASE.Models.DocumentosLegales>
+
+@{
+    ViewData["Title"] = "Documentos Legales";
+}
+
+<h1>Documentos</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Agregar Documento</a>
+</p>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Expediente</th>
+            <th>Fecha</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@item.nombreDocumento</td>
+        <td>@(item.expediente != null ? item.expediente.tituloExpediente : "-")</td>
+        <td>@item.fechaCreacion.ToString()</td>
+        <td>
+            <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.idDocumentoLegal">Ver</a>
+            <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.idDocumentoLegal">Eliminar</a>
+        </td>
+    </tr>
+}
+    </tbody>
+</table>

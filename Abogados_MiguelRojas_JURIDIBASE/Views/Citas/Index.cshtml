@@ -1,0 +1,46 @@
+@model IEnumerable<Abogados_MiguelRojas_JURIDIBASE.Models.Cita>
+
+@{
+    ViewData["Title"] = "Citas";
+}
+
+<h1>Citas</h1>
+
+<p>
+    <a class="btn btn-primary" href="@Url.Action("Create")">Nueva Cita</a>
+</p>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Asunto</th>
+            <th>Abogado</th>
+            <th>Cliente</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@item.asuntoLegalCita</td>
+        <td>@(item.abogado != null ? item.abogado.nombreAbogado : "-")</td>
+        <td>@(item.cliente != null ? item.cliente.nombreCliente : "-")</td>
+        <td>@item.fechaHoraCita.ToString()</td>
+        <td>@(item.estadoCita ? "Activa" : "Inactiva")</td>
+        <td>
+            <a class="btn btn-sm btn-info" href="@Url.Action("Details", new { id = item.idCita })">Ver</a>
+            <a class="btn btn-sm btn-warning" href="@Url.Action("Edit", new { id = item.idCita })">Editar</a>
+            <a class="btn btn-sm btn-danger" href="@Url.Action("Delete", new { id = item.idCita })">Eliminar</a>
+        </td>
+    </tr>
+}
+    </tbody>
+</table>

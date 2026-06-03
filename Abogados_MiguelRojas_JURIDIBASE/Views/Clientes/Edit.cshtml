@@ -1,0 +1,55 @@
+@model Abogados_MiguelRojas_JURIDIBASE.Models.Cliente
+
+@{
+    ViewData["Title"] = "Editar Cliente";
+}
+
+<h1>Editar Cliente</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="idCliente" />
+    <div class="form-group">
+        <label asp-for="nombreCliente"></label>
+        <input asp-for="nombreCliente" class="form-control" />
+        <span asp-validation-for="nombreCliente" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="descripcionCliente"></label>
+        <textarea asp-for="descripcionCliente" class="form-control"></textarea>
+        <span asp-validation-for="descripcionCliente" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="dniCliente"></label>
+        <input asp-for="dniCliente" class="form-control" />
+        <span asp-validation-for="dniCliente" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="telefonoCliente"></label>
+        <input asp-for="telefonoCliente" class="form-control" />
+        <span asp-validation-for="telefonoCliente" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="correoCliente"></label>
+        <input asp-for="correoCliente" class="form-control" />
+        <span asp-validation-for="correoCliente" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="direccionCliente"></label>
+        <input asp-for="direccionCliente" class="form-control" />
+        <span asp-validation-for="direccionCliente" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="estadoCliente"></label>
+        <input asp-for="estadoCliente" type="checkbox" />
+    </div>
+    <div class="form-group">
+        <label asp-for="tipoCliente">Tipo</label>
+        <input asp-for="tipoCliente" type="checkbox" />
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
