@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Abogados_MiguelRojas_JURIDIBASE.Models.Especialista>
+
+@{
+    ViewData["Title"] = "Especialistas";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Gestión de Especialistas</h2>
+        <a asp-action="Nuevo" class="btn btn-primary">Nuevo Especialista</a>
+    </div>
+
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>DNI</th>
+                <th>Teléfono</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.idEspecialista</td>
+                    <td>@item.nombreEspecialista</td>
+                    <td>@item.dniEspecialista</td>
+                    <td>@item.telefonoEspecialista</td>
+                    <td>
+                        <span class="badge @(item.estadoEspecialista == "Activo" ? "bg-success" : "bg-secondary")">
+                            @item.estadoEspecialista
+                        </span>
+                    </td>
+                    <td>
+                        <a asp-action="Editar" asp-route-id="@item.idEspecialista" class="btn btn-sm btn-warning">Editar</a>
+                        <a asp-action="Eliminar" asp-route-id="@item.idEspecialista" class="btn btn-sm btn-danger" onclick="return confirm('¿Está seguro de eliminar este especialista?');">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
