@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Abogados_MiguelRojas_JURIDIBASE.Models.Notificacion>
+
+@{
+    ViewData["Title"] = "Notificaciones";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Bandeja de Notificaciones</h2>
+        <a asp-action="Nuevo" class="btn btn-primary">Crear Notificación</a>
+    </div>
+
+    <table class="table table-striped table-hover shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Mensaje</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.idNotificacion</td>
+                    <td>@item.tituloNotificacion</td>
+                    <td>@(item.mensajeNotificacion.Length > 50 ? item.mensajeNotificacion.Substring(0, 50) + "..." : item.mensajeNotificacion)</td>
+                    <td>@item.fechaNotificacion.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        <span class="badge @(item.leido ? "bg-secondary" : "bg-success")">
+                            @(item.leido ? "Leído" : "No Leído")
+                        </span>
+                    </td>
+                    <td>
+                        <a asp-action="Editar" asp-route-id="@item.idNotificacion" class="btn btn-sm btn-warning">Editar</a>
+                        <a asp-action="Eliminar" asp-route-id="@item.idNotificacion" class="btn btn-sm btn-danger" onclick="return confirm('¿Seguro que desea eliminar esta notificación?');">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

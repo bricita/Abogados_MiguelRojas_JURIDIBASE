@@ -1,0 +1,75 @@
+﻿@model Abogados_MiguelRojas_JURIDIBASE.Models.Expediente
+
+@{
+    ViewData["Title"] = "Editar Expediente";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-warning">
+            <h4 class="mb-0">Editar Expediente: @Model.tituloExpediente</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Editar" method="post">
+                <input type="hidden" asp-for="idExpediente" />
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Título del Expediente</label>
+                        <input asp-for="tituloExpediente" class="form-control" required maxlength="70" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Tipo de Expediente</label>
+                        <input asp-for="tipoExpediente" class="form-control" required maxlength="70" />
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Resumen del Expediente</label>
+                    <textarea asp-for="resumenExpediente" class="form-control" rows="3" required maxlength="200"></textarea>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Víctima</label>
+                        <input asp-for="victima" class="form-control" required maxlength="20" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Victimario</label>
+                        <input asp-for="victimario" class="form-control" required maxlength="20" />
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Fecha de Inicio</label>
+                        <input asp-for="fechaInicio" class="form-control" type="date" required maxlength="10" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Fecha de Cierre</label>
+                        <input asp-for="fechaCierre" class="form-control" type="date" required maxlength="10" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Estado</label>
+                        <select asp-for="estadoExpediente" class="form-select">
+                            <option value="true">Activo</option>
+                            <option value="false">Cerrado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label">ID Caso Asociado</label>
+                        <input asp-for="id_Caso" class="form-control" type="number" required />
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Listar" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-warning">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
