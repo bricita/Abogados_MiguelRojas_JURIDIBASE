@@ -565,11 +565,6 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("rolUsuario")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.HasKey("idUsuario");
 
                     b.ToTable("usuario");

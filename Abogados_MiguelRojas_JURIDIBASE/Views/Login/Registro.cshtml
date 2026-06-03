@@ -1,0 +1,46 @@
+﻿@model Abogados_MiguelRojas_JURIDIBASE.ViewModels.AbogadoVM;
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Registro</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    </head>
+    <body>
+        <div class="row mt-5 justify-content-center">
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-header">
+                        Registro
+                    </div>
+                    <div class="card-body">
+                        <form asp-controller="Login" asp-action="Registro" method="post" autocomplete="off">
+                            <input class="form-control mb-3" type="text" placeholder="Nombres" required asp-for="Nombre" /> 
+                            <input class="form-control mb-3" type="text" placeholder="Apellidos" required asp-for="Apellido" />
+                            <input class="form-control mb-3" type="text" placeholder="Telefono" required asp-for="Telefono" />
+                            <input class="form-control mb-3" type="text" placeholder="DNI" required asp-for="DNI" />
+                            <input class="form-control mb-3" type="text" placeholder="Especialidad" required asp-for="Especialidad" />
+                            <input class="form-control mb-3" type="email" placeholder="Correo" required asp-for="Correo" />
+                            <input class="form-control mb-3" type="password" placeholder="Contraseña" required asp-for="Password" />
+                            <input class="form-control mb-3" type="password" placeholder="Repetir Contraseña" required asp-for="RepPassword" />
+                            <div class="d-grid gap-2 mb-3">
+                                <button class="btn btn-primary" type="submit">Registrarse</button>
+                            </div>
+                        </form>
+                        @if (ViewData["Mensaje"] != null)
+                                {
+                                    <div class="alert alert-danger" role="alert">
+                                        @ViewData["Mensaje"]
+                                    </div>
+                                }
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>

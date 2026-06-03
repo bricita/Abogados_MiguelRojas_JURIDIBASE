@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260523165510_M1")]
+    [Migration("20260603070328_M1")]
     partial class M1
     {
         /// <inheritdoc />
@@ -564,11 +564,6 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("passwordUsuario")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("rolUsuario")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
