@@ -86,6 +86,7 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
         }
 
         // GET: Clientes/Details/5
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();

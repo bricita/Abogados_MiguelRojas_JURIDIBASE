@@ -24,7 +24,7 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Models
         [Required]
         public bool estadoCliente { get; set; }
         [Required]
-        public bool tipoCliente { get; set; }
+        public string tipoCliente { get; set; }
 
         //Conexion de uno a muchos con Cita
         public ICollection<Cita> cita { get; set; }
