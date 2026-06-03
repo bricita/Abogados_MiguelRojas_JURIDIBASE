@@ -1,0 +1,43 @@
+@model Abogados_MiguelRojas_JURIDIBASE.Models.Cita
+
+@{
+    ViewData["Title"] = "Crear Cita";
+}
+
+<h1>Crear Cita</h1>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="asuntoLegalCita"></label>
+        <input asp-for="asuntoLegalCita" class="form-control" />
+        <span asp-validation-for="asuntoLegalCita" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="detallesAdicionalesCita"></label>
+        <textarea asp-for="detallesAdicionalesCita" class="form-control"></textarea>
+        <span asp-validation-for="detallesAdicionalesCita" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="fechaHoraCita"></label>
+        <input asp-for="fechaHoraCita" type="datetime-local" class="form-control" />
+        <span asp-validation-for="fechaHoraCita" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="id_Abogado">Abogado</label>
+        <select asp-for="id_Abogado" class="form-control" asp-items="ViewBag.Abogados"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="id_Cliente">Cliente</label>
+        <select asp-for="id_Cliente" class="form-control" asp-items="ViewBag.Clientes"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="estadoCita"></label>
+        <input asp-for="estadoCita" type="checkbox" />
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a class="btn btn-secondary" href="@Url.Action("Index")">Cancelar</a>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
