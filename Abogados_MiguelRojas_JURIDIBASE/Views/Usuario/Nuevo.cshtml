@@ -1,0 +1,55 @@
+﻿@model Abogados_MiguelRojas_JURIDIBASE.Models.Usuario
+
+<div class="row mt-5 justify-content-center">
+    <div class="col-sm-6 col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Registro de Nuevo Usuario</h5>
+            </div>
+            <div class="card-body">
+                <form asp-controller="Usuario" asp-action="Nuevo" method="post" autocomplete="off">
+
+                    <div class="mb-3">
+                        <label class="form-label">Nombre de Usuario</label>
+                        <input class="form-control" type="text" placeholder="Ej: mrojas" required asp-for="nombreUsuario" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Rol del Usuario</label>
+                        <select class="form-select" required asp-for="rolUsuario">
+                            <option value="">Seleccione un Rol</option>
+                            <option value="Admin">Administrador</option>
+                            <option value="Abogado">Abogado</option>
+                            <option value="Asistente">Asistente</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Contraseña</label>
+                        <input class="form-control" type="password" placeholder="Ingrese contraseña" required asp-for="passwordUsuario" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Confirmar Contraseña</label>
+                        <input class="form-control" type="password" name="RepPassword" placeholder="Repita la contraseña" required />
+                    </div>
+
+                    <div class="d-grid gap-2 mb-3">
+                        <button class="btn btn-success" type="submit">Guardar</button>
+                    </div>
+                </form>
+
+                @if (ViewData["Mensaje"] != null)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @ViewData["Mensaje"]
+                    </div>
+                }
+
+                <div class="text-center mt-2">
+                    <a asp-action="Listar" class="text-secondary small">Volver al listado</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+﻿@model List<Abogados_MiguelRojas_JURIDIBASE.Models.Usuario>;
+<div>
+    <div class="col col-sm-8 offset-sm-2">
+        <a asp-controller="Usuario" asp-action="Nuevo" class="btn btn-primary mb-3">
+            Nuevo Usuario
+        </a>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Rol</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.idUsuario</td>
+                        <td>@item.nombreUsuario</td>
+                        <td>@item.rolUsuario</td>
+                        <td>
+                            <a asp-controller="Usuario" asp-action="Editar" asp-route-id="@item.idUsuario"
+                               class="btn btn-primary mb-3">Editar</a>
+                            <a asp-controller="Usuario" asp-action="Eliminar" asp-route-id="@item.idUsuario"
+                               class="btn btn-danger mb-3" onclick="return confirmar()">
+                                Eliminar
+
+                            </a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        function confirmar(){
+            return confirm("¿Estás seguro que desea eliminar este usuario?")
+        }
+    </script>
+}
