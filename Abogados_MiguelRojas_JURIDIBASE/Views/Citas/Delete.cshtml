@@ -1,0 +1,29 @@
+@model Abogados_MiguelRojas_JURIDIBASE.Models.Cita
+
+@{
+    ViewData["Title"] = "Eliminar Cita";
+}
+
+<h1>Eliminar Cita</h1>
+
+<h3>¿Está seguro que desea eliminar esta cita?</h3>
+<div>
+    <h4>Cita</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Asunto</dt>
+        <dd class="col-sm-10">@Model.asuntoLegalCita</dd>
+
+        <dt class="col-sm-2">Fecha</dt>
+        <dd class="col-sm-10">@Model.fechaHoraCita.ToString()</dd>
+
+        <dt class="col-sm-2">Abogado</dt>
+        <dd class="col-sm-10">@(Model.abogado != null ? Model.abogado.nombreAbogado : "-")</dd>
+    </dl>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="idCita" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a class="btn btn-secondary" href="@Url.Action("Index")">Cancelar</a>
+</form>
