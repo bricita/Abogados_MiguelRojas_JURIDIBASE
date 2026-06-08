@@ -1,0 +1,32 @@
+﻿@model Abogados_MiguelRojas_JURIDIBASE.Models.Audiencia
+
+@{
+    ViewData["Title"] = "Detalle Audiencia";
+}
+
+<h1>Detalle Audiencia</h1>
+<hr />
+<dl class="row">
+    <dt class="col-sm-2">Dirección</dt>
+    <dd class="col-sm-10">@Model.direccionAudiencia</dd>
+
+    <dt class="col-sm-2">Tipo</dt>
+    <dd class="col-sm-10">@Model.tipoAudiencia</dd>
+
+    <dt class="col-sm-2">Link</dt>
+    <dd class="col-sm-10"><a href="@Model.linkAudiencia" target="_blank">@Model.linkAudiencia</a></dd>
+
+    <dt class="col-sm-2">Fecha</dt>
+    <dd class="col-sm-10">@Model.fechaAudiencia.ToString("dd/MM/yyyy")</dd>
+
+    <dt class="col-sm-2">Hora</dt>
+    <dd class="col-sm-10">@Model.horaAudiencia.ToString("HH:mm")</dd>
+
+    <dt class="col-sm-2">Abogado</dt>
+    <dd class="col-sm-10">@Model.abogado?.nombreAbogado</dd>
+
+    <dt class="col-sm-2">Caso</dt>
+    <dd class="col-sm-10">@Model.caso?.tituloCaso</dd>
+</dl>
+<a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.idAudiencia">Editar</a>
+<a class="btn btn-secondary" asp-action="Index">Volver</a>

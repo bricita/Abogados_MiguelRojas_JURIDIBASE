@@ -1,0 +1,31 @@
+﻿@model Abogados_MiguelRojas_JURIDIBASE.Models.AreaDerecho
+
+@{
+    ViewData["Title"] = "Editar Área de Derecho";
+}
+
+<h1>Editar Área de Derecho</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="idAreaDerecho" />
+    <div class="form-group">
+        <label asp-for="nombreAreaDerecho"></label>
+        <input asp-for="nombreAreaDerecho" class="form-control" />
+        <span asp-validation-for="nombreAreaDerecho" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="descripcionAreaDerecho"></label>
+        <textarea asp-for="descripcionAreaDerecho" class="form-control"></textarea>
+        <span asp-validation-for="descripcionAreaDerecho" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="estadoAreaDerecho"></label>
+        <input asp-for="estadoAreaDerecho" type="checkbox" />
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

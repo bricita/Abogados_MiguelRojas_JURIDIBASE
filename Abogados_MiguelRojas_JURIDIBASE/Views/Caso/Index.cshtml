@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Abogados_MiguelRojas_JURIDIBASE.Models.Caso>
+
+@{
+    ViewData["Title"] = "Casos";
+}
+
+<h1>Casos</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Nuevo Caso</a>
+</p>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Estado</th>
+            <th>Abogado</th>
+            <th>Cliente</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.tituloCaso</td>
+                <td>@item.descripcionCaso</td>
+                <td>@(item.estadoCaso ? "Activo" : "Cerrado")</td>
+                <td>@item.abogado?.nombreAbogado</td>
+                <td>@item.cliente?.nombreCliente</td>
+                <td>
+                    <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.idCaso">Ver</a>
+                    <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.idCaso">Editar</a>
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.idCaso">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
