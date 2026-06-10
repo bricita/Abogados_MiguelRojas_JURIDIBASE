@@ -31,8 +31,14 @@
                 <input class="form-control" type="text" asp-for="nombreUsuario" required />
             </div>
             <div class="mb-3">
-                <label>Rol</label>
-                <input class="form-control" type="text" asp-for="rolUsuario" required />
+                <label class="form-label">Rol del Usuario</label>
+                <select class="form-select" required asp-for="rolUsuario">
+                    <option value="">Seleccione un Rol</option>
+                    <option value="Admin">Administrador</option>
+                    <option value="Abogado">Abogado</option>
+                    <option value="Asistente">Asistente</option>
+                </select>
+                <span asp-validation-for="rolUsuario" class="text-danger small"></span>
             </div>
             <div class="mb-3">
                 <label>Contraseña</label>

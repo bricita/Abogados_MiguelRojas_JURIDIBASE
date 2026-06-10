@@ -190,28 +190,18 @@
                     </a>
                 </li>
                 <li>
+                    <a asp-controller="Audiencia" asp-action="Index">
+                        <i class="bi bi-display"></i> Audiencias
+                    </a>
+                </li>
+                <li>
                     <a asp-controller="Clientes" asp-action="Index">
                         <i class="bi bi-people"></i> Clientes
                     </a>
                 </li>
                 <li>
-                    <a asp-controller="Pago" asp-action="Listar">
-                        <i class="bi bi-cash-coin"></i> Pagos
-                    </a>
-                </li>
-                <li>
                     <a asp-controller="Citas" asp-action="Index">
-                        <i class="bi bi-calendar3"></i> Agenda de Citas
-                    </a>
-                </li>
-                <li>
-                    <a asp-controller="Notificacion" asp-action="Listar">
-                        <i class="bi bi-bell-fill"></i> Notificaciones
-                    </a>
-                </li>
-                <li>
-                    <a asp-controller="Audiencia" asp-action="Index">
-                        <i class="bi bi-display"></i> Audiencias
+                        <i class="bi bi-calendar3"></i> Citas
                     </a>
                 </li>
                 <li>
@@ -224,6 +214,19 @@
                         <i class="bi bi-calendar3"></i> Expedientes
                     </a>
                 </li>
+                <li>
+                    <a asp-controller="Pago" asp-action="Listar">
+                        <i class="bi bi-cash-coin"></i> Pagos
+                    </a>
+                </li>
+                
+                <li>
+                    <a asp-controller="Notificacion" asp-action="Listar">
+                        <i class="bi bi-bell-fill"></i> Notificaciones
+                    </a>
+                </li>
+                
+                
               
             </ul>
 
@@ -235,9 +238,7 @@
             </div>
         </nav>
 
-        <!-- AREA DE CONTENIDO PRINCIPAL -->
         <div id="content">
-            <!-- Barra Superior Fija (Top Navbar) -->
             <div class="top-navbar">
                 <div class="user-profile d-flex align-items-center gap-2">
                     <i class="bi bi-person-circle fs-5 text-secondary-juridico"></i>
@@ -245,7 +246,6 @@
                 </div>
             </div>
 
-            <!-- Contenedor de las vistas del sistema -->
             <div class="main-container">
                 @RenderBody()
             </div>

@@ -104,7 +104,7 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
                 case "Asistente":
                     return RedirectToAction("Index", "Asistente");
                 default:
-                    return RedirectToAction("Index", "Admin");
+                    return RedirectToAction("Login", "Login");
             }
         }
         public async Task<IActionResult> Logout()
