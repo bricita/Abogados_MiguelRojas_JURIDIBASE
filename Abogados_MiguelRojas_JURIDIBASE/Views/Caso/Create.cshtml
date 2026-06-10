@@ -1,0 +1,44 @@
+﻿@model Abogados_MiguelRojas_JURIDIBASE.Models.Caso
+
+@{
+    ViewData["Title"] = "Nuevo Caso";
+}
+
+<h1>Nuevo Caso</h1>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="tituloCaso"></label>
+        <input asp-for="tituloCaso" class="form-control" />
+        <span asp-validation-for="tituloCaso" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="descripcionCaso"></label>
+        <textarea asp-for="descripcionCaso" class="form-control"></textarea>
+        <span asp-validation-for="descripcionCaso" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="estadoCaso"></label>
+        <input asp-for="estadoCaso" type="checkbox" />
+    </div>
+    <div class="form-group">
+        <label asp-for="id_Abogado">Abogado</label>
+        <select asp-for="id_Abogado" asp-items="ViewBag.Abogados" class="form-control">
+            <option value="">-- Seleccione un Abogado --</option>
+        </select>
+        <span asp-validation-for="id_Abogado" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="id_Cliente">Cliente</label>
+        <select asp-for="id_Cliente" asp-items="ViewBag.Clientes" class="form-control">
+            <option value="">-- Seleccione un Cliente --</option>
+        </select>
+        <span asp-validation-for="id_Cliente" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

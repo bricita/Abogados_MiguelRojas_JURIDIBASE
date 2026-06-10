@@ -1,0 +1,52 @@
+﻿@model Abogados_MiguelRojas_JURIDIBASE.Models.Audiencia
+
+@{
+    ViewData["Title"] = "Editar Audiencia";
+}
+
+<h1>Editar Audiencia</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="idAudiencia" />
+    <div class="form-group">
+        <label asp-for="direccionAudiencia"></label>
+        <input asp-for="direccionAudiencia" class="form-control" />
+        <span asp-validation-for="direccionAudiencia" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="tipoAudiencia"></label>
+        <input asp-for="tipoAudiencia" class="form-control" />
+        <span asp-validation-for="tipoAudiencia" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="linkAudiencia"></label>
+        <input asp-for="linkAudiencia" class="form-control" />
+        <span asp-validation-for="linkAudiencia" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="fechaAudiencia"></label>
+        <input asp-for="fechaAudiencia" type="date" class="form-control" />
+        <span asp-validation-for="fechaAudiencia" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="horaAudiencia"></label>
+        <input asp-for="horaAudiencia" type="datetime-local" class="form-control" />
+        <span asp-validation-for="horaAudiencia" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="id_Abogado">Abogado</label>
+        <select asp-for="id_Abogado" asp-items="ViewBag.Abogados" class="form-control"></select>
+        <span asp-validation-for="id_Abogado" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="id_Caso">Caso</label>
+        <select asp-for="id_Caso" asp-items="ViewBag.Casos" class="form-control"></select>
+        <span asp-validation-for="id_Caso" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
