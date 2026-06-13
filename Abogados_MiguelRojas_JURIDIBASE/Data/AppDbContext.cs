@@ -10,6 +10,7 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Data
 
         }
         public DbSet<Abogado> abogados { get; set; }
+        public DbSet<Rol> roles { get; set; }
         public DbSet<AbogadoArea> abogadoArea { get; set; }
         public DbSet<AbogadoServicio> AbogadoServicio { get; set; }
         public DbSet<AreaDerecho> areasDerecho { get; set; }
@@ -27,6 +28,10 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Usuario>()
+                .HasOne(u => u.rol)
+                .WithMany(r => r.usuarios)
+                .HasForeignKey(u => u.RolId);
             // Abogado (1) -> (M) AbogadoArea
             modelBuilder.Entity<AbogadoArea>()
                 .HasOne(u => u.abogado)

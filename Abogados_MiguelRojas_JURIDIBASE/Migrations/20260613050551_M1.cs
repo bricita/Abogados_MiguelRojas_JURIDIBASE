@@ -46,6 +46,19 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "roles",
+                columns: table => new
+                {
+                    idRol = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_roles", x => x.idRol);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "servicio",
                 columns: table => new
                 {
@@ -68,12 +81,18 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                     idUsuario = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     nombreUsuario = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    rolUsuario = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    passwordUsuario = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    passwordUsuario = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    RolId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_usuario", x => x.idUsuario);
+                    table.ForeignKey(
+                        name: "FK_usuario_roles_RolId",
+                        column: x => x.RolId,
+                        principalTable: "roles",
+                        principalColumn: "idRol",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -184,12 +203,12 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                     idCliente = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     nombreCliente = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    descripcionCliente = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    descripcionCliente = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     dniCliente = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
-                    rucCliente = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    rucCliente = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     telefonoCliente = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
-                    direccionCliente = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    correoCliente = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    direccionCliente = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    correoCliente = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     estadoCliente = table.Column<bool>(type: "bit", nullable: false),
                     tipoCliente = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     idAbogado = table.Column<int>(type: "int", nullable: false)
@@ -471,6 +490,11 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                 name: "IX_pago_idCliente",
                 table: "pago",
                 column: "idCliente");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_usuario_RolId",
+                table: "usuario",
+                column: "RolId");
         }
 
         /// <inheritdoc />
@@ -520,6 +544,9 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
 
             migrationBuilder.DropTable(
                 name: "usuario");
+
+            migrationBuilder.DropTable(
+                name: "roles");
         }
     }
 }

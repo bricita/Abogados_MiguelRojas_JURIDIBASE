@@ -10,14 +10,10 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Models
         [Required, StringLength(100)]
         public string nombreUsuario { get; set; }
         [Required, StringLength(50)]
-        public string rolUsuario { get; set; }
-        [Required, StringLength(50)]
         public string passwordUsuario { get; set; }
-
-        //Conexion de uno a muchos con Notificaciones
         public ICollection<Notificacion> notificacion { get; set; }
-        
-        //Conexion de uno a uno con abogado
         public Abogado abogado { get; set; }
+        public int RolId { get; set; }
+        public Rol rol { get; set; }
     }
 }

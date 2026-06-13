@@ -528,6 +528,24 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                     b.ToTable("pago");
                 });
 
+            modelBuilder.Entity("Abogados_MiguelRojas_JURIDIBASE.Models.Rol", b =>
+                {
+                    b.Property<int>("idRol")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idRol"));
+
+                    b.Property<string>("nombre")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("idRol");
+
+                    b.ToTable("roles");
+                });
+
             modelBuilder.Entity("Abogados_MiguelRojas_JURIDIBASE.Models.ServicioLegal", b =>
                 {
                     b.Property<int>("idServicio")
@@ -567,6 +585,9 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idUsuario"));
 
+                    b.Property<int>("RolId")
+                        .HasColumnType("int");
+
                     b.Property<string>("nombreUsuario")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -577,12 +598,9 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("rolUsuario")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.HasKey("idUsuario");
+
+                    b.HasIndex("RolId");
 
                     b.ToTable("usuario");
                 });
@@ -764,6 +782,17 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                     b.Navigation("cliente");
                 });
 
+            modelBuilder.Entity("Abogados_MiguelRojas_JURIDIBASE.Models.Usuario", b =>
+                {
+                    b.HasOne("Abogados_MiguelRojas_JURIDIBASE.Models.Rol", "rol")
+                        .WithMany("usuarios")
+                        .HasForeignKey("RolId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("rol");
+                });
+
             modelBuilder.Entity("Abogados_MiguelRojas_JURIDIBASE.Models.Abogado", b =>
                 {
                     b.Navigation("abogadoArea");
@@ -808,6 +837,11 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
             modelBuilder.Entity("Abogados_MiguelRojas_JURIDIBASE.Models.Expediente", b =>
                 {
                     b.Navigation("documentosLegales");
+                });
+
+            modelBuilder.Entity("Abogados_MiguelRojas_JURIDIBASE.Models.Rol", b =>
+                {
+                    b.Navigation("usuarios");
                 });
 
             modelBuilder.Entity("Abogados_MiguelRojas_JURIDIBASE.Models.ServicioLegal", b =>

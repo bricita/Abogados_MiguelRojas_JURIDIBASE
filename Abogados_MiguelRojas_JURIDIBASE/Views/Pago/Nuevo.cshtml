@@ -69,10 +69,14 @@
         <span asp-validation-for="monto" class="text-danger"></span>
     </div>
 
-    <div class="form-group mb-3">
-        <label asp-for="fechaPago">Fecha de Pago</label>
-        <input asp-for="fechaPago" class="form-control" type="date" />
-        <span asp-validation-for="fechaPago" class="text-danger"></span>
+    <div class="mb-3">
+        <label class="form-label fw-semibold">Fecha del Pago</label>
+        <input type="date"
+               asp-for="fechaPago"
+               class="form-control"
+               max="@DateTime.Today.ToString("yyyy-MM-dd")"
+               required />
+        <span asp-validation-for="fechaPago" class="text-danger small"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Guardar</button>

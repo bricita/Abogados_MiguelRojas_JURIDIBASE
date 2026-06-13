@@ -1,4 +1,4 @@
-@model Abogados_MiguelRojas_JURIDIBASE.ViewModels.UsuarioVM;
+@model Abogados_MiguelRojas_JURIDIBASE.ViewModels.UsuarioVM
 
 @{
     var esRegistroPublico = Context.Request.Query["publico"] == "true";
@@ -44,73 +44,73 @@
         <title>Registro - JURIDIBASE</title>
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
         <style>
-            :root {
-                --deep-dark-blue: #1B263B;
-                --solid-grey-blue: #415A77;
-                --gris-acero: #E0E1DD;
-                --gris-oxford: #415A77;
-            }
+                :root {
+                    --deep-dark-blue: #1B263B;
+                    --solid-grey-blue: #415A77;
+                    --gris-acero: #E0E1DD;
+                    --gris-oxford: #415A77;
+                }
 
-            body {
-                min-height: 100vh;
-                background: linear-gradient(135deg, #415A77 0%, var(--deep-dark-blue) 100%);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            }
+                body {
+                    min-height: 100vh;
+                    background: linear-gradient(135deg, #415A77 0%, var(--deep-dark-blue) 100%);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                }
 
-            .register-card {
-                background: #ffffff;
-                border-radius: 12px;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-                overflow: hidden;
-            }
+                .register-card {
+                    background: #ffffff;
+                    border-radius: 12px;
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+                    overflow: hidden;
+                }
 
-            .register-header {
-                background-color: var(--deep-dark-blue);
-                color: #f1f5f9;
-                text-align: center;
-                padding: 2rem 1.5rem 1.25rem;
-                border-bottom: 3px solid var(--gris-acero);
-            }
+                .register-header {
+                    background-color: var(--deep-dark-blue);
+                    color: #f1f5f9;
+                    text-align: center;
+                    padding: 2rem 1.5rem 1.25rem;
+                    border-bottom: 3px solid var(--gris-acero);
+                }
 
-            .brand-title {
-                font-size: 1.55rem;
-                font-weight: 700;
-                letter-spacing: 1px;
-                margin-bottom: 0.2rem;
-            }
+                .brand-title {
+                    font-size: 1.55rem;
+                    font-weight: 700;
+                    letter-spacing: 1px;
+                    margin-bottom: 0.2rem;
+                }
 
-            .brand-subtitle {
-                font-size: 0.85rem;
-                color: #94a3b8;
-            }
+                .brand-subtitle {
+                    font-size: 0.85rem;
+                    color: #94a3b8;
+                }
 
-            .form-label {
-                color: var(--gris-oxford);
-                font-weight: 500;
-                font-size: 0.9rem;
-            }
+                .form-label {
+                    color: var(--gris-oxford);
+                    font-weight: 500;
+                    font-size: 0.9rem;
+                }
 
-            .form-control:focus,
-            .form-select:focus {
-                border-color: var(--solid-grey-blue);
-                box-shadow: 0 0 0 0.25rem rgba(65, 90, 119, 0.25);
-            }
+                .form-control:focus,
+                .form-select:focus {
+                    border-color: var(--solid-grey-blue);
+                    box-shadow: 0 0 0 0.25rem rgba(65, 90, 119, 0.25);
+                }
 
-            .btn-legal {
-                background-color: var(--deep-dark-blue);
-                color: #ffffff;
-                border: 1px solid var(--deep-dark-blue);
-                font-weight: 600;
-            }
+                .btn-legal {
+                    background-color: var(--deep-dark-blue);
+                    color: #ffffff;
+                    border: 1px solid var(--deep-dark-blue);
+                    font-weight: 600;
+                }
 
-            .btn-legal:hover {
-                background-color: var(--solid-grey-blue);
-                border-color: var(--solid-grey-blue);
-                color: #ffffff;
-            }
+                    .btn-legal:hover {
+                        background-color: var(--solid-grey-blue);
+                        border-color: var(--solid-grey-blue);
+                        color: #ffffff;
+                    }
         </style>
     </head>
     <body>
@@ -126,7 +126,7 @@
                         <div class="card-body p-4">
                             <h1 class="h4 mb-4">Nuevo Usuario</h1>
 
-                            <form asp-controller="Usuario" asp-action="Nuevo" method="post" autocomplete="off">
+                            <form asp-controller="Usuario" asp-action="Nuevo" asp-route-publico="true" method="post" autocomplete="off">
                                 <div class="mb-3">
                                     <label class="form-label">Nombre de Usuario</label>
                                     <input class="form-control" type="text" placeholder="Ej: mrojas" required asp-for="nombreUsuario" />
@@ -135,13 +135,10 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">Rol del Usuario</label>
-                                    <select class="form-select" required asp-for="rolUsuario">
-                                        <option value="">Seleccione un Rol</option>
-                                        <option value="Admin">Administrador</option>
-                                        <option value="Abogado">Abogado</option>
-                                        <option value="Asistente">Asistente</option>
+                                    <select class="form-select" required asp-for="RolId" asp-items="ViewBag.Roles">
+                                        <option value="" disabled selected>Seleccione un Rol</option>
                                     </select>
-                                    <span asp-validation-for="rolUsuario" class="text-danger small"></span>
+                                    <span asp-validation-for="RolId" class="text-danger small"></span>
                                 </div>
 
                                 <div class="mb-3">
@@ -152,7 +149,8 @@
 
                                 <div class="mb-4">
                                     <label class="form-label">Confirmar Contraseña</label>
-                                    <input class="form-control" type="password" name="RepPassword" placeholder="Repita la contraseña" required />
+                                    <input class="form-control" type="password" placeholder="Repita la contraseña" required asp-for="RepPassword" />
+                                    <span asp-validation-for="RepPassword" class="text-danger small"></span>
                                 </div>
 
                                 <div class="d-grid gap-2">
@@ -177,7 +175,7 @@
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <partial name="_ValidationScriptsPartial" />
     </body>
-    </html>
+</html>
 }
 else
 {
@@ -186,8 +184,10 @@ else
             <div class="col-md-8 col-lg-6">
 
                 <h1 class="mb-4">Nuevo Usuario</h1>
-
+                
                 <form asp-controller="Usuario" asp-action="Nuevo" method="post" autocomplete="off">
+
+                
                     <div class="mb-3">
                         <label class="form-label">Nombre de Usuario</label>
                         <input class="form-control" type="text" placeholder="Ej: mrojas" required asp-for="nombreUsuario" />
@@ -196,13 +196,10 @@ else
 
                     <div class="mb-3">
                         <label class="form-label">Rol del Usuario</label>
-                        <select class="form-select" required asp-for="rolUsuario">
-                            <option value="">Seleccione un Rol</option>
-                            <option value="Admin">Administrador</option>
-                            <option value="Abogado">Abogado</option>
-                            <option value="Asistente">Asistente</option>
+                        <select class="form-select" required asp-for="RolId" asp-items="ViewBag.Roles">
+                            <option value="" disabled selected>Seleccione un Rol</option>
                         </select>
-                        <span asp-validation-for="rolUsuario" class="text-danger"></span>
+                        <span asp-validation-for="RolId" class="text-danger"></span>
                     </div>
 
                     <div class="mb-3">
@@ -213,7 +210,8 @@ else
 
                     <div class="mb-3">
                         <label class="form-label">Confirmar Contraseña</label>
-                        <input class="form-control" type="password" name="RepPassword" placeholder="Repita la contraseña" required />
+                        <input class="form-control" type="password" placeholder="Repita la contraseña" required asp-for="RepPassword" />
+                        <span asp-validation-for="RepPassword" class="text-danger"></span>
                     </div>
 
                     <div class="mt-4">

@@ -24,17 +24,62 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
             return View(casos);
         }
 
-        public IActionResult Create()
+        
+        [HttpGet]
+        public async Task<IActionResult> Create()
         {
-            ViewBag.Abogados = new SelectList(_context.abogados, "idAbogado", "nombreAbogado");
-            ViewBag.Clientes = new SelectList(_context.cliente, "idCliente", "nombreCliente");
+            
+            var idUsuarioClaim = User.FindFirst("IdUsuario")?.Value;
+
+            // 2. Evaluamos si el usuario actual es un Abogado
+            if (User.IsInRole("Abogado") && idUsuarioClaim != null)
+            {
+                int idUsuario = int.Parse(idUsuarioClaim);
+
+                // Buscamos el registro del abogado asociado a este usuario logueado
+                var abogadoActual = await _context.abogados
+                    .FirstOrDefaultAsync(a => a.id_Usuario == idUsuario);
+
+                if (abogadoActual != null)
+                {
+                    // Regrilla 1: El SelectList de abogados solo tendrá una opción (él mismo)
+                    ViewBag.Abogados = new SelectList(
+                        new List<Abogado> { abogadoActual },
+                        "idAbogado",
+                        "nombreAbogado",
+                        abogadoActual.idAbogado
+                    );
+
+                    // Regrilla 2: El SelectList de clientes mostrará SOLO los que él defiende
+                    var clientesDelAbogado = await _context.cliente
+                        .Where(c => c.idAbogado == abogadoActual.idAbogado && c.estadoCliente)
+                        .ToListAsync();
+
+                    ViewBag.Clientes = new SelectList(clientesDelAbogado, "idCliente", "nombreCliente");
+
+                    // Bandera para que la vista oculte/estilice el select de abogados
+                    ViewBag.EsAbogado = true;
+                    return View();
+                }
+            }
+
+            // 3. Si el rol es "Admin" (u otro), ve el comportamiento global original
+            ViewBag.Abogados = new SelectList(_context.abogados.Where(a => a.estadoAbogado), "idAbogado", "nombreAbogado");
+            ViewBag.Clientes = new SelectList(_context.cliente.Where(c => c.estadoCliente), "idCliente", "nombreCliente");
+            ViewBag.EsAbogado = false;
+
             return View();
         }
 
+        // POST: Caso/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Caso caso)
         {
+            // Limpiamos errores fantasmas del ModelState para evitar falsos negativos en relaciones
+            ModelState.Remove("abogado");
+            ModelState.Remove("cliente");
+
             if (ModelState.IsValid)
             {
                 _context.caso.Add(caso);
@@ -42,8 +87,34 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
                 TempData["Success"] = "Caso registrado correctamente.";
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Abogados = new SelectList(_context.abogados, "idAbogado", "nombreAbogado", caso.id_Abogado);
-            ViewBag.Clientes = new SelectList(_context.cliente, "idCliente", "nombreCliente", caso.id_Cliente);
+
+            // =========================================================================
+            // SI EL MODELSTATE NO ES VÁLIDO: Volvemos a repoblar los combos según el rol
+            // =========================================================================
+            var idUsuarioClaim = User.FindFirst("IdUsuario")?.Value;
+
+            if (User.IsInRole("Abogado") && idUsuarioClaim != null)
+            {
+                int idUsuario = int.Parse(idUsuarioClaim);
+                var abogadoActual = await _context.abogados.FirstOrDefaultAsync(a => a.id_Usuario == idUsuario);
+
+                if (abogadoActual != null)
+                {
+                    // Forzamos el ID correcto por si se manipuló el request en el cliente
+                    caso.id_Abogado = abogadoActual.idAbogado;
+
+                    ViewBag.Abogados = new SelectList(new List<Abogado> { abogadoActual }, "idAbogado", "nombreAbogado", abogadoActual.idAbogado);
+                    ViewBag.Clientes = new SelectList(_context.cliente.Where(c => c.idAbogado == abogadoActual.idAbogado && c.estadoCliente), "idCliente", "nombreCliente", caso.id_Cliente);
+                    ViewBag.EsAbogado = true;
+                    return View(caso);
+                }
+            }
+
+            // Repoblación estándar para el Administrador en caso de error de validación
+            ViewBag.Abogados = new SelectList(_context.abogados.Where(a => a.estadoAbogado), "idAbogado", "nombreAbogado", caso.id_Abogado);
+            ViewBag.Clientes = new SelectList(_context.cliente.Where(c => c.estadoCliente), "idCliente", "nombreCliente", caso.id_Cliente);
+            ViewBag.EsAbogado = false;
+
             return View(caso);
         }
 

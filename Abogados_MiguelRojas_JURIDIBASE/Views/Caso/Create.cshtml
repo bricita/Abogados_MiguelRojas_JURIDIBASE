@@ -8,28 +8,28 @@
 
 <form asp-action="Create" method="post">
     <div class="form-group">
-        <label asp-for="tituloCaso"></label>
+        <label class="form-label">Titulo Caso</label>
         <input asp-for="tituloCaso" class="form-control" />
         <span asp-validation-for="tituloCaso" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="descripcionCaso"></label>
+        <label class="form-label">Descripcion</label>
         <textarea asp-for="descripcionCaso" class="form-control"></textarea>
         <span asp-validation-for="descripcionCaso" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="estadoCaso"></label>
+        <label class="form-label">Estado</label>
         <input asp-for="estadoCaso" type="checkbox" />
     </div>
     <div class="form-group">
-        <label asp-for="id_Abogado">Abogado</label>
+        <label class="form-label">Abogado</label>
         <select asp-for="id_Abogado" asp-items="ViewBag.Abogados" class="form-control">
             <option value="">-- Seleccione un Abogado --</option>
         </select>
         <span asp-validation-for="id_Abogado" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="id_Cliente">Cliente</label>
+        <label class="form-label">Cliente</label>
         <select asp-for="id_Cliente" asp-items="ViewBag.Clientes" class="form-control">
             <option value="">-- Seleccione un Cliente --</option>
         </select>
