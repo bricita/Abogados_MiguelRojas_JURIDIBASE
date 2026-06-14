@@ -21,6 +21,14 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
         [HttpGet]
         public async Task<IActionResult> Nuevo()
         {
+            var listaUsuarios = await _context.usuario.ToListAsync();
+
+            // Creamos el SelectList (Valor que se guarda, Texto que se muestra)
+            ViewBag.Usuarios = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(
+                listaUsuarios,
+                "idUsuario",       // <-- Asegúrate de que coincida con la PK de tu clase Usuario
+                "nombreUsuario"    // <-- El campo con el nombre que verá el administrador
+            );
             return View();
         }
         [HttpPost]
@@ -51,5 +59,6 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Listar));
         }
+
     }
 }

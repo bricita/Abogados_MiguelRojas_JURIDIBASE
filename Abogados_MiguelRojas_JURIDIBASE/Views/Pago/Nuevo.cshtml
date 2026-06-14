@@ -1,0 +1,88 @@
+@model Abogados_MiguelRojas_JURIDIBASE.Models.Pago
+
+@{
+    if (User.Identity.IsAuthenticated)
+    {
+        // Usamos los roles exactos definidos en tu switch del Login
+        if (User.IsInRole("Admin"))
+        {
+            Layout = "~/Views/Shared/_LayoutAsistente.cshtml";
+        }
+        else if (User.IsInRole("Abogado"))
+        {
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        else if (User.IsInRole("Asistente"))
+        {
+            Layout = "~/Views/Shared/_LayoutAsistente.cshtml";
+        }
+    }
+    else
+    {
+        Layout = "~/Views/Shared/Layout_Limpio.cshtml";
+    }
+
+    ViewData["Title"] = "Nuevo Pago";
+}
+
+<h1>Nuevo Pago</h1>
+
+<form asp-action="Nuevo" method="post">
+    @if (ViewBag.AbogadoActual != null)
+    {
+        <input asp-for="idAbogado" type="hidden" value="@ViewBag.AbogadoActual.idAbogado" />
+        <div class="form-group mb-3">
+            <label>Abogado</label>
+            <input class="form-control" value="@ViewBag.AbogadoActual.nombreAbogado @ViewBag.AbogadoActual.apellidoAbogado" readonly />
+        </div>
+    }
+    else
+    {
+        <div class="form-group mb-3">
+            <label asp-for="idAbogado">Abogado</label>
+            <select asp-for="idAbogado" class="form-control" asp-items="ViewBag.Abogados"></select>
+            <span asp-validation-for="idAbogado" class="text-danger"></span>
+        </div>
+    }
+
+    <div class="form-group mb-3">
+        <label asp-for="idCliente">Cliente</label>
+        <select asp-for="idCliente" class="form-control" asp-items="ViewBag.Clientes"></select>
+        <span asp-validation-for="idCliente" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="id_Caso">Caso</label>
+        <select asp-for="id_Caso" class="form-control" asp-items="ViewBag.Casos"></select>
+        <span asp-validation-for="id_Caso" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="metodoPago">Metodo de Pago</label>
+        <input asp-for="metodoPago" class="form-control" />
+        <span asp-validation-for="metodoPago" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="monto">Monto</label>
+        <input asp-for="monto" class="form-control" type="number" step="0.01" min="0" />
+        <span asp-validation-for="monto" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label fw-semibold">Fecha del Pago</label>
+        <input type="date"
+               asp-for="fechaPago"
+               class="form-control"
+               max="@DateTime.Today.ToString("yyyy-MM-dd")"
+               required />
+        <span asp-validation-for="fechaPago" class="text-danger small"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a class="btn btn-secondary" asp-action="Listar">Cancelar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

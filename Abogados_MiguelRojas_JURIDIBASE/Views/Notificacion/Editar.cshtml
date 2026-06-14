@@ -1,0 +1,56 @@
+﻿@model Abogados_MiguelRojas_JURIDIBASE.Models.Notificacion
+
+@{
+    ViewData["Title"] = "Editar Notificación";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow-sm">
+                <div class="card-header bg-warning">
+                    <h4 class="mb-0">Editar Notificación</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Editar" method="post">
+                        <input type="hidden" asp-for="idNotificacion" />
+
+                        <div class="mb-3">
+                            <label class="form-label">Título de la Notificación</label>
+                            <input asp-for="tituloNotificacion" class="form-control" required maxlength="70" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Mensaje</label>
+                            <textarea asp-for="mensajeNotificacion" class="form-control" rows="4" required maxlength="500"></textarea>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Fecha de Notificación</label>
+                                <!-- Para DateOnly, type="date" funciona perfectamente -->
+                                <input asp-for="fechaNotificacion" class="form-control" type="date" required />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Estado de Lectura</label>
+                                <div class="form-check mt-2">
+                                    <input asp-for="leido" class="form-check-input" type="checkbox" />
+                                    <label class="form-check-label">Marcar como leído</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">ID Usuario Destino</label>
+                                <input asp-for="id_Usuario" class="form-control" type="number" required />
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <a asp-action="Listar" class="btn btn-secondary">Cancelar</a>
+                            <button type="submit" class="btn btn-warning">Actualizar Notificación</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

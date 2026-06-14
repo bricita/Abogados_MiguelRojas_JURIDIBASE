@@ -1,0 +1,100 @@
+﻿@model Abogados_MiguelRojas_JURIDIBASE.Models.Especialista
+
+@{
+    if (User.Identity.IsAuthenticated)
+    {
+        // Usamos los roles exactos definidos en tu switch del Login
+        if (User.IsInRole("Admin"))
+        {
+            Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+        }
+        else if (User.IsInRole("Abogado"))
+        {
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        else if (User.IsInRole("Asistente"))
+        {
+            Layout = "~/Views/Shared/_LayoutAsistente.cshtml";
+        }
+    }
+    else
+    {
+        Layout = "~/Views/Shared/Layout_Limpio.cshtml";
+    }
+    ViewData["Title"] = "Detalle Especialista";
+    // Estilos en línea para simular tu diseño de Figma rápidamente
+}
+
+<style>
+    .figma-bg { background-color: #c4d7df; padding: 40px; border-radius: 8px; min-height: 80vh; }
+    .figma-title { color: #1f2d3d; font-weight: bold; text-align: center; margin-bottom: 40px; }
+    .figma-input { background: transparent; border: none; border-bottom: 1px solid #1f2d3d; border-radius: 0; padding-left: 0; box-shadow: none !important; }
+    .figma-input:focus { background: transparent; border-bottom: 2px solid #1f2d3d; }
+    .figma-label { color: #1f2d3d; font-weight: 500; }
+    .figma-btn { background-color: #4a5c71; color: white; border: none; border-radius: 20px; padding: 10px 30px; font-weight: 500; }
+    .figma-btn:hover { background-color: #364555; color: white; }
+</style>
+
+<div class="container mt-4">
+    <div class="figma-bg">
+        <h1 class="figma-title">DETALLE ESPECIALISTA</h1>
+
+        <form asp-action="Editar" method="post" class="mt-5">
+            <input type="hidden" asp-for="idEspecialista" />
+            <!-- Campos ocultos necesarios para que no se pierdan al editar -->
+            <input type="hidden" asp-for="dniEspecialista" />
+            <input type="hidden" asp-for="disponibilidadEspecialista" />
+
+            <div class="row mb-4 align-items-center">
+                <div class="col-md-3 text-md-end figma-label">ID Especialista:</div>
+                <div class="col-md-7">
+                    <span>ID: @Model.idEspecialista</span>
+                </div>
+            </div>
+
+            <div class="row mb-4 align-items-center">
+                <div class="col-md-3 text-md-end figma-label">Nombre completo:</div>
+                <div class="col-md-7">
+                    <input asp-for="nombreEspecialista" class="form-control figma-input" placeholder="Ingresar nombre completo" required />
+                </div>
+            </div>
+
+            <div class="row mb-4 align-items-center">
+                <div class="col-md-3 text-md-end figma-label">Estado:</div>
+                <div class="col-md-3">
+                    <select asp-for="estadoEspecialista" class="form-select figma-input" style="background-color: #e2ebef; border: none; border-radius: 8px; padding: 5px 15px;">
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                </div>
+                <div class="col-md-1 text-md-end figma-label">Teléfono:</div>
+                <div class="col-md-3">
+                    <input asp-for="telefonoEspecialista" class="form-control figma-input" placeholder="Ingresar teléfono" required />
+                </div>
+            </div>
+
+            <div class="row mb-4 align-items-center">
+                <div class="col-md-3 text-md-end figma-label">Correo Electrónico:</div>
+                <div class="col-md-7">
+                    <input asp-for="correoEspecialista" type="email" class="form-control figma-input" placeholder="Ingresar correo electrónico" required />
+                </div>
+            </div>
+
+            <div class="row mb-5 align-items-center">
+                <div class="col-md-3 text-md-end figma-label">Descripción/Perfil:</div>
+                <div class="col-md-7">
+                    <input asp-for="descripcionEspecialista" class="form-control figma-input" placeholder="Ingresar descripción" required />
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-12 d-flex justify-content-center gap-4">
+                    <button type="submit" class="figma-btn">Guardar Cambios</button>
+                    <!-- El botón de ver citas podría ser un link a otra vista en el futuro -->
+                    <button type="button" class="figma-btn">Ver Citas Asociadas</button>
+                    <a asp-action="Eliminar" asp-route-id="@Model.idEspecialista" class="figma-btn" style="text-decoration: none;" onclick="return confirm('¿Está seguro de eliminar este perfil?');">Eliminar Perfil</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

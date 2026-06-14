@@ -1,0 +1,53 @@
+@model Abogados_MiguelRojas_JURIDIBASE.Models.Pago
+
+@{
+    if (User.Identity.IsAuthenticated)
+    {
+        // Usamos los roles exactos definidos en tu switch del Login
+        if (User.IsInRole("Admin"))
+        {
+            Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+        }
+        else if (User.IsInRole("Abogado"))
+        {
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        else if (User.IsInRole("Asistente"))
+        {
+            Layout = "~/Views/Shared/_LayoutAsistente.cshtml";
+        }
+    }
+    else
+    {
+        Layout = "~/Views/Shared/Layout_Limpio.cshtml";
+    }
+
+    ViewData["Title"] = "Eliminar Pago";
+}
+
+<h1>Eliminar Pago</h1>
+
+<h3>Esta seguro que desea eliminar este pago?</h3>
+
+<dl class="row">
+    <dt class="col-sm-3">Cliente</dt>
+    <dd class="col-sm-9">@Model.cliente?.nombreCliente</dd>
+
+    <dt class="col-sm-3">Caso</dt>
+    <dd class="col-sm-9">@Model.caso?.tituloCaso</dd>
+
+    <dt class="col-sm-3">Metodo</dt>
+    <dd class="col-sm-9">@Model.metodoPago</dd>
+
+    <dt class="col-sm-3">Monto</dt>
+    <dd class="col-sm-9">@Model.monto.ToString("N2")</dd>
+
+    <dt class="col-sm-3">Fecha</dt>
+    <dd class="col-sm-9">@Model.fechaPago</dd>
+</dl>
+
+<form asp-action="Eliminar" asp-route-id="@Model.idPago" method="post">
+    <input asp-for="idPago" type="hidden" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a class="btn btn-secondary" asp-action="Listar">Cancelar</a>
+</form>

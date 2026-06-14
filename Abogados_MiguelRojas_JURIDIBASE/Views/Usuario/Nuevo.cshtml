@@ -1,0 +1,236 @@
+@model Abogados_MiguelRojas_JURIDIBASE.ViewModels.UsuarioVM
+
+@{
+    var esRegistroPublico = Context.Request.Query["publico"] == "true";
+
+    if (esRegistroPublico)
+    {
+        Layout = null;
+    }
+    else if (User.Identity?.IsAuthenticated == true)
+    {
+        if (User.IsInRole("Admin"))
+        {
+            Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+        }
+        else if (User.IsInRole("Abogado"))
+        {
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        else if (User.IsInRole("Asistente"))
+        {
+            Layout = "~/Views/Shared/_LayoutAsistente.cshtml";
+        }
+        else
+        {
+            Layout = "~/Views/Shared/Layout_Limpio.cshtml";
+        }
+    }
+    else
+    {
+        Layout = "~/Views/Shared/Layout_Limpio.cshtml";
+    }
+
+    ViewData["Title"] = "Registro de Nuevo Usuario";
+}
+
+@if (esRegistroPublico)
+{
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Registro - JURIDIBASE</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <style>
+                :root {
+                    --deep-dark-blue: #1B263B;
+                    --solid-grey-blue: #415A77;
+                    --gris-acero: #E0E1DD;
+                    --gris-oxford: #415A77;
+                }
+
+                body {
+                    min-height: 100vh;
+                    background: linear-gradient(135deg, #415A77 0%, var(--deep-dark-blue) 100%);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                }
+
+                .register-card {
+                    background: #ffffff;
+                    border-radius: 12px;
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+                    overflow: hidden;
+                }
+
+                .register-header {
+                    background-color: var(--deep-dark-blue);
+                    color: #f1f5f9;
+                    text-align: center;
+                    padding: 2rem 1.5rem 1.25rem;
+                    border-bottom: 3px solid var(--gris-acero);
+                }
+
+                .brand-title {
+                    font-size: 1.55rem;
+                    font-weight: 700;
+                    letter-spacing: 1px;
+                    margin-bottom: 0.2rem;
+                }
+
+                .brand-subtitle {
+                    font-size: 0.85rem;
+                    color: #94a3b8;
+                }
+
+                .form-label {
+                    color: var(--gris-oxford);
+                    font-weight: 500;
+                    font-size: 0.9rem;
+                }
+
+                .form-control:focus,
+                .form-select:focus {
+                    border-color: var(--solid-grey-blue);
+                    box-shadow: 0 0 0 0.25rem rgba(65, 90, 119, 0.25);
+                }
+
+                .btn-legal {
+                    background-color: var(--deep-dark-blue);
+                    color: #ffffff;
+                    border: 1px solid var(--deep-dark-blue);
+                    font-weight: 600;
+                }
+
+                    .btn-legal:hover {
+                        background-color: var(--solid-grey-blue);
+                        border-color: var(--solid-grey-blue);
+                        color: #ffffff;
+                    }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-9 col-md-7 col-lg-5">
+                    <div class="register-card">
+                        <div class="register-header">
+                            <div class="brand-title">JURIDIBASE</div>
+                            <div class="brand-subtitle">Registro de usuario</div>
+                        </div>
+
+                        <div class="card-body p-4">
+                            <h1 class="h4 mb-4">Nuevo Usuario</h1>
+
+                            <form asp-controller="Usuario" asp-action="Nuevo" asp-route-publico="true" method="post" autocomplete="off">
+                                <div class="mb-3">
+                                    <label class="form-label">Nombre de Usuario</label>
+                                    <input class="form-control" type="text" placeholder="Ej: mrojas" required asp-for="nombreUsuario" />
+                                    <span asp-validation-for="nombreUsuario" class="text-danger small"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Rol del Usuario</label>
+                                    <select class="form-select" required asp-for="RolId" asp-items="ViewBag.Roles">
+                                        <option value="" disabled selected>Seleccione un Rol</option>
+                                    </select>
+                                    <span asp-validation-for="RolId" class="text-danger small"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Contraseña</label>
+                                    <input class="form-control" type="password" placeholder="Ingrese contraseña" required asp-for="password" />
+                                    <span asp-validation-for="password" class="text-danger small"></span>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label">Confirmar Contraseña</label>
+                                    <input class="form-control" type="password" placeholder="Repita la contraseña" required asp-for="RepPassword" />
+                                    <span asp-validation-for="RepPassword" class="text-danger small"></span>
+                                </div>
+
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-legal py-2">Guardar</button>
+                                    <a class="btn btn-outline-secondary" asp-controller="Login" asp-action="Login">Cancelar</a>
+                                </div>
+                            </form>
+
+                            @if (ViewData["Mensaje"] != null)
+                            {
+                                <div class="alert alert-danger py-2 text-center small my-3" role="alert">
+                                    @ViewData["Mensaje"]
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <partial name="_ValidationScriptsPartial" />
+    </body>
+</html>
+}
+else
+{
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8 col-lg-6">
+
+                <h1 class="mb-4">Nuevo Usuario</h1>
+                
+                <form asp-controller="Usuario" asp-action="Nuevo" method="post" autocomplete="off">
+
+                
+                    <div class="mb-3">
+                        <label class="form-label">Nombre de Usuario</label>
+                        <input class="form-control" type="text" placeholder="Ej: mrojas" required asp-for="nombreUsuario" />
+                        <span asp-validation-for="nombreUsuario" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Rol del Usuario</label>
+                        <select class="form-select" required asp-for="RolId" asp-items="ViewBag.Roles">
+                            <option value="" disabled selected>Seleccione un Rol</option>
+                        </select>
+                        <span asp-validation-for="RolId" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Contraseña</label>
+                        <input class="form-control" type="password" placeholder="Ingrese contraseña" required asp-for="password" />
+                        <span asp-validation-for="password" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Confirmar Contraseña</label>
+                        <input class="form-control" type="password" placeholder="Repita la contraseña" required asp-for="RepPassword" />
+                        <span asp-validation-for="RepPassword" class="text-danger"></span>
+                    </div>
+
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary me-2">Guardar</button>
+                        <a class="btn btn-secondary" asp-action="Listar">Cancelar</a>
+                    </div>
+                </form>
+
+                @if (ViewData["Mensaje"] != null)
+                {
+                    <div class="alert alert-danger mt-3" role="alert">
+                        @ViewData["Mensaje"]
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

@@ -1,54 +1,87 @@
-﻿@model List<Abogados_MiguelRojas_JURIDIBASE.Models.Abogado>
-<div>
-    <div class="col_sm_B offset-sm-2">
-        <a asp-controller="Abogado" asp-action="Nuevo" class="btn btn-primary mb-3">Nuevo</a>
-        <table class=" table table-bordered">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Teléfono</th>
-                    <th>DNI</th>
-                    <th>Correo</th>
-                    <th>Especialidad</th>
-                    <th>Activo</th>
-                    <th>Opciones</th>
-                </tr>
-            </thead>
-            <tboy>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.idAbogado</td>
-                        <td>@item.nombreAbogado</td>
-                        <td>@item.apellidoAbogado</td>
-                        <td>@item.telefonoAbogado</td>
-                        <td>@item.dniAbogado</td>
-                        <td>@item.correoAbogado</td>
-                        <td>@item.especialidadAbogado</td>
-                        <td>@(item.estadoAbogado ? "Si" : "No")</td>
-                        <td>
-                            <a asp-controller="Abogado" asp-action="Editar" asp-route-id="@item.idAbogado"
-                                   class=" btn btn-primary nm-3">
-                                Editar
-                            </a>
-                            <a asp-controller="Abogado" asp-action="Eliminar" asp-route-id="@item.idAbogado"
-                                   class=" btn btn-danger nm-3" onclick="return confirmar()">
-                                Eliminar
-                            </a>
-                        </td>
-                    </tr>
-                }
-            </tboy>
-        </table>
-    </div>
-</div>
+﻿@model IEnumerable<Abogados_MiguelRojas_JURIDIBASE.Models.Abogado>
+
+@{
+    if (User.Identity.IsAuthenticated)
+    {
+        // Usamos los roles exactos definidos en tu switch del Login
+        if (User.IsInRole("Admin"))
+        {
+            Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+        }
+        else if (User.IsInRole("Abogado"))
+        {
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        else if (User.IsInRole("Asistente"))
+        {
+            Layout = "~/Views/Shared/_LayoutAsistente.cshtml";
+        }
+    }
+    else
+    {
+        Layout = "~/Views/Shared/Layout_Limpio.cshtml";
+    }
+
+    ViewData["Title"] = "Abogados";
+}
+
+<h1>Abogados</h1>
+
+<p>
+    <a class="btn btn-primary" asp-controller="Abogado" asp-action="Nuevo">Nuevo Abogado</a>
+</p>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre Completo</th>
+            <th>Teléfono</th>
+            <th>DNI</th>
+            <th>Correo Electrónico</th>
+            <th>Especialidad</th>
+            <th>Estado</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.idAbogado</td>
+                <td>@item.nombreAbogado @item.apellidoAbogado</td>
+                <td>@item.telefonoAbogado</td>
+                <td>@item.dniAbogado</td>
+                <td>@item.correoAbogado</td>
+                <td>@item.especialidadAbogado</td>
+                <td>
+                    @if (item.estadoAbogado)
+                    {
+                        <span class="badge bg-success">Activo</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Inactivo</span>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-warning" asp-controller="Abogado" asp-action="Editar" asp-route-id="@item.idAbogado">Editar</a>
+                    <a class="btn btn-sm btn-danger" asp-controller="Abogado" asp-action="Eliminar" asp-route-id="@item.idAbogado" onclick="return confirmar()">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
 @section Scripts {
     <script>
         function confirmar() {
-            return confirm("¿Está seguro que desea eliminar este abogado?")
+            return confirm("¿Está seguro de que desea eliminar este abogado?");
         }
     </script>
 }
-

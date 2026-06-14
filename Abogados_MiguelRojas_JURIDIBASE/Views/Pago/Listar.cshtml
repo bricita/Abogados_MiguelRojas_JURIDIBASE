@@ -1,0 +1,70 @@
+@model IEnumerable<Abogados_MiguelRojas_JURIDIBASE.Models.Pago>
+
+@{
+    if (User.Identity.IsAuthenticated)
+    {
+        // Usamos los roles exactos definidos en tu switch del Login
+        if (User.IsInRole("Admin"))
+        {
+            Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+        }
+        else if (User.IsInRole("Abogado"))
+        {
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        else if (User.IsInRole("Asistente"))
+        {
+            Layout = "~/Views/Shared/_LayoutAsistente.cshtml";
+        }
+    }
+    else
+    {
+        Layout = "~/Views/Shared/Layout_Limpio.cshtml";
+    }
+
+    ViewData["Title"] = "Pagos";
+}
+
+<h1>Pagos</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Nuevo" asp-route-clienteId="@ViewBag.FilterClienteId">Nuevo Pago</a>
+    <a class="btn btn-secondary" asp-controller="Clientes" asp-action="Index">Clientes</a>
+</p>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Abogado</th>
+            <th>Caso</th>
+            <th>Metodo</th>
+            <th>Monto</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.fechaPago</td>
+                <td>@item.cliente?.nombreCliente</td>
+                <td>@(item.abogado != null ? $"{item.abogado.nombreAbogado} {item.abogado.apellidoAbogado}" : "")</td>
+                <td>@item.caso?.tituloCaso</td>
+                <td>@item.metodoPago</td>
+                <td>@item.monto.ToString("N2")</td>
+                <td>
+                    <a class="btn btn-sm btn-info" asp-action="Detalles" asp-route-id="@item.idPago">Ver</a>
+                    <a class="btn btn-sm btn-warning" asp-action="Editar" asp-route-id="@item.idPago">Editar</a>
+                    <a class="btn btn-sm btn-danger" asp-action="Eliminar" asp-route-id="@item.idPago">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

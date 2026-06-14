@@ -1,6 +1,26 @@
 @model Abogados_MiguelRojas_JURIDIBASE.Models.Cliente
 
 @{
+    if (User.Identity.IsAuthenticated)
+    {
+        // Usamos los roles exactos definidos en tu switch del Login
+        if (User.IsInRole("Admin"))
+        {
+            Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+        }
+        else if (User.IsInRole("Abogado"))
+        {
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        else if (User.IsInRole("Asistente"))
+        {
+            Layout = "~/Views/Shared/_LayoutAsistente.cshtml";
+        }
+    }
+    else
+    {
+        Layout = "~/Views/Shared/Layout_Limpio.cshtml";
+    }
     ViewData["Title"] = "Editar Cliente";
 }
 
@@ -9,43 +29,65 @@
 <form asp-action="Edit" method="post">
     <input type="hidden" asp-for="idCliente" />
     <div class="form-group">
-        <label asp-for="nombreCliente"></label>
+        <label asp-for="nombreCliente">Nombre</label>
         <input asp-for="nombreCliente" class="form-control" />
         <span asp-validation-for="nombreCliente" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="descripcionCliente"></label>
+        <label asp-for="descripcionCliente">Descripción</label>
         <textarea asp-for="descripcionCliente" class="form-control"></textarea>
         <span asp-validation-for="descripcionCliente" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="dniCliente"></label>
+        <label asp-for="dniCliente">DNI</label>
         <input asp-for="dniCliente" class="form-control" />
         <span asp-validation-for="dniCliente" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="telefonoCliente"></label>
+        <label asp-for="rucCliente">RUC</label>
+        <input asp-for="rucCliente" class="form-control" />
+        <span asp-validation-for="rucCliente" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="telefonoCliente">Telefono</label>
         <input asp-for="telefonoCliente" class="form-control" />
         <span asp-validation-for="telefonoCliente" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="correoCliente"></label>
+        <label asp-for="correoCliente">Correo</label>
         <input asp-for="correoCliente" class="form-control" />
         <span asp-validation-for="correoCliente" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="direccionCliente"></label>
+        <label asp-for="direccionCliente">Dirección</label>
         <input asp-for="direccionCliente" class="form-control" />
         <span asp-validation-for="direccionCliente" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="estadoCliente"></label>
+        <label asp-for="estadoCliente">Estado</label>
         <input asp-for="estadoCliente" type="checkbox" />
     </div>
     <div class="form-group">
         <label asp-for="tipoCliente">Tipo</label>
-        <input asp-for="tipoCliente" type="checkbox" />
+        <input asp-for="tipoCliente" class="form-control" />
+        <span asp-validation-for="tipoCliente" class="text-danger"></span>
     </div>
+    @if (ViewBag.AbogadoActual != null)
+    {
+        <input asp-for="idAbogado" type="hidden" value="@ViewBag.AbogadoActual.idAbogado" />
+        <div class="form-group">
+            <label>Abogado</label>
+            <input class="form-control" value="@ViewBag.AbogadoActual.nombreAbogado @ViewBag.AbogadoActual.apellidoAbogado" readonly />
+        </div>
+    }
+    else
+    {
+        <div class="form-group">
+            <label asp-for="idAbogado">Abogado</label>
+            <select asp-for="idAbogado" class="form-control" asp-items="ViewBag.Abogados"></select>
+            <span asp-validation-for="idAbogado" class="text-danger"></span>
+        </div>
+    }
     <button type="submit" class="btn btn-primary">Guardar</button>
     <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
 </form>

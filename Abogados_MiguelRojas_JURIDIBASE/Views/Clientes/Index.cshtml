@@ -1,6 +1,27 @@
 @model IEnumerable<Abogados_MiguelRojas_JURIDIBASE.Models.Cliente>
 
 @{
+    if (User.Identity.IsAuthenticated)
+    {
+        // Usamos los roles exactos definidos en tu switch del Login
+        if (User.IsInRole("Admin"))
+        {
+            Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+        }
+        else if (User.IsInRole("Abogado"))
+        {
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        else if (User.IsInRole("Asistente"))
+        {
+            Layout = "~/Views/Shared/_LayoutAsistente.cshtml";
+        }
+    }
+    else
+    {
+        Layout = "~/Views/Shared/Layout_Limpio.cshtml";
+    }
+
     ViewData["Title"] = "Clientes";
 }
 
@@ -23,6 +44,7 @@
             <th>DNI</th>
             <th>Teléfono</th>
             <th>Correo</th>
+            <th>Abogado</th>
             <th>Estado</th>
             <th></th>
         </tr>
@@ -36,9 +58,11 @@
         <td>@item.dniCliente</td>
         <td>@item.telefonoCliente</td>
         <td>@item.correoCliente</td>
+        <td>@(item.abogado != null ? $"{item.abogado.nombreAbogado} {item.abogado.apellidoAbogado}" : "Sin abogado")</td>
         <td>@(item.estadoCliente ? "Activo" : "Inactivo")</td>
         <td>
             <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.idCliente">Ver</a>
+            <a class="btn btn-sm btn-success" asp-controller="Pago" asp-action="Listar" asp-route-clienteId="@item.idCliente">Pagos</a>
             <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.idCliente">Editar</a>
             <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.idCliente">Eliminar</a>
         </td>
