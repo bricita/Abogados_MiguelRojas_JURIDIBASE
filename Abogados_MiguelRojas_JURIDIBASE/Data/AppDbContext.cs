@@ -153,6 +153,16 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Data
                 .WithMany(r => r.documentosLegales)
                 .HasForeignKey(u => u.id_Expediente);
 
+            modelBuilder.Entity<Rol>().HasData(
+                new Rol { idRol = 1, nombre = "Abogado" },
+                new Rol { idRol = 2, nombre = "Administrador" },
+                new Rol { idRol = 3, nombre = "Usuario" }
+            );
+
+            modelBuilder.Entity<Usuario>().HasData(
+                new Usuario { idUsuario = 1, nombreUsuario = "Miguel Rojas", passwordUsuario = "12345", RolId = 1 }
+            );
+
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
 {
     /// <inheritdoc />
@@ -398,6 +400,21 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                         principalColumn: "idExpediente",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "roles",
+                columns: new[] { "idRol", "nombre" },
+                values: new object[,]
+                {
+                    { 1, "Abogado" },
+                    { 2, "Administrador" },
+                    { 3, "Usuario" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "usuario",
+                columns: new[] { "idUsuario", "RolId", "nombreUsuario", "passwordUsuario" },
+                values: new object[] { 1, 1, "Miguel Rojas", "12345" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_abogadoArea_id_Abogado",

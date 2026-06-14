@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260613050551_M1")]
+    [Migration("20260614233946_M1")]
     partial class M1
     {
         /// <inheritdoc />
@@ -547,6 +547,23 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                     b.HasKey("idRol");
 
                     b.ToTable("roles");
+
+                    b.HasData(
+                        new
+                        {
+                            idRol = 1,
+                            nombre = "Abogado"
+                        },
+                        new
+                        {
+                            idRol = 2,
+                            nombre = "Administrador"
+                        },
+                        new
+                        {
+                            idRol = 3,
+                            nombre = "Usuario"
+                        });
                 });
 
             modelBuilder.Entity("Abogados_MiguelRojas_JURIDIBASE.Models.ServicioLegal", b =>
@@ -606,6 +623,15 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                     b.HasIndex("RolId");
 
                     b.ToTable("usuario");
+
+                    b.HasData(
+                        new
+                        {
+                            idUsuario = 1,
+                            RolId = 1,
+                            nombreUsuario = "Miguel Rojas",
+                            passwordUsuario = "12345"
+                        });
                 });
 
             modelBuilder.Entity("Abogados_MiguelRojas_JURIDIBASE.Models.Abogado", b =>
