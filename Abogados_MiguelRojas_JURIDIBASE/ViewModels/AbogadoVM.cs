@@ -21,6 +21,5 @@
 
         // Campos del usuario relacionados al abogado
         public string nombreUsuario { get; set; }
-        // rol eliminado en el modelo Usuario
     }
 }
