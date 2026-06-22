@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
-// Nota: no se usa PasswordHasher si la contraseña se guarda en texto plano
+
 
 namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
 {
@@ -71,11 +71,11 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
             switch (nombreRol)
             {
                 case "Administrador":
-                    return RedirectToAction("Admin", "Usuario"); // Asegúrate de que esta acción exista
+                    return RedirectToAction("Admin", "Usuario"); 
                 case "Abogado":
                     return RedirectToAction("Index", "Home");
                 case "Asistente":
-                    return RedirectToAction("Index", "Home"); // Asegúrate de que este controlador exista
+                    return RedirectToAction("Index", "Home");
                 default:
                     return RedirectToAction("Login", "Login");
             }
