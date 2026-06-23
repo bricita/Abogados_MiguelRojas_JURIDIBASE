@@ -36,7 +36,7 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
 
             if (usuario_encontrado == null)
             {
-                ViewData["Mensaje"] = "No se encontraron usuarios";
+                ViewData["Mensaje"] = "Usuario o Contraseña incorrectos";
                 return View();
             }
 
@@ -73,7 +73,7 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
                 case "Administrador":
                     return RedirectToAction("Admin", "Usuario"); // Asegúrate de que esta acción exista
                 case "Abogado":
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Inicio", "Home");
                 case "Asistente":
                     return RedirectToAction("Index", "Home"); // Asegúrate de que este controlador exista
                 default:
