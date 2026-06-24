@@ -43,6 +43,10 @@
                 display: flex;
                 flex-direction: column;
                 border-right: 1px solid var(--gris-acero);
+                /* Hacer que la sidebar ocupe toda la altura y que su lista
+                   pueda desplazarse internamente sin mover el resto de la página */
+                height: 100vh;
+                overflow: hidden;
             }
 
                 #sidebar .sidebar-header {
@@ -50,6 +54,10 @@
                     background-color: #111926; /* Un tono sutilmente más oscuro para contraste */
                     border-bottom: 2px solid var(--gris-acero);
                     text-align: center;
+                    /* Mantener JURIDIBASE estático dentro de la sidebar */
+                    position: sticky;
+                    top: 0;
+                    z-index: 2;
                 }
 
                     #sidebar .sidebar-header h3 {
@@ -62,7 +70,35 @@
 
                 #sidebar ul.components {
                     padding: 15px 0;
-                    flex-grow: 1;
+                    /* Hacer que la lista ocupe el espacio disponible y sea scrollable */
+                    flex: 1 1 auto;
+                    overflow-y: auto;
+                }
+
+                /* Estilos estéticos para el scrollbar interno (WebKit + Firefox) */
+                #sidebar ul.components::-webkit-scrollbar {
+                    width: 8px;
+                }
+
+                #sidebar ul.components::-webkit-scrollbar-track {
+                    background: transparent;
+                }
+
+                #sidebar ul.components::-webkit-scrollbar-thumb {
+                    background-color: rgba(65,90,119,0.28); /* tono suave basado en --solid-grey-blue */
+                    border-radius: 999px;
+                    border: 2px solid transparent; /* espacio alrededor para efecto */
+                    background-clip: content-box;
+                }
+
+                #sidebar ul.components::-webkit-scrollbar-thumb:hover {
+                    background-color: rgba(65,90,119,0.45);
+                }
+
+                /* Firefox */
+                #sidebar ul.components {
+                    scrollbar-width: thin;
+                    scrollbar-color: rgba(65,90,119,0.28) transparent;
                 }
 
                 #sidebar ul li {
@@ -103,6 +139,10 @@
                 padding: 15px 20px;
                 border-top: 1px solid rgba(224, 225, 221, 0.1);
                 background-color: #111926;
+                /* Mantener Cerrar Sesión estático en la parte baja de la sidebar */
+                position: sticky;
+                bottom: 0;
+                z-index: 2;
             }
 
                 .sidebar-footer a {
@@ -185,7 +225,7 @@
 
             <ul class="list-unstyled components">
                 <li>
-                    <a asp-controller="Home" asp-action="Index">
+                    <a asp-controller="Home" asp-action="Inicio">
                         <i class="bi bi-house-door"></i> Inicio
                     </a>
                 </li>
@@ -219,13 +259,21 @@
                         <i class="bi bi-cash-coin"></i> Pagos
                     </a>
                 </li>
-                
                 <li>
                     <a asp-controller="Notificacion" asp-action="Listar">
                         <i class="bi bi-bell-fill"></i> Notificaciones
                     </a>
                 </li>
-                
+                <li>
+                    <a asp-controller="DocumentosLegales" asp-action="Index">
+                        <i class="bi bi-file-text"></i> Documentos Legales
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Especialista" asp-action="Listar">
+                        <i class="bi bi-people"></i> Especialistas
+                    </a>
+                </li>
                 
               
             </ul>
@@ -251,9 +299,7 @@
             </div>
         </div>
     </div>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
