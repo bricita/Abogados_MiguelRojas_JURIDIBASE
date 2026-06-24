@@ -3,7 +3,6 @@
 @{
     if (User.Identity.IsAuthenticated)
     {
-        // Usamos los roles exactos definidos en tu switch del Login
         if (User.IsInRole("Administrador"))
         {
             Layout = "~/Views/Shared/_Layout_Admin.cshtml";
@@ -24,60 +23,57 @@
     ViewData["Title"] = "Nuevo Especialista";
 }
 
-<div class="container mt-4">
-    <h2>Registrar Nuevo Especialista</h2>
-    <hr />
+<h1>Nuevo Especialista</h1>
 
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <form asp-action="Nuevo" method="post">
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label class="form-label">Nombre Completo</label>
-                        <input asp-for="nombreEspecialista" class="form-control" placeholder="Ingresar nombre completo" required />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">DNI</label>
-                        <input asp-for="dniEspecialista" class="form-control" placeholder="Ingresar DNI" required />
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label class="form-label">Estado</label>
-                        <select asp-for="estadoEspecialista" class="form-select">
-                            <option value="Activo">Activo</option>
-                            <option value="Inactivo">Inactivo</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Teléfono</label>
-                        <input asp-for="telefonoEspecialista" class="form-control" placeholder="Ingresar teléfono" required />
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Disponibilidad</label>
-                        <div class="form-check mt-2">
-                            <input asp-for="disponibilidadEspecialista" class="form-check-input" type="checkbox" />
-                            <label class="form-check-label">Disponible</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Correo Electrónico</label>
-                    <input asp-for="correoEspecialista" type="email" class="form-control" placeholder="Ingresar correo electrónico" required />
-                </div>
-
-                <div class="mb-4">
-                    <label class="form-label">Descripción / Perfil</label>
-                    <textarea asp-for="descripcionEspecialista" class="form-control" rows="3" placeholder="Ingresar descripción" required></textarea>
-                </div>
-
-                <div class="d-flex justify-content-between">
-                    <a asp-action="Listar" class="btn btn-secondary">Cancelar</a>
-                    <button type="submit" class="btn btn-primary">Guardar Especialista</button>
-                </div>
-            </form>
-        </div>
+<form asp-action="Nuevo" method="post">
+    <div class="form-group">
+        <label class="form-label">Nombre Completo</label>
+        <input asp-for="nombreEspecialista" class="form-control" placeholder="Ingresar nombre completo" required />
+        <span asp-validation-for="nombreEspecialista" class="text-danger"></span>
     </div>
-</div>
+
+    <div class="form-group">
+        <label class="form-label">DNI</label>
+        <input asp-for="dniEspecialista" class="form-control" placeholder="Ingresar DNI" required />
+        <span asp-validation-for="dniEspecialista" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Estado</label>
+        <select asp-for="estadoEspecialista" class="form-control">
+            <option value="Activo">Activo</option>
+            <option value="Inactivo">Inactivo</option>
+        </select>
+        <span asp-validation-for="estadoEspecialista" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Teléfono</label>
+        <input asp-for="telefonoEspecialista" class="form-control" placeholder="Ingresar teléfono" required />
+        <span asp-validation-for="telefonoEspecialista" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Disponibilidad</label><br />
+        <input asp-for="disponibilidadEspecialista" type="checkbox" /> Disponible
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Correo Electrónico</label>
+        <input asp-for="correoEspecialista" type="email" class="form-control" placeholder="Ingresar correo electrónico" required />
+        <span asp-validation-for="correoEspecialista" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Descripción / Perfil</label>
+        <textarea asp-for="descripcionEspecialista" class="form-control" rows="3" placeholder="Ingresar descripción" required></textarea>
+        <span asp-validation-for="descripcionEspecialista" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar Especialista</button>
+    <a class="btn btn-secondary" asp-action="Listar">Cancelar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
