@@ -34,7 +34,7 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
 
             if (usuario_encontrado == null)
             {
-                ViewData["Mensaje"] = "No se encontraron usuarios";
+                ViewData["Mensaje"] = "Usuario o Contraseña incorrectos";
                 return View();
             }
             string nombreRol = usuario_encontrado.rol?.nombre ?? "SinRol";
@@ -67,7 +67,7 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
                 case "Administrador":
                     return RedirectToAction("Index", "Home"); 
                 case "Abogado":
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Inicio", "Home");
                 case "Asistente":
                     return RedirectToAction("Index", "Home");
                 default:

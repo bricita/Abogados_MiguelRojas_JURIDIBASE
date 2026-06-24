@@ -1,0 +1,102 @@
+﻿
+@{
+    if (User.Identity.IsAuthenticated)
+    {
+        // Usamos los roles exactos definidos en tu switch del Login
+        if (User.IsInRole("Admin"))
+        {
+            Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+        }
+        else if (User.IsInRole("Abogado"))
+        {
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        else if (User.IsInRole("Asistente"))
+        {
+            Layout = "~/Views/Shared/_LayoutAsistente.cshtml";
+        }
+    }
+    else
+    {
+        Layout = "~/Views/Shared/Layout_Limpio.cshtml";
+    }
+
+    ViewData["Title"] = "Inicio Abogados";
+}
+
+@{
+    // Mostrar nombre proporcionado por el controlador (ViewBag.DisplayName)
+    var displayName = ViewBag.DisplayName ?? "ABOGADO";
+}
+
+<style>
+    .home-hero .hero-title {
+        color: #14222b;
+        font-weight: 700;
+        font-size: 64px;
+        line-height: 1;
+        margin: 0 0 20px;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .home-hero .hero-sub {
+        color: #3b5666;
+        font-size: 24px;
+        margin-bottom: 34px;
+    }
+
+    .home-hero .hero-actions {
+        display: flex;
+        gap: 28px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+    }
+
+    .home-hero .btn-hero {
+        background: #212b33;
+        color: #fff;
+        text-decoration: none;
+        display: inline-block;
+        vertical-align: middle;
+        padding: 14px 28px;
+        border-radius: 12px;
+        border: none;
+        box-shadow: none;
+        font-weight: 600;
+    }
+
+    .home-hero .btn-hero:hover {
+        background: #182027;
+        text-decoration: none;
+    }
+
+    @@media (max-width:768px) {
+        .home-hero .hero-title {
+            font-size: 36px;
+        }
+
+        .home-hero {
+            padding: 24px;
+        }
+    }
+</style>
+
+@* Contenido principal — diseño adaptado al layout *@
+<div class="home-hero" style="background:#f6f8f9; padding:40px 30px; min-height:420px;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-10 offset-md-1">
+                <h1 class="hero-title">BUEN DÍA ABOGADO<br/> @displayName</h1>
+                <p class="hero-sub">¿Qué vamos a hacer hoy?</p>
+
+                <div class="hero-actions">
+                    <a type="button" class="btn-hero" asp-controller="Caso" asp-action="Index">Casos</a>
+                    <a type="button" class="btn-hero" asp-controller="Expediente" asp-action="Listar">Expediente</a>
+                    <a type="button" class="btn-hero" asp-controller="Notificacion" asp-action="Listar">Notificaciones</a>
+                    <a type="button" class="btn-hero" asp-controller="Pago" asp-action="Listar">Pagos</a>
+                    <a type="button" class="btn-hero" asp-controller="Especialista" asp-action="Listar">Especialistas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
