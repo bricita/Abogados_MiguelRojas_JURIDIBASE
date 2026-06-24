@@ -1,2 +1,25 @@
-﻿<h1>Acceso Denegado</h1>
+﻿@{
+    if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole("Administrador"))
+        {
+            Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+        }
+        else if (User.IsInRole("Abogado"))
+        {
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        else if (User.IsInRole("Asistente"))
+        {
+            Layout = "~/Views/Shared/_LayoutAsistente.cshtml";
+        }
+    }
+    else
+    {
+        Layout = "~/Views/Shared/Layout_Limpio.cshtml";
+    }
+
+    ViewData["Title"] = "Acceso Denegado";
+}
+<h1>Acceso Denegado</h1>
 <p>Ud no puede acceder a esta ventana</p>
