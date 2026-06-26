@@ -24,24 +24,46 @@
     ViewData["Title"] = "Expedientes";
 }
 
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Gestión de Expedientes</h2>
-        <a asp-action="Nuevo" class="btn btn-primary">Nuevo Expediente</a>
-    </div>
+<h1>Gestión de Expedientes</h1>
 
-    <table class="table table-striped table-hover">
-        <thead class="table-dark">
+<p>
+    <a asp-action="Nuevo" class="btn btn-primary">Nuevo Expediente</a>
+</p>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Tipo</th>
+            <th>Víctima</th>
+            <th>Victimario</th>
+            <th>Fechas</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>ID</th>
-                <th>Título</th>
-                <th>Tipo</th>
-                <th>Víctima</th>
-                <th>Victimario</th>
-                <th>Fechas</th>
-                <th>Estado</th>
-                <th>Acciones</th>
+                <td>@item.idExpediente</td>
+                <td>@item.tituloExpediente</td>
+                <td>@item.tipoExpediente</td>
+                <td>@item.victima</td>
+                <td>@item.victimario</td>
+                <td>@item.fechaInicio - @item.fechaCierre</td>
+                <td>
+                    <span class="badge @(item.estadoExpediente ? "bg-success" : "bg-warning text-dark")">
+                        @(item.estadoExpediente ? "Activo" : "Cerrado")
+                    </span>
+                </td>
+                <td>
+                    <a asp-action="Editar" asp-route-id="@item.idExpediente" class="btn btn-sm btn-warning">Editar</a>
+                    <a asp-action="Eliminar" asp-route-id="@item.idExpediente" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar expediente?');">Eliminar</a>
+                </td>
             </tr>
+<<<<<<< HEAD
         </thead>
         <tbody>
             @if (!Model.Any())
@@ -76,3 +98,8 @@
         </tbody>
     </table>
 </div>
+=======
+        }
+    </tbody>
+</table>
+>>>>>>> 0b16a01c5a3b43a9225cad1ef94cb59eb2b3df9e
