@@ -65,7 +65,7 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
             switch (nombreRol)
             {
                 case "Administrador":
-                    return RedirectToAction("Index", "Home"); 
+                    return RedirectToAction("Inicio", "Home"); 
                 case "Abogado":
                     return RedirectToAction("Inicio", "Home");
                 case "Asistente":

@@ -23,8 +23,8 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
         [Authorize]
         public async Task<IActionResult> Inicio()
         {
-            string displayName = "ABOGADO";
             var idClaim = User?.FindFirst("IdUsuario")?.Value;
+            string displayName = User?.Identity?.Name ?? "USUARIO";
             if (!string.IsNullOrEmpty(idClaim) && int.TryParse(idClaim, out var idUsuario))
             {
                 var abogado = await _dbconext.abogados.FirstOrDefaultAsync(a => a.id_Usuario == idUsuario);

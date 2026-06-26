@@ -59,6 +59,7 @@
             <tr>
                 <td>@item.idUsuario</td>
                 <td>@item.nombreUsuario</td>
+                
 
                 <td>
                     @if (item.rol?.nombre == "Administrador")
@@ -77,7 +78,8 @@
                     {
                         <span class="badge bg-dark">Sin Rol Asignado</span>
                     }
-                </td>
+                    
+                </td> 
 
                 <td>
                     <a class="btn btn-sm btn-warning" asp-controller="Usuario" asp-action="Editar" asp-route-id="@item.idUsuario">Editar</a>

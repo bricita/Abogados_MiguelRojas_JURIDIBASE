@@ -17,7 +17,7 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
         [HttpGet]
         public async Task<IActionResult> Listar()
         {
-            List<Usuario> lista = await _context.usuario.ToListAsync(); 
+            List<Usuario> lista = await _context.usuario.Include(u => u.rol).ToListAsync(); 
             return View(lista);
         }
 

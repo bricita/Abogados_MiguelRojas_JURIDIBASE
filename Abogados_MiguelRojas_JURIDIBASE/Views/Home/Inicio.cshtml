@@ -3,7 +3,7 @@
     if (User.Identity.IsAuthenticated)
     {
         // Usamos los roles exactos definidos en tu switch del Login
-        if (User.IsInRole("Admin"))
+        if (User.IsInRole("Administrador"))
         {
             Layout = "~/Views/Shared/_Layout_Admin.cshtml";
         }
@@ -86,7 +86,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-10 offset-md-1">
-                <h1 class="hero-title">BUEN DÍA ABOGADO<br/> @displayName</h1>
+                <h1 class="hero-title">BUEN DÍA @displayName<br /></h1>
                 <p class="hero-sub">¿Qué vamos a hacer hoy?</p>
 
                 <div class="hero-actions">
