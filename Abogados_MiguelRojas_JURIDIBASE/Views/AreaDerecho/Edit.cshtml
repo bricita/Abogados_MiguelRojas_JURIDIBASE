@@ -1,51 +1,24 @@
 ﻿@model Abogados_MiguelRojas_JURIDIBASE.Models.AreaDerecho
-
-@{
-    if (User.Identity.IsAuthenticated)
-    {
-
-        if (User.IsInRole("Administrador"))
-        {
-            Layout = "~/Views/Shared/_Layout_Admin.cshtml";
-        }
-        else if (User.IsInRole("Abogado"))
-        {
-            Layout = "~/Views/Shared/_Layout.cshtml";
-        }
-        else if (User.IsInRole("Asistente"))
-        {
-            Layout = "~/Views/Shared/_LayoutAsistente.cshtml";
-        }
-    }
-    else
-    {
-        Layout = "~/Views/Shared/Layout_Limpio.cshtml";
-    }
-    ViewData["Title"] = "Editar Área de Derecho";
-}
+@{ ViewData["Title"] = "Editar Área de Derecho"; Layout = "~/Views/Shared/_Layout_Admin.cshtml"; }
 
 <h1>Editar Área de Derecho</h1>
-
 <form asp-action="Edit" method="post">
     <input type="hidden" asp-for="idAreaDerecho" />
-    <div class="form-group">
-        <label asp-for="nombreAreaDerecho"></label>
+    <div class="mb-3">
+        <label asp-for="nombreAreaDerecho" class="form-label"></label>
         <input asp-for="nombreAreaDerecho" class="form-control" />
         <span asp-validation-for="nombreAreaDerecho" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="descripcionAreaDerecho"></label>
+    <div class="mb-3">
+        <label asp-for="descripcionAreaDerecho" class="form-label"></label>
         <textarea asp-for="descripcionAreaDerecho" class="form-control"></textarea>
         <span asp-validation-for="descripcionAreaDerecho" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="estadoAreaDerecho"></label>
-        <input asp-for="estadoAreaDerecho" type="checkbox" />
+    <div class="mb-3 form-check">
+        <input asp-for="estadoAreaDerecho" class="form-check-input" />
+        <label asp-for="estadoAreaDerecho" class="form-check-label"></label>
     </div>
-    <button type="submit" class="btn btn-primary">Guardar</button>
-    <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+    <button type="submit" class="btn btn-juridico">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
 </form>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+@section Scripts{ <partial name="_ValidationScriptsPartial" /> }

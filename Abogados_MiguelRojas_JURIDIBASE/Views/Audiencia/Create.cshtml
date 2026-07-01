@@ -28,39 +28,39 @@
 
 <form asp-action="Create" method="post">
     <div class="form-group">
-        <label asp-for="direccionAudiencia"></label>
+        <label class="form-label">Dirección de audiencia</label>
         <input asp-for="direccionAudiencia" class="form-control" />
         <span asp-validation-for="direccionAudiencia" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="tipoAudiencia"></label>
+        <label class="form-label">Tipo de audiencia</label>
         <input asp-for="tipoAudiencia" class="form-control" />
         <span asp-validation-for="tipoAudiencia" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="linkAudiencia"></label>
+        <label class="form-label">Link de audiencia</label>
         <input asp-for="linkAudiencia" class="form-control" />
         <span asp-validation-for="linkAudiencia" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="fechaAudiencia"></label>
+        <label class="form-label">Fecha de audiencia</label>
         <input asp-for="fechaAudiencia" type="date" class="form-control" />
         <span asp-validation-for="fechaAudiencia" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="horaAudiencia"></label>
-        <input asp-for="horaAudiencia" type="datetime-local" class="form-control" />
+        <label class="form-label">Hora de audiencia</label>
+        <input asp-for="horaAudiencia" type="time" class="form-control" />
         <span asp-validation-for="horaAudiencia" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="id_Abogado">Abogado</label>
+        <label class="form-label">Abogado</label>
         <select asp-for="id_Abogado" asp-items="ViewBag.Abogados" class="form-control">
             <option value="">-- Seleccione un Abogado --</option>
         </select>
         <span asp-validation-for="id_Abogado" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="id_Caso">Caso</label>
+        <label class="form-label">Caso de audiencia</label>
         <select asp-for="id_Caso" asp-items="ViewBag.Casos" class="form-control">
             <option value="">-- Seleccione un Caso --</option>
         </select>

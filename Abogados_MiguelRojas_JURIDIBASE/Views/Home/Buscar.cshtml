@@ -1,0 +1,83 @@
+@{
+    ViewData["Title"] = "Resultados de búsqueda";
+    var q = ViewBag.Query as string;
+}
+
+<div class="mb-4">
+    <h1 class="h3 mb-2">Resultados para: "@q"</h1>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-bottom py-3">
+                <h5 class="mb-0 fw-semibold">Casos <span class="badge bg-secondary">@ViewBag.Casos.Count</span></h5>
+            </div>
+            <div class="card-body p-0">
+                @if (ViewBag.Casos.Count == 0)
+                {
+                    <p class="text-secondary p-3 mb-0">Sin resultados.</p>
+                }
+                <ul class="list-group list-group-flush">
+                    @foreach (var c in ViewBag.Casos)
+                    {
+                        <li class="list-group-item">
+                            <a asp-controller="Caso" asp-action="Details" asp-route-id="@c.idCaso" class="text-decoration-none fw-semibold">@c.tituloCaso</a>
+                            <br /><small class="text-secondary">@(c.cliente?.nombreCliente ?? "—")</small>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-bottom py-3">
+                <h5 class="mb-0 fw-semibold">Clientes <span class="badge bg-secondary">@ViewBag.Clientes.Count</span></h5>
+            </div>
+            <div class="card-body p-0">
+                @if (ViewBag.Clientes.Count == 0)
+                {
+                    <p class="text-secondary p-3 mb-0">Sin resultados.</p>
+                }
+                <ul class="list-group list-group-flush">
+                    @foreach (var c in ViewBag.Clientes)
+                    {
+                        <li class="list-group-item">
+                            <a asp-controller="Clientes" asp-action="Details" asp-route-id="@c.idCliente" class="text-decoration-none fw-semibold">@c.nombreCliente</a>
+                            <br /><small class="text-secondary">@c.dniCliente</small>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-bottom py-3">
+                <h5 class="mb-0 fw-semibold">Expedientes <span class="badge bg-secondary">@ViewBag.Expedientes.Count</span></h5>
+            </div>
+            <div class="card-body p-0">
+                @if (ViewBag.Expedientes.Count == 0)
+                {
+                    <p class="text-secondary p-3 mb-0">Sin resultados.</p>
+                }
+                <ul class="list-group list-group-flush">
+                    @foreach (var e in ViewBag.Expedientes)
+                    {
+                        <li class="list-group-item">
+                            <a asp-controller="Expediente" asp-action="Listar" class="text-decoration-none fw-semibold">@e.tituloExpediente</a>
+                            <br /><small class="text-secondary">@(e.caso?.tituloCaso ?? "—")</small>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a asp-action="Inicio" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Volver al inicio</a>
+</div>

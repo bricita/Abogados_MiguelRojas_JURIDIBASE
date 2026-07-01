@@ -31,6 +31,7 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(DocumentosLegales doc)
         {
+            ModelState.Remove("expediente");
             if (ModelState.IsValid)
             {
                 _context.documento.Add(doc);

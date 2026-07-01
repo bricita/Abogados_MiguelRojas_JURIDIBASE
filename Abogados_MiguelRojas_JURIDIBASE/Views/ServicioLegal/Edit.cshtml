@@ -1,0 +1,30 @@
+@model Abogados_MiguelRojas_JURIDIBASE.Models.ServicioLegal
+@{ ViewData["Title"] = "Editar Servicio Legal"; Layout = "~/Views/Shared/_Layout_Admin.cshtml"; }
+
+<h1>Editar Servicio Legal</h1>
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="idServicio" />
+    <div class="mb-3">
+        <label asp-for="nombreServicio" class="form-label"></label>
+        <input asp-for="nombreServicio" class="form-control" />
+        <span asp-validation-for="nombreServicio" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="descripcionServicio" class="form-label"></label>
+        <textarea asp-for="descripcionServicio" class="form-control"></textarea>
+        <span asp-validation-for="descripcionServicio" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="costoBase" class="form-label">Costo Base (S/)</label>
+        <input asp-for="costoBase" class="form-control" type="number" step="0.01" />
+        <span asp-validation-for="costoBase" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="estadoServicio" class="form-label"></label>
+        <input asp-for="estadoServicio" class="form-control" />
+        <span asp-validation-for="estadoServicio" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-juridico">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+@section Scripts{ <partial name="_ValidationScriptsPartial" /> }

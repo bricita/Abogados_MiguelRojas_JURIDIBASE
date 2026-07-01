@@ -17,10 +17,17 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var casos = await _context.caso
+            var abogadoActual = await ObtenerAbogadoActualAsync();
+            IQueryable<Caso> consulta = _context.caso
                 .Include(c => c.abogado)
-                .Include(c => c.cliente)
-                .ToListAsync();
+                .Include(c => c.cliente);
+
+            if (abogadoActual != null)
+            {
+                consulta = consulta.Where(c => c.id_Abogado == abogadoActual.idAbogado);
+            }
+
+            var casos = await consulta.ToListAsync();
             return View(casos);
         }
 
@@ -123,8 +130,19 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
             if (id == null) return NotFound();
             var caso = await _context.caso.FindAsync(id.Value);
             if (caso == null) return NotFound();
-            ViewBag.Abogados = new SelectList(_context.abogados, "idAbogado", "nombreAbogado", caso.id_Abogado);
-            ViewBag.Clientes = new SelectList(_context.cliente, "idCliente", "nombreCliente", caso.id_Cliente);
+            if (!await PuedeVerCasoAsync(caso)) return Forbid();
+
+            var abogadoActual = await ObtenerAbogadoActualAsync();
+            if (abogadoActual != null)
+            {
+                ViewBag.Abogados = new SelectList(new List<Abogado> { abogadoActual }, "idAbogado", "nombreAbogado", caso.id_Abogado);
+                ViewBag.Clientes = new SelectList(_context.cliente.Where(c => c.idAbogado == abogadoActual.idAbogado), "idCliente", "nombreCliente", caso.id_Cliente);
+            }
+            else
+            {
+                ViewBag.Abogados = new SelectList(_context.abogados, "idAbogado", "nombreAbogado", caso.id_Abogado);
+                ViewBag.Clientes = new SelectList(_context.cliente, "idCliente", "nombreCliente", caso.id_Cliente);
+            }
             return View(caso);
         }
 
@@ -133,6 +151,11 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
         public async Task<IActionResult> Edit(int id, Caso caso)
         {
             if (id != caso.idCaso) return NotFound();
+            ModelState.Remove("abogado");
+            ModelState.Remove("cliente");
+            ModelState.Remove("expediente");
+            ModelState.Remove("audiencia");
+            ModelState.Remove("pago");
             if (ModelState.IsValid)
             {
                 try
@@ -162,6 +185,7 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
                 .Include(c => c.cliente)
                 .FirstOrDefaultAsync(c => c.idCaso == id.Value);
             if (caso == null) return NotFound();
+            if (!await PuedeVerCasoAsync(caso)) return Forbid();
             return View(caso);
         }
 
@@ -173,6 +197,7 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
                 .Include(c => c.cliente)
                 .FirstOrDefaultAsync(c => c.idCaso == id.Value);
             if (caso == null) return NotFound();
+            if (!await PuedeVerCasoAsync(caso)) return Forbid();
             return View(caso);
         }
 
@@ -181,13 +206,32 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var caso = await _context.caso.FindAsync(id);
-            if (caso != null)
-            {
-                _context.caso.Remove(caso);
-                await _context.SaveChangesAsync();
-                TempData["Success"] = "Caso eliminado.";
-            }
+            if (caso == null) return NotFound();
+            if (!await PuedeVerCasoAsync(caso)) return Forbid();
+
+            _context.caso.Remove(caso);
+            await _context.SaveChangesAsync();
+            TempData["Success"] = "Caso eliminado.";
             return RedirectToAction(nameof(Index));
+        }
+
+        private async Task<Abogado?> ObtenerAbogadoActualAsync()
+        {
+            var idUsuarioClaim = User.FindFirst("IdUsuario")?.Value;
+            var idUsuarioSession = HttpContext.Session.GetInt32("IdUsuario");
+            int? idUsuario = int.TryParse(idUsuarioClaim, out var claimId) ? claimId : idUsuarioSession;
+
+            if (idUsuario == null) return null;
+
+            return await _context.abogados
+                .AsNoTracking()
+                .FirstOrDefaultAsync(a => a.id_Usuario == idUsuario.Value);
+        }
+
+        private async Task<bool> PuedeVerCasoAsync(Caso caso)
+        {
+            var abogadoActual = await ObtenerAbogadoActualAsync();
+            return abogadoActual == null || caso.id_Abogado == abogadoActual.idAbogado;
         }
     }
 }

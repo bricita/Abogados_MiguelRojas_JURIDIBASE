@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260614233946_M1")]
+    [Migration("20260626134247_M1")]
     partial class M1
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.7")
+                .HasAnnotation("ProductVersion", "10.0.0-preview.1.25081.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -412,15 +412,13 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                     b.Property<bool>("estadoExpediente")
                         .HasColumnType("bit");
 
-                    b.Property<string>("fechaCierre")
-                        .IsRequired()
+                    b.Property<DateOnly>("fechaCierre")
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("date");
 
-                    b.Property<string>("fechaInicio")
-                        .IsRequired()
+                    b.Property<DateOnly>("fechaInicio")
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("date");
 
                     b.Property<int>("id_Caso")
                         .HasColumnType("int");

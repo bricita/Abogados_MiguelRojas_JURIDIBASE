@@ -72,17 +72,10 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
                 TempData["Success"] = "Pago registrado correctamente.";
                 return RedirectToAction(nameof(Listar));
             }
-            
+
             if (pago.fechaPago > DateOnly.FromDateTime(DateTime.Today))
             {
                 ModelState.AddModelError("fechaPago", "No se permiten registrar pagos con fechas futuras.");
-            }
-            if (ModelState.IsValid)
-            {
-                _context.pago.Add(pago);
-                await _context.SaveChangesAsync();
-                TempData["Success"] = "Pago registrado correctamente.";
-                return RedirectToAction(nameof(Listar));
             }
             await CargarCombosAsync(pago.idAbogado, pago.idCliente, pago.id_Caso);
             return View(pago);

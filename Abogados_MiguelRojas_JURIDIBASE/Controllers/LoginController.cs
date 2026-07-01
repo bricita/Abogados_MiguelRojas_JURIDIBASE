@@ -26,7 +26,12 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
         }
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM model)
-        { 
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             Usuario? usuario_encontrado = await _dbconext.usuario
                 .Include(u => u.rol)
                 .Where(u => u.nombreUsuario == model.NombreUser && u.passwordUsuario == model.Password)

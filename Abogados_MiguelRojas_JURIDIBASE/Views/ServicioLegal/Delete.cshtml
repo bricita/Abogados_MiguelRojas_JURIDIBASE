@@ -1,0 +1,10 @@
+@model Abogados_MiguelRojas_JURIDIBASE.Models.ServicioLegal
+@{ ViewData["Title"] = "Eliminar Servicio Legal"; Layout = "~/Views/Shared/_Layout_Admin.cshtml"; }
+
+<h1>¿Eliminar @Model.nombreServicio?</h1>
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="idServicio" />
+    <p class="text-danger">Esta acción no se puede deshacer.</p>
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

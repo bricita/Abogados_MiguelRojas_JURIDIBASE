@@ -15,14 +15,14 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Models
         public string resumenExpediente { get; set; }
         [Required]
         public bool estadoExpediente { get; set; }
-        [Required, StringLength(20)]
+        [Required, StringLength(100)]
         public string victima {  get; set; }
-        [Required, StringLength(20)]
+        [Required, StringLength(100)]
         public string victimario {  get; set; }
         [Required, StringLength(10)]
-        public string fechaInicio { get; set; }
+        public DateOnly fechaInicio { get; set; }
         [Required, StringLength(10)]
-        public string fechaCierre { get; set; }
+        public DateOnly fechaCierre { get; set; }
 
         //Conexion de uno a uno con Caso
         public int id_Caso { get; set; }

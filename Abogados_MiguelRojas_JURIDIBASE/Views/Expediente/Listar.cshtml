@@ -3,8 +3,7 @@
 @{
     if (User.Identity.IsAuthenticated)
     {
-        // Usamos los roles exactos definidos en tu switch del Login
-        if (User.IsInRole("Administrador"))
+        if (User.IsInRole("Admin"))
         {
             Layout = "~/Views/Shared/_Layout_Admin.cshtml";
         }
@@ -44,37 +43,17 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @if (!Model.Any())
         {
             <tr>
-                <td>@item.idExpediente</td>
-                <td>@item.tituloExpediente</td>
-                <td>@item.tipoExpediente</td>
-                <td>@item.victima</td>
-                <td>@item.victimario</td>
-                <td>@item.fechaInicio - @item.fechaCierre</td>
-                <td>
-                    <span class="badge @(item.estadoExpediente ? "bg-success" : "bg-warning text-dark")">
-                        @(item.estadoExpediente ? "Activo" : "Cerrado")
-                    </span>
-                </td>
-                <td>
-                    <a asp-action="Editar" asp-route-id="@item.idExpediente" class="btn btn-sm btn-warning">Editar</a>
-                    <a asp-action="Eliminar" asp-route-id="@item.idExpediente" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar expediente?');">Eliminar</a>
+                <td colspan="8" class="text-center text-muted py-4">
+                    <i class="bi bi-calendar-x fs-4 d-block mb-2"></i>
+                    No hay expedientes registrados en el sistema.
                 </td>
             </tr>
-<<<<<<< HEAD
-        </thead>
-        <tbody>
-            @if (!Model.Any())
-            {
-                <tr>
-                    <td colspan="7" class="text-center text-muted py-4">
-                        <i class="bi bi-calendar-x fs-4 d-block mb-2"></i>
-                        No hay especialistas registrados en el sistema.
-                    </td>
-                </tr>
-            }
+        }
+        else
+        {
             @foreach (var item in Model)
             {
                 <tr>
@@ -83,7 +62,10 @@
                     <td>@item.tipoExpediente</td>
                     <td>@item.victima</td>
                     <td>@item.victimario</td>
-                    <td>@item.fechaInicio - @item.fechaCierre</td>
+                    <td>
+                        
+                        @item.fechaInicio.ToString("dd/MM/yyyy") - @item.fechaCierre.ToString("dd/MM/yyyy")
+                    </td>
                     <td>
                         <span class="badge @(item.estadoExpediente ? "bg-success" : "bg-warning text-dark")">
                             @(item.estadoExpediente ? "Activo" : "Cerrado")
@@ -91,15 +73,10 @@
                     </td>
                     <td>
                         <a asp-action="Editar" asp-route-id="@item.idExpediente" class="btn btn-sm btn-warning">Editar</a>
-                        <a asp-action="Eliminar" asp-route-id="@item.idExpediente" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar expediente?');">Eliminar</a>
+                        <a asp-action="Eliminar" asp-route-id="@item.idExpediente" class="btn btn-sm btn-danger" onclick="return confirm('¿Está seguro de eliminar este expediente?');">Eliminar</a>
                     </td>
                 </tr>
             }
-        </tbody>
-    </table>
-</div>
-=======
         }
     </tbody>
 </table>
->>>>>>> 0b16a01c5a3b43a9225cad1ef94cb59eb2b3df9e

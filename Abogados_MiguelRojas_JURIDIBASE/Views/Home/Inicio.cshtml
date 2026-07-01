@@ -1,8 +1,8 @@
-﻿
+﻿@model Abogados_MiguelRojas_JURIDIBASE.ViewModels.DashboardViewModel
+@using Abogados_MiguelRojas_JURIDIBASE.Models
 @{
     if (User.Identity.IsAuthenticated)
     {
-        // Usamos los roles exactos definidos en tu switch del Login
         if (User.IsInRole("Administrador"))
         {
             Layout = "~/Views/Shared/_Layout_Admin.cshtml";
@@ -22,81 +22,470 @@
     }
 
     ViewData["Title"] = "Inicio Abogados";
+    var displayName = ViewBag.DisplayName ?? "USUARIO";
+    var esAdmin = User.IsInRole("Administrador");
 }
 
-@{
-    // Mostrar nombre proporcionado por el controlador (ViewBag.DisplayName)
-    var displayName = ViewBag.DisplayName ?? "ABOGADO";
-}
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="display-6 fw-bold mb-1" style="color: #14222b;">Bienvenido, @displayName</h1>
+            <p class="text-secondary mb-0">Panel de control — @(esAdmin ? "Vista general del sistema" : "Tu resumen legal")</p>
+        </div>
+        <div class="d-none d-md-block">
+            <span class="badge bg-dark px-3 py-2">@DateTime.Now.ToString("dddd, dd MMMM yyyy", new System.Globalization.CultureInfo("es-PE")).ToUpper()</span>
+        </div>
+    </div>
 
-<style>
-    .home-hero .hero-title {
-        color: #14222b;
-        font-weight: 700;
-        font-size: 64px;
-        line-height: 1;
-        margin: 0 0 20px;
-        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    }
-
-    .home-hero .hero-sub {
-        color: #3b5666;
-        font-size: 24px;
-        margin-bottom: 34px;
-    }
-
-    .home-hero .hero-actions {
-        display: flex;
-        gap: 28px;
-        flex-wrap: wrap;
-        margin-top: 10px;
-    }
-
-    .home-hero .btn-hero {
-        background: #212b33;
-        color: #fff;
-        text-decoration: none;
-        display: inline-block;
-        vertical-align: middle;
-        padding: 14px 28px;
-        border-radius: 12px;
-        border: none;
-        box-shadow: none;
-        font-weight: 600;
-    }
-
-    .home-hero .btn-hero:hover {
-        background: #182027;
-        text-decoration: none;
-    }
-
-    @@media (max-width:768px) {
-        .home-hero .hero-title {
-            font-size: 36px;
+    @* ───── KPIs ───── *@
+    <div class="row g-3 mb-4">
+        @if (esAdmin)
+        {
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <div class="rounded-3 d-flex align-items-center justify-content-center" style="width:48px;height:48px;background:#e8f0fe;">
+                            <span class="fs-5">👥</span>
+                        </div>
+                        <div>
+                            <div class="fs-3 fw-bold">@Model.TotalAbogadosActivos</div>
+                            <div class="small text-secondary">Abogados activos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <div class="rounded-3 d-flex align-items-center justify-content-center" style="width:48px;height:48px;background:#e6f4ea;">
+                            <span class="fs-5">📁</span>
+                        </div>
+                        <div>
+                            <div class="fs-3 fw-bold">@Model.TotalCasosActivos</div>
+                            <div class="small text-secondary">Casos activos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <div class="rounded-3 d-flex align-items-center justify-content-center" style="width:48px;height:48px;background:#fef7e0;">
+                            <span class="fs-5">🧾</span>
+                        </div>
+                        <div>
+                            <div class="fs-3 fw-bold">@Model.TotalExpedientesActivos</div>
+                            <div class="small text-secondary">Expedientes activos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <div class="rounded-3 d-flex align-items-center justify-content-center" style="width:48px;height:48px;background:#fce8e6;">
+                            <span class="fs-5">💰</span>
+                        </div>
+                        <div>
+                            <div class="fs-3 fw-bold">S/ @Model.IngresosTotales.ToString("N2")</div>
+                            <div class="small text-secondary">Ingresos totales</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <div class="rounded-3 d-flex align-items-center justify-content-center" style="width:48px;height:48px;background:#f3e8fd;">
+                            <span class="fs-5">🔔</span>
+                        </div>
+                        <div>
+                            <div class="fs-3 fw-bold">@Model.NotificacionesNoLeidas</div>
+                            <div class="small text-secondary">No leídas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <div class="rounded-3 d-flex align-items-center justify-content-center" style="width:48px;height:48px;background:#e0f7fa;">
+                            <span class="fs-5">👤</span>
+                        </div>
+                        <div>
+                            <div class="fs-3 fw-bold">@Model.TotalUsuarios</div>
+                            <div class="small text-secondary">Usuarios</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         }
-
-        .home-hero {
-            padding: 24px;
+        else
+        {
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <div class="rounded-3 d-flex align-items-center justify-content-center" style="width:48px;height:48px;background:#e6f4ea;">
+                            <span class="fs-5">📁</span>
+                        </div>
+                        <div>
+                            <div class="fs-3 fw-bold">@Model.TotalCasosActivos</div>
+                            <div class="small text-secondary">Casos activos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <div class="rounded-3 d-flex align-items-center justify-content-center" style="width:48px;height:48px;background:#e8f0fe;">
+                            <span class="fs-5">👥</span>
+                        </div>
+                        <div>
+                            <div class="fs-3 fw-bold">@Model.TotalClientesActivos</div>
+                            <div class="small text-secondary">Clientes activos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <div class="rounded-3 d-flex align-items-center justify-content-center" style="width:48px;height:48px;background:#fef7e0;">
+                            <span class="fs-5">⚖️</span>
+                        </div>
+                        <div>
+                            <div class="fs-3 fw-bold">@Model.TotalAudienciasHoy</div>
+                            <div class="small text-secondary">Audiencias hoy</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <div class="rounded-3 d-flex align-items-center justify-content-center" style="width:48px;height:48px;background:#fce8e6;">
+                            <span class="fs-5">📅</span>
+                        </div>
+                        <div>
+                            <div class="fs-3 fw-bold">@Model.TotalCitasPendientes</div>
+                            <div class="small text-secondary">Citas pendientes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <div class="rounded-3 d-flex align-items-center justify-content-center" style="width:48px;height:48px;background:#f3e8fd;">
+                            <span class="fs-5">🔔</span>
+                        </div>
+                        <div>
+                            <div class="fs-3 fw-bold">@Model.NotificacionesNoLeidas</div>
+                            <div class="small text-secondary">Notificaciones no leídas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         }
-    }
-</style>
+    </div>
 
-@* Contenido principal — diseño adaptado al layout *@
-<div class="home-hero" style="background:#f6f8f9; padding:40px 30px; min-height:420px;">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md-10 offset-md-1">
-                <h1 class="hero-title">BUEN DÍA @displayName<br /></h1>
-                <p class="hero-sub">¿Qué vamos a hacer hoy?</p>
-
-                <div class="hero-actions">
-                    <a type="button" class="btn-hero" asp-controller="Caso" asp-action="Index">Casos</a>
-                    <a type="button" class="btn-hero" asp-controller="Expediente" asp-action="Listar">Expediente</a>
-                    <a type="button" class="btn-hero" asp-controller="Notificacion" asp-action="Listar">Notificaciones</a>
-                    <a type="button" class="btn-hero" asp-controller="Pago" asp-action="Listar">Pagos</a>
-                    <a type="button" class="btn-hero" asp-controller="Especialista" asp-action="Listar">Especialistas</a>
+    @* ───── Tablas ───── *@
+    @if (esAdmin)
+    {
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center py-3">
+                        <h5 class="mb-0 fw-semibold">Próximas audiencias</h5>
+                        <a asp-controller="Audiencia" asp-action="Index" class="btn btn-sm btn-outline-secondary">Ver todas</a>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr><th>Caso</th><th>Fecha</th><th>Hora</th><th>Tipo</th></tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.ProximasAudiencias.Count == 0)
+                                    {
+                                        <tr><td colspan="4" class="text-center text-secondary py-3">Sin audiencias programadas</td></tr>
+                                    }
+                                    @foreach (var a in Model.ProximasAudiencias)
+                                    {
+                                        <tr>
+                                            <td>@(a.caso?.tituloCaso ?? "—")</td>
+                                            <td>@a.fechaAudiencia.ToString("dd/MM/yyyy")</td>
+                                            <td>@a.horaAudiencia.ToString("hh:mm tt")</td>
+                                            <td>@a.tipoAudiencia</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center py-3">
+                        <h5 class="mb-0 fw-semibold">Últimos casos</h5>
+                        <a asp-controller="Caso" asp-action="Index" class="btn btn-sm btn-outline-secondary">Ver todos</a>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr><th>Título</th><th>Cliente</th><th>Abogado</th><th>Estado</th></tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.UltimosCasos.Count == 0)
+                                    {
+                                        <tr><td colspan="4" class="text-center text-secondary py-3">Sin casos registrados</td></tr>
+                                    }
+                                    @foreach (var c in Model.UltimosCasos)
+                                    {
+                                        <tr>
+                                            <td>@c.tituloCaso</td>
+                                            <td>@(c.cliente?.nombreCliente ?? "—")</td>
+                                            <td>@(c.abogado?.nombreAbogado ?? "—")</td>
+                                            <td><span class="badge @(c.estadoCaso ? "bg-success" : "bg-secondary")">@(c.estadoCaso ? "Activo" : "Inactivo")</span></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center py-3">
+                        <h5 class="mb-0 fw-semibold">Últimos pagos</h5>
+                        <a asp-controller="Pago" asp-action="Listar" class="btn btn-sm btn-outline-secondary">Ver todos</a>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr><th>Cliente</th><th>Caso</th><th>Monto</th><th>Fecha</th></tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.UltimosPagos.Count == 0)
+                                    {
+                                        <tr><td colspan="4" class="text-center text-secondary py-3">Sin pagos registrados</td></tr>
+                                    }
+                                    @foreach (var p in Model.UltimosPagos)
+                                    {
+                                        <tr>
+                                            <td>@(p.cliente?.nombreCliente ?? "—")</td>
+                                            <td>@(p.caso?.tituloCaso ?? "—")</td>
+                                            <td>S/ @p.monto.ToString("N2")</td>
+                                            <td>@p.fechaPago.ToString("dd/MM/yyyy")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center py-3">
+                        <h5 class="mb-0 fw-semibold">Abogados recientes</h5>
+                        <a asp-controller="Abogado" asp-action="Listar" class="btn btn-sm btn-outline-secondary">Ver todos</a>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr><th>Nombre</th><th>Especialidad</th><th>Teléfono</th><th>Estado</th></tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.AbogadosRecientes.Count == 0)
+                                    {
+                                        <tr><td colspan="4" class="text-center text-secondary py-3">Sin abogados registrados</td></tr>
+                                    }
+                                    @foreach (var a in Model.AbogadosRecientes)
+                                    {
+                                        <tr>
+                                            <td>@a.nombreAbogado @a.apellidoAbogado</td>
+                                            <td>@a.especialidadAbogado</td>
+                                            <td>@a.telefonoAbogado</td>
+                                            <td><span class="badge @(a.estadoAbogado ? "bg-success" : "bg-secondary")">@(a.estadoAbogado ? "Activo" : "Inactivo")</span></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center py-3">
+                        <h5 class="mb-0 fw-semibold">Próximas audiencias</h5>
+                        <a asp-controller="Audiencia" asp-action="Index" class="btn btn-sm btn-outline-secondary">Ver todas</a>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr><th>Caso</th><th>Fecha</th><th>Hora</th><th>Tipo</th></tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.ProximasAudiencias.Count == 0)
+                                    {
+                                        <tr><td colspan="4" class="text-center text-secondary py-3">Sin audiencias programadas</td></tr>
+                                    }
+                                    @foreach (var a in Model.ProximasAudiencias)
+                                    {
+                                        <tr>
+                                            <td>@(a.caso?.tituloCaso ?? "—")</td>
+                                            <td>@a.fechaAudiencia.ToString("dd/MM/yyyy")</td>
+                                            <td>@a.horaAudiencia.ToString("hh:mm tt")</td>
+                                            <td>@a.tipoAudiencia</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center py-3">
+                        <h5 class="mb-0 fw-semibold">Próximas citas</h5>
+                        <a asp-controller="Citas" asp-action="Index" class="btn btn-sm btn-outline-secondary">Ver todas</a>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr><th>Cliente</th><th>Asunto</th><th>Fecha</th><th>Estado</th></tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.ProximasCitas.Count == 0)
+                                    {
+                                        <tr><td colspan="4" class="text-center text-secondary py-3">Sin citas programadas</td></tr>
+                                    }
+                                    @foreach (var c in Model.ProximasCitas)
+                                    {
+                                        <tr>
+                                            <td>@(c.cliente?.nombreCliente ?? "—")</td>
+                                            <td>@c.asuntoLegalCita</td>
+                                            <td>@c.fechaHoraCita.ToString("dd/MM/yyyy")</td>
+                                            <td><span class="badge @(c.estadoCita ? "bg-success" : "bg-warning text-dark")">@(c.estadoCita ? "Confirmada" : "Pendiente")</span></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center py-3">
+                        <h5 class="mb-0 fw-semibold">Últimos casos</h5>
+                        <a asp-controller="Caso" asp-action="Index" class="btn btn-sm btn-outline-secondary">Ver todos</a>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr><th>Título</th><th>Cliente</th><th>Estado</th></tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.UltimosCasos.Count == 0)
+                                    {
+                                        <tr><td colspan="3" class="text-center text-secondary py-3">Sin casos registrados</td></tr>
+                                    }
+                                    @foreach (var c in Model.UltimosCasos)
+                                    {
+                                        <tr>
+                                            <td>@c.tituloCaso</td>
+                                            <td>@(c.cliente?.nombreCliente ?? "—")</td>
+                                            <td><span class="badge @(c.estadoCaso ? "bg-success" : "bg-secondary")">@(c.estadoCaso ? "Activo" : "Inactivo")</span></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center py-3">
+                        <h5 class="mb-0 fw-semibold">Últimos pagos</h5>
+                        <a asp-controller="Pago" asp-action="Listar" class="btn btn-sm btn-outline-secondary">Ver todos</a>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr><th>Cliente</th><th>Caso</th><th>Monto</th><th>Fecha</th></tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.UltimosPagos.Count == 0)
+                                    {
+                                        <tr><td colspan="4" class="text-center text-secondary py-3">Sin pagos registrados</td></tr>
+                                    }
+                                    @foreach (var p in Model.UltimosPagos)
+                                    {
+                                        <tr>
+                                            <td>@(p.cliente?.nombreCliente ?? "—")</td>
+                                            <td>@(p.caso?.tituloCaso ?? "—")</td>
+                                            <td>S/ @p.monto.ToString("N2")</td>
+                                            <td>@p.fechaPago.ToString("dd/MM/yyyy")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center py-3">
+                        <h5 class="mb-0 fw-semibold">Notificaciones recientes</h5>
+                        <a asp-controller="Notificacion" asp-action="Listar" class="btn btn-sm btn-outline-secondary">Ver todas</a>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr><th>Título</th><th>Mensaje</th><th>Fecha</th><th>Estado</th></tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.UltimasNotificaciones.Count == 0)
+                                    {
+                                        <tr><td colspan="4" class="text-center text-secondary py-3">Sin notificaciones</td></tr>
+                                    }
+                                    @foreach (var n in Model.UltimasNotificaciones)
+                                    {
+                                        <tr class="@(!n.leido ? "fw-semibold" : "")">
+                                            <td>@n.tituloNotificacion</td>
+                                            <td>@n.mensajeNotificacion</td>
+                                            <td>@n.fechaNotificacion.ToString("dd/MM/yyyy")</td>
+                                            <td><span class="badge @(n.leido ? "bg-secondary" : "bg-primary")">@(n.leido ? "Leído" : "Nuevo")</span></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>

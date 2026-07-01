@@ -328,8 +328,8 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                     estadoExpediente = table.Column<bool>(type: "bit", nullable: false),
                     victima = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     victimario = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    fechaInicio = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    fechaCierre = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    fechaInicio = table.Column<DateOnly>(type: "date", maxLength: 10, nullable: false),
+                    fechaCierre = table.Column<DateOnly>(type: "date", maxLength: 10, nullable: false),
                     id_Caso = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

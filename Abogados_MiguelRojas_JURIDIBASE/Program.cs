@@ -49,4 +49,5 @@ app.MapControllerRoute(
     .WithStaticAssets();
 
 
+app.Urls.Add("http://localhost:5169");
 app.Run();

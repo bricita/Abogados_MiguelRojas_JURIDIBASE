@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8" />
@@ -7,7 +6,6 @@
     <title>@ViewData["Title"] - JURIDIBASE</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
-    <!-- Iconos oficiales de Bootstrap para los menús -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
@@ -44,278 +42,15 @@
                 display: flex;
                 flex-direction: column;
                 border-right: 1px solid var(--gris-acero);
-            }
-
-                #sidebar .sidebar-header {
-                    padding: 20px;
-                    background-color: #111926; /* Un tono sutilmente más oscuro para contraste */
-                    border-bottom: 2px solid var(--gris-acero);
-                    text-align: center;
-                }
-
-                    #sidebar .sidebar-header h3 {
-                        font-size: 1.4rem;
-                        font-weight: 700;
-                        letter-spacing: 1px;
-                        margin: 0;
-                        color: #ffffff;
-                    }
-
-                #sidebar ul.components {
-                    padding: 15px 0;
-                    flex-grow: 1;
-                }
-
-                #sidebar ul li {
-                    padding: 2px 15px;
-                }
-
-                    #sidebar ul li a {
-                        padding: 12px 15px;
-                        font-size: 0.95rem;
-                        color: #e2e8f0;
-                        display: flex;
-                        align-items: center;
-                        gap: 12px;
-                        text-decoration: none;
-                        border-radius: 6px;
-                        transition: all 0.2s ease;
-                    }
-
-                        #sidebar ul li a i {
-                            font-size: 1.2rem;
-                        }
-
-                        /* Hover dinámico usando el ocre/gris de la estructura */
-                        #sidebar ul li a:hover {
-                            background-color: var(--solid-grey-blue);
-                            color: #ffffff;
-                        }
-
-                    /* Elemento activo de la vista actual */
-                    #sidebar ul li.active > a {
-                        background-color: var(--solid-grey-blue);
-                        color: #ffffff;
-                        font-weight: 600;
-                    }
-
-            /* Footer de la Barra Lateral (Cerrar Sesión) */
-            .sidebar-footer {
-                padding: 15px 20px;
-                border-top: 1px solid rgba(224, 225, 221, 0.1);
-                background-color: #111926;
-            }
-
-                .sidebar-footer a {
-                    color: #fca5a5;
-                    text-decoration: none;
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    font-size: 0.9rem;
-                }
-
-                    .sidebar-footer a:hover {
-                        color: #ef4444;
-                    }
-
-            /* --- CONTENIDO PRINCIPAL --- */
-            #content {
-                width: 100%;
-                overflow-y: auto;
-                display: flex;
-                flex-direction: column;
-            }
-
-            /* Barra superior de navegación interna */
-            .top-navbar {
-                background-color: #ffffff;
-                padding: 15px 30px;
-                border-bottom: 1px solid var(--gris-acero);
-                display: flex;
-                justify-content: flex-end;
-                align-items: center;
-            }
-
-            /* Zona de renderizado de las vistas hijas */
-            .main-container {
-                padding: 30px;
-                flex-grow: 1;
-            }
-
-            /* Clases globales reutilizables basadas en tu paleta */
-            .text-secondary-juridico {
-                color: var(--gris-oxford);
-            }
-
-            .border-juridico {
-                border-color: var(--gris-acero);
-            }
-
-            .badge-cita {
-                background-color: var(--alerta-cita);
-                color: white;
-            }
-
-            .badge-urgente {
-                background-color: var(--urgencia);
-                color: white;
-            }
-
-            .btn-juridico {
-                background-color: var(--deep-dark-blue);
-                color: white;
-                border: none;
-            }
-
-                .btn-juridico:hover {
-                    background-color: var(--solid-grey-blue);
-                    color: white;
-                }
-    </style>
-</head>
-<body>
-
-    <div class="wrapper">
-        <!-- BARRA LATERAL (SIDEBAR) -->
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <h3>JURIDIBASE</h3>
-                <small class="text-muted" style="font-size: 0.75rem;">Estudio Miguel Rojas</small>
-            </div>
-
-            <ul class="list-unstyled components">
-                <li>
-                    <a asp-controller="Home" asp-action="Inicio">
-                        <i class="bi bi-house-door"></i> Inicio
-                    </a>
-                </li>
-                <li>
-                    <a asp-controller="Audiencia" asp-action="Index">
-                        <i class="bi bi-display"></i> Audiencias
-                    </a>
-                </li>
-                <li>
-                    <a asp-controller="Clientes" asp-action="Index">
-                        <i class="bi bi-people"></i> Clientes
-                    </a>
-                </li>
-                <li>
-                    <a asp-controller="Citas" asp-action="Index">
-                        <i class="bi bi-calendar3"></i> Citas
-                    </a>
-                </li>
-                <li>
-                    <a asp-controller="Caso" asp-action="Index">
-                        <i class="bi bi-calendar3"></i> Casos
-                    </a>
-                </li>
-                <li>
-                    <a asp-controller="Expediente" asp-action="Listar">
-                        <i class="bi bi-calendar3"></i> Expedientes
-                    </a>
-                </li>
-                <li>
-                    <a asp-controller="Pago" asp-action="Listar">
-                        <i class="bi bi-cash-coin"></i> Pagos
-                    </a>
-                </li>
-                
-                <li>
-                    <a asp-controller="Notificacion" asp-action="Listar">
-                        <i class="bi bi-bell-fill"></i> Notificaciones
-                    </a>
-                </li>
-                
-                
-              
-            </ul>
-
-            <!-- Sección inferior de sesión -->
-            <div class="sidebar-footer">
-                <a asp-controller="Login" asp-action="Logout">
-                    <i class="bi bi-box-arrow-left"></i> Cerrar Sesión
-                </a>
-            </div>
-        </nav>
-
-        <div id="content">
-            <div class="top-navbar">
-                <div class="user-profile d-flex align-items-center gap-2">
-                    <i class="bi bi-person-circle fs-5 text-secondary-juridico"></i>
-                    <span class="small fw-semibold text-secondary-juridico">@User.Identity?.Name</span>
-                </div>
-            </div>
-
-            <div class="main-container">
-                @RenderBody()
-            </div>
-        </div>
-    </div>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
-</html>
-=======
-﻿<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - JURIDIBASE</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-
-    <!-- Iconos oficiales de Bootstrap para los menús -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    <style>
-            :root {
-                --deep-dark-blue: #1B263B;
-                --solid-grey-blue: #415A77;
-                --blanco-humo: #F8F9FA;
-                --gris-oxford: #415A77;
-                --gris-acero: #E0E1DD;
-                --alerta-cita: #778DA9;
-                --urgencia: #A44A3F;
-            }
-
-            body {
-                background-color: var(--blanco-humo);
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                overflow-x: hidden;
-            }
-
-            /* Contenedor principal estilo Dashboard */
-            .wrapper {
-                display: flex;
-                align-items: stretch;
-                height: 100vh;
-            }
-
-            /* --- BARRA LATERAL (SIDEBAR) --- */
-            #sidebar {
-                min-width: 260px;
-                max-width: 260px;
-                background-color: var(--deep-dark-blue);
-                color: #ffffff;
-                transition: all 0.3s;
-                display: flex;
-                flex-direction: column;
-                border-right: 1px solid var(--gris-acero);
-                /* Hacer que la sidebar ocupe toda la altura y que su lista
-                   pueda desplazarse internamente sin mover el resto de la página */
                 height: 100vh;
                 overflow: hidden;
             }
 
                 #sidebar .sidebar-header {
                     padding: 20px;
-                    background-color: #111926; /* Un tono sutilmente más oscuro para contraste */
+                    background-color: #111926;
                     border-bottom: 2px solid var(--gris-acero);
                     text-align: center;
-                    /* Mantener JURIDIBASE estático dentro de la sidebar */
                     position: sticky;
                     top: 0;
                     z-index: 2;
@@ -331,30 +66,29 @@
 
                 #sidebar ul.components {
                     padding: 15px 0;
-                    /* Hacer que la lista ocupe el espacio disponible y sea scrollable */
                     flex: 1 1 auto;
                     overflow-y: auto;
                 }
 
-                /* Estilos estéticos para el scrollbar interno (WebKit + Firefox) */
-                #sidebar ul.components::-webkit-scrollbar {
-                    width: 8px;
-                }
+                    /* Estilos estéticos para el scrollbar interno (WebKit + Firefox) */
+                    #sidebar ul.components::-webkit-scrollbar {
+                        width: 8px;
+                    }
 
-                #sidebar ul.components::-webkit-scrollbar-track {
-                    background: transparent;
-                }
+                    #sidebar ul.components::-webkit-scrollbar-track {
+                        background: transparent;
+                    }
 
-                #sidebar ul.components::-webkit-scrollbar-thumb {
-                    background-color: rgba(65,90,119,0.28); /* tono suave basado en --solid-grey-blue */
-                    border-radius: 999px;
-                    border: 2px solid transparent; /* espacio alrededor para efecto */
-                    background-clip: content-box;
-                }
+                    #sidebar ul.components::-webkit-scrollbar-thumb {
+                        background-color: rgba(65,90,119,0.28);
+                        border-radius: 999px;
+                        border: 2px solid transparent;
+                        background-clip: content-box;
+                    }
 
-                #sidebar ul.components::-webkit-scrollbar-thumb:hover {
-                    background-color: rgba(65,90,119,0.45);
-                }
+                        #sidebar ul.components::-webkit-scrollbar-thumb:hover {
+                            background-color: rgba(65,90,119,0.45);
+                        }
 
                 /* Firefox */
                 #sidebar ul.components {
@@ -382,13 +116,11 @@
                             font-size: 1.2rem;
                         }
 
-                        /* Hover dinámico usando el ocre/gris de la estructura */
                         #sidebar ul li a:hover {
                             background-color: var(--solid-grey-blue);
                             color: #ffffff;
                         }
 
-                    /* Elemento activo de la vista actual */
                     #sidebar ul li.active > a {
                         background-color: var(--solid-grey-blue);
                         color: #ffffff;
@@ -400,7 +132,6 @@
                 padding: 15px 20px;
                 border-top: 1px solid rgba(224, 225, 221, 0.1);
                 background-color: #111926;
-                /* Mantener Cerrar Sesión estático en la parte baja de la sidebar */
                 position: sticky;
                 bottom: 0;
                 z-index: 2;
@@ -427,7 +158,6 @@
                 flex-direction: column;
             }
 
-            /* Barra superior de navegación interna */
             .top-navbar {
                 background-color: #ffffff;
                 padding: 15px 30px;
@@ -437,13 +167,12 @@
                 align-items: center;
             }
 
-            /* Zona de renderizado de las vistas hijas */
             .main-container {
                 padding: 30px;
                 flex-grow: 1;
             }
 
-            /* Clases globales reutilizables basadas en tu paleta */
+            /* Clases globales reutilizables */
             .text-secondary-juridico {
                 color: var(--gris-oxford);
             }
@@ -477,7 +206,6 @@
 <body>
 
     <div class="wrapper">
-        <!-- BARRA LATERAL (SIDEBAR) -->
         <nav id="sidebar">
             <div class="sidebar-header">
                 <h3>JURIDIBASE</h3>
@@ -488,6 +216,11 @@
                 <li>
                     <a asp-controller="Home" asp-action="Inicio">
                         <i class="bi bi-house-door"></i> Inicio
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Home" asp-action="Calendario">
+                        <i class="bi bi-calendar-week"></i> Calendario
                     </a>
                 </li>
                 <li>
@@ -507,12 +240,12 @@
                 </li>
                 <li>
                     <a asp-controller="Caso" asp-action="Index">
-                        <i class="bi bi-calendar3"></i> Casos
+                        <i class="bi bi-briefcase"></i> Casos
                     </a>
                 </li>
                 <li>
                     <a asp-controller="Expediente" asp-action="Listar">
-                        <i class="bi bi-calendar3"></i> Expedientes
+                        <i class="bi bi-folder2-open"></i> Expedientes
                     </a>
                 </li>
                 <li>
@@ -532,14 +265,11 @@
                 </li>
                 <li>
                     <a asp-controller="Especialista" asp-action="Listar">
-                        <i class="bi bi-people"></i> Especialistas
+                        <i class="bi bi-person-workspace"></i> Especialistas
                     </a>
                 </li>
-                
-              
             </ul>
 
-            <!-- Sección inferior de sesión -->
             <div class="sidebar-footer">
                 <a asp-controller="Login" asp-action="Logout">
                     <i class="bi bi-box-arrow-left"></i> Cerrar Sesión
@@ -549,6 +279,12 @@
 
         <div id="content">
             <div class="top-navbar">
+                <form asp-controller="Home" asp-action="Buscar" method="get" class="d-flex align-items-center gap-2 me-auto" style="max-width:400px;flex:1;">
+                    <div class="input-group input-group-sm">
+                        <input type="text" name="q" class="form-control" placeholder="Buscar casos, clientes, expedientes..." value="@Context.Request.Query["q"]" />
+                        <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+                    </div>
+                </form>
                 <div class="user-profile d-flex align-items-center gap-2">
                     <i class="bi bi-person-circle fs-5 text-secondary-juridico"></i>
                     <span class="small fw-semibold text-secondary-juridico">@User.Identity?.Name</span>
@@ -560,8 +296,9 @@
             </div>
         </div>
     </div>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
->>>>>>> 0b16a01c5a3b43a9225cad1ef94cb59eb2b3df9e

@@ -1,0 +1,111 @@
+@model Abogados_MiguelRojas_JURIDIBASE.Models.Abogado
+@using Abogados_MiguelRojas_JURIDIBASE.Models
+@{
+    ViewData["Title"] = "Perfil - " + Model.nombreAbogado + " " + Model.apellidoAbogado;
+    var esAdmin = User.IsInRole("Administrador");
+    Layout = esAdmin ? "~/Views/Shared/_Layout_Admin.cshtml" : "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0">Perfil del Abogado</h1>
+    <a asp-action="Listar" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Volver</a>
+</div>
+
+<div class="row g-4">
+    @* Datos del abogado *@
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body text-center">
+                <div class="rounded-circle bg-dark text-white d-flex align-items-center justify-content-center mx-auto mb-3" style="width:96px;height:96px;font-size:2.5rem;">
+                    @Model.nombreAbogado[0]@Model.apellidoAbogado[0]
+                </div>
+                <h5>@Model.nombreAbogado @Model.apellidoAbogado</h5>
+                <span class="badge @(Model.estadoAbogado ? "bg-success" : "bg-secondary") mb-3">@(Model.estadoAbogado ? "Activo" : "Inactivo")</span>
+                <hr />
+                <div class="text-start small">
+                    <p class="mb-1"><strong>DNI:</strong> @Model.dniAbogado</p>
+                    <p class="mb-1"><strong>Teléfono:</strong> @Model.telefonoAbogado</p>
+                    <p class="mb-1"><strong>Correo:</strong> @Model.correoAbogado</p>
+                    <p class="mb-1"><strong>Especialidad:</strong> @Model.especialidadAbogado</p>
+                    <p class="mb-0"><strong>Usuario:</strong> @(Model.usuario?.nombreUsuario ?? "—")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* Áreas de Derecho *@
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center py-3">
+                <h5 class="mb-0 fw-semibold">Áreas de Derecho</h5>
+            </div>
+            <div class="card-body">
+                @if (Model.abogadoArea.Count == 0)
+                {
+                    <p class="text-secondary mb-3">Sin áreas asignadas.</p>
+                }
+                <ul class="list-group list-group-flush mb-3">
+                    @foreach (var aa in Model.abogadoArea)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                            <span>@aa.areaDerecho.nombreAreaDerecho</span>
+                            <form asp-action="QuitarArea" method="post" style="display:inline;">
+                                <input type="hidden" name="idAbogado" value="@Model.idAbogado" />
+                                <input type="hidden" name="idArea" value="@aa.id_AreaDerecho" />
+                                <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-x-lg"></i></button>
+                            </form>
+                        </li>
+                    }
+                </ul>
+                @if (((SelectList)ViewBag.AreasDisponibles).Count() > 0)
+                {
+                    <form asp-action="AgregarArea" method="post" class="d-flex gap-2">
+                        <input type="hidden" name="idAbogado" value="@Model.idAbogado" />
+                        <select name="idArea" asp-items="ViewBag.AreasDisponibles" class="form-select form-select-sm">
+                            <option value="">— Seleccionar —</option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-juridico"><i class="bi bi-plus-lg"></i></button>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+
+    @* Servicios Legales *@
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center py-3">
+                <h5 class="mb-0 fw-semibold">Servicios Legales</h5>
+            </div>
+            <div class="card-body">
+                @if (Model.abogadoServicio.Count == 0)
+                {
+                    <p class="text-secondary mb-3">Sin servicios asignados.</p>
+                }
+                <ul class="list-group list-group-flush mb-3">
+                    @foreach (var s in Model.abogadoServicio)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                            <span>@s.servicioLegal.nombreServicio</span>
+                            <form asp-action="QuitarServicio" method="post" style="display:inline;">
+                                <input type="hidden" name="idAbogado" value="@Model.idAbogado" />
+                                <input type="hidden" name="idServicio" value="@s.id_ServicioLegal" />
+                                <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-x-lg"></i></button>
+                            </form>
+                        </li>
+                    }
+                </ul>
+                @if (((SelectList)ViewBag.ServiciosDisponibles).Count() > 0)
+                {
+                    <form asp-action="AgregarServicio" method="post" class="d-flex gap-2">
+                        <input type="hidden" name="idAbogado" value="@Model.idAbogado" />
+                        <select name="idServicio" asp-items="ViewBag.ServiciosDisponibles" class="form-select form-select-sm">
+                            <option value="">— Seleccionar —</option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-juridico"><i class="bi bi-plus-lg"></i></button>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</div>

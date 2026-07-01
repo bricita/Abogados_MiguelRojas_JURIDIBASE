@@ -1,4 +1,4 @@
-﻿using Abogados_MiguelRojas_JURIDIBASE.Data;
+using Abogados_MiguelRojas_JURIDIBASE.Data;
 using Abogados_MiguelRojas_JURIDIBASE.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,71 +7,71 @@ using Microsoft.EntityFrameworkCore;
 namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
 {
     [Authorize(Roles = "Administrador")]
-    public class AreaDerechoController : Controller
+    public class ServicioLegalController : Controller
     {
         private readonly AppDbContext _context;
-        public AreaDerechoController(AppDbContext context) => _context = context;
+        public ServicioLegalController(AppDbContext context) => _context = context;
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.areasDerecho.ToListAsync());
+            return View(await _context.servicio.ToListAsync());
         }
 
         public IActionResult Create() => View();
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(AreaDerecho area)
+        public async Task<IActionResult> Create(ServicioLegal servicio)
         {
             if (ModelState.IsValid)
             {
-                _context.areasDerecho.Add(area);
+                _context.servicio.Add(servicio);
                 await _context.SaveChangesAsync();
-                TempData["Success"] = "Área de derecho creada.";
+                TempData["Success"] = "Servicio legal creado.";
                 return RedirectToAction(nameof(Index));
             }
-            return View(area);
+            return View(servicio);
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var area = await _context.areasDerecho.FindAsync(id);
-            if (area == null) return NotFound();
-            return View(area);
+            var servicio = await _context.servicio.FindAsync(id);
+            if (servicio == null) return NotFound();
+            return View(servicio);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, AreaDerecho area)
+        public async Task<IActionResult> Edit(int id, ServicioLegal servicio)
         {
-            if (id != area.idAreaDerecho) return NotFound();
+            if (id != servicio.idServicio) return NotFound();
             if (ModelState.IsValid)
             {
-                _context.areasDerecho.Update(area);
+                _context.servicio.Update(servicio);
                 await _context.SaveChangesAsync();
-                TempData["Success"] = "Área de derecho actualizada.";
+                TempData["Success"] = "Servicio legal actualizado.";
                 return RedirectToAction(nameof(Index));
             }
-            return View(area);
+            return View(servicio);
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            var area = await _context.areasDerecho.FindAsync(id);
-            if (area == null) return NotFound();
-            return View(area);
+            var servicio = await _context.servicio.FindAsync(id);
+            if (servicio == null) return NotFound();
+            return View(servicio);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var area = await _context.areasDerecho.FindAsync(id);
-            if (area != null)
+            var servicio = await _context.servicio.FindAsync(id);
+            if (servicio != null)
             {
-                _context.areasDerecho.Remove(area);
+                _context.servicio.Remove(servicio);
                 await _context.SaveChangesAsync();
-                TempData["Success"] = "Área de derecho eliminada.";
+                TempData["Success"] = "Servicio legal eliminado.";
             }
             return RedirectToAction(nameof(Index));
         }

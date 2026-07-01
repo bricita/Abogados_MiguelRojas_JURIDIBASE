@@ -83,8 +83,9 @@
                     }
                 </td>
                 <td>
-                    <a class="btn btn-sm btn-warning" asp-controller="Abogado" asp-action="Editar" asp-route-id="@item.idAbogado">Editar</a>
-                    <a class="btn btn-sm btn-danger" asp-controller="Abogado" asp-action="Eliminar" asp-route-id="@item.idAbogado" onclick="return confirmar()">Eliminar</a>
+                    <a class="btn btn-sm btn-info" asp-controller="Abogado" asp-action="Perfil" asp-route-id="@item.idAbogado"><i class="bi bi-person"></i></a>
+                    <a class="btn btn-sm btn-warning" asp-controller="Abogado" asp-action="Editar" asp-route-id="@item.idAbogado"><i class="bi bi-pencil"></i></a>
+                    <a class="btn btn-sm btn-danger" asp-controller="Abogado" asp-action="Eliminar" asp-route-id="@item.idAbogado" onclick="return confirmar()"><i class="bi bi-trash"></i></a>
                 </td>
             </tr>
         }

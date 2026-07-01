@@ -28,11 +28,18 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Nuevo(Especialista especialista)
         {
-            await _context.especialista.AddAsync(especialista);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Listar));
+            if (ModelState.IsValid)
+            {
+                await _context.especialista.AddAsync(especialista);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Especialista registrado correctamente.";
+                return RedirectToAction(nameof(Listar));
+            }
+
+            return View(especialista);
         }
 
         [HttpGet]
@@ -43,11 +50,18 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Editar(Especialista especialista)
         {
-            _context.especialista.Update(especialista);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Listar));
+            if (ModelState.IsValid)
+            {
+                _context.especialista.Update(especialista);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Especialista actualizado correctamente.";
+                return RedirectToAction(nameof(Listar));
+            }
+
+            return View(especialista);
         }
 
         [HttpGet]
