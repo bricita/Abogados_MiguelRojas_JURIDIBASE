@@ -87,8 +87,10 @@
 
                 <div class="row mb-4">
                     <div class="col-md-6">
-                        <label class="form-label">ID Caso Asociado</label>
-                        <input asp-for="id_Caso" class="form-control" type="number" required />
+                        <label class="form-label">Caso Asociado</label>
+                        <select asp-for="id_Caso" class="form-select" asp-items="ViewBag.Casos">
+                            <option value="">-- Seleccione un caso --</option>
+                        </select>
                         <span asp-validation-for="id_Caso" class="text-danger"></span>
                     </div>
                 </div>
