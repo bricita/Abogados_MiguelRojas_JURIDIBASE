@@ -83,9 +83,11 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Caso caso)
         {
-            // Limpiamos errores fantasmas del ModelState para evitar falsos negativos en relaciones
             ModelState.Remove("abogado");
             ModelState.Remove("cliente");
+            ModelState.Remove("expediente");
+            ModelState.Remove("audiencia");
+            ModelState.Remove("pago");
 
             if (ModelState.IsValid)
             {

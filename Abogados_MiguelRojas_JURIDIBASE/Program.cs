@@ -28,7 +28,19 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.Migrate();
+    for (int i = 0; i < 5; i++)
+    {
+        try
+        {
+            db.Database.Migrate();
+            break;
+        }
+        catch (Exception ex) when (i < 4)
+        {
+            Console.WriteLine($"[Migrate] Intento {i + 1} falló: {ex.Message}. Reintentando en 5s...");
+            Thread.Sleep(5000);
+        }
+    }
 }
 
 if (!app.Environment.IsDevelopment())
