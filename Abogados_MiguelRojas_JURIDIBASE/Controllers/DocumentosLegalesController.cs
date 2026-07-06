@@ -63,7 +63,14 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
                 ModelState.AddModelError("archivo", "Debe seleccionar un archivo PDF.");
             }
 
-           
+            if (ModelState.IsValid)
+            {
+                _context.documento.Add(doc);
+                await _context.SaveChangesAsync();
+
+                TempData["Success"] = "Documento registrado correctamente.";
+                return RedirectToAction(nameof(Index));
+            }
 
             ViewBag.Expedientes = new SelectList(_context.expediente.Where(e => e.estadoExpediente), "idExpediente", "tituloExpediente", doc.id_Expediente);
             return View(doc);

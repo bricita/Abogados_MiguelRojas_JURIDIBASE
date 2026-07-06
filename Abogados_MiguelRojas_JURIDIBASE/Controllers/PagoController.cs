@@ -63,18 +63,23 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
                 pago.idAbogado = abogadoActual.idAbogado;
             }
 
-            if (!await PagoPerteneceAlAbogadoAsync(pago)) return Forbid();
-
             if (ModelState.IsValid)
             {
-                _context.pago.Add(pago);
-                await _context.SaveChangesAsync();
+                if (!await PagoPerteneceAlAbogadoAsync(pago))
+                {
+                    ModelState.AddModelError("", "El cliente y el caso seleccionados no coinciden con el abogado asignado. Verifique su selección.");
+                }
+                else
+                {
+                    _context.pago.Add(pago);
+                    await _context.SaveChangesAsync();
 
-                var cliente = await _context.cliente.FindAsync(pago.idCliente);
-                await Services.NotificationService.NotificarPagoAsync(_context, pago.idAbogado, cliente?.nombreCliente ?? "—", (decimal)pago.monto);
+                    var cliente = await _context.cliente.FindAsync(pago.idCliente);
+                    await Services.NotificationService.NotificarPagoAsync(_context, pago.idAbogado, cliente?.nombreCliente ?? "—", (decimal)pago.monto);
 
-                TempData["Success"] = "Pago registrado correctamente.";
-                return RedirectToAction(nameof(Listar));
+                    TempData["Success"] = "Pago registrado correctamente.";
+                    return RedirectToAction(nameof(Listar));
+                }
             }
 
             if (pago.fechaPago > DateOnly.FromDateTime(DateTime.Today))
@@ -130,23 +135,28 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
                 pago.idAbogado = abogadoActual.idAbogado;
             }
 
-            if (!await PagoPerteneceAlAbogadoAsync(pago)) return Forbid();
-
             if (ModelState.IsValid)
             {
-                try
+                if (!await PagoPerteneceAlAbogadoAsync(pago))
                 {
-                    _context.pago.Update(pago);
-                    await _context.SaveChangesAsync();
-                    TempData["Success"] = "Pago actualizado correctamente.";
+                    ModelState.AddModelError("", "El cliente y el caso seleccionados no coinciden con el abogado asignado. Verifique su selección.");
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!await _context.pago.AnyAsync(p => p.idPago == pago.idPago)) return NotFound();
-                    throw;
-                }
+                    try
+                    {
+                        _context.pago.Update(pago);
+                        await _context.SaveChangesAsync();
+                        TempData["Success"] = "Pago actualizado correctamente.";
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!await _context.pago.AnyAsync(p => p.idPago == pago.idPago)) return NotFound();
+                        throw;
+                    }
 
-                return RedirectToAction(nameof(Listar));
+                    return RedirectToAction(nameof(Listar));
+                }
             }
 
             await CargarCombosAsync(pago.idAbogado, pago.idCliente, pago.id_Caso);

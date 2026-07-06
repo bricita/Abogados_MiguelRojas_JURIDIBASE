@@ -88,6 +88,7 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
             ModelState.Remove("expediente");
             ModelState.Remove("audiencia");
             ModelState.Remove("pago");
+            
 
             if (ModelState.IsValid)
             {
