@@ -1,4 +1,4 @@
-﻿@model Abogados_MiguelRojas_JURIDIBASE.Models.Audiencia
+@model Abogados_MiguelRojas_JURIDIBASE.Models.Audiencia
 
 @{
     if (User.Identity.IsAuthenticated)
@@ -50,7 +50,7 @@
     </div>
     <div class="form-group">
         <label asp-for="horaAudiencia"></label>
-        <input asp-for="horaAudiencia" type="datetime-local" class="form-control" />
+        <input asp-for="horaAudiencia" type="time" class="form-control" />
         <span asp-validation-for="horaAudiencia" class="text-danger"></span>
     </div>
     <div class="form-group">

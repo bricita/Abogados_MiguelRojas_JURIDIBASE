@@ -10,7 +10,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("CadenaSQL"));
 });
-//Sesiones
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
@@ -22,12 +21,16 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     options.LoginPath = "/Login/Login";
     options.AccessDeniedPath = "/Home/AccesoDenegado";
 });
-//Autorizaciones
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -40,14 +43,10 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-
-
 app.MapStaticAssets();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Login}/{action=Login}/{id?}")
     .WithStaticAssets();
 
-
-app.Urls.Add("http://localhost:5169");
 app.Run();

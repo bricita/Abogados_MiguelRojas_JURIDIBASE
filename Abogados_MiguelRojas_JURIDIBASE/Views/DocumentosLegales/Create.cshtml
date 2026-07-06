@@ -3,7 +3,6 @@
 @{
     if (User.Identity.IsAuthenticated)
     {
-        // Usamos los roles exactos definidos en tu switch del Login
         if (User.IsInRole("Administrador"))
         {
             Layout = "~/Views/Shared/_Layout_Admin.cshtml";
@@ -26,16 +25,16 @@
 
 <h1>Agregar Documento</h1>
 
-<form asp-action="Create" method="post">
+<form asp-action="Create" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="nombreDocumento"></label>
         <input asp-for="nombreDocumento" class="form-control" />
         <span asp-validation-for="nombreDocumento" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="rutaDocumento"></label>
-        <input asp-for="rutaDocumento" class="form-control" />
-        <span asp-validation-for="rutaDocumento" class="text-danger"></span>
+        <label>Archivo PDF</label>
+        <input type="file" name="archivo" class="form-control" accept=".pdf" required />
+        <span class="text-danger">@Html.ValidationMessage("archivo")</span>
     </div>
     <div class="form-group">
         <label asp-for="fechaCreacion"></label>
@@ -45,6 +44,7 @@
     <div class="form-group">
         <label asp-for="id_Expediente">Expediente</label>
         <select asp-for="id_Expediente" class="form-control" asp-items="ViewBag.Expedientes"></select>
+        <span asp-validation-for="id_Expediente" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Guardar</button>
     <a class="btn btn-secondary" asp-action="Index">Cancelar</a>

@@ -45,10 +45,12 @@
     <div class="form-group">
         <label asp-for="id_Abogado">Abogado</label>
         <select asp-for="id_Abogado" class="form-control" asp-items="ViewBag.Abogados"></select>
+        <span asp-validation-for="id_Abogado" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="id_Cliente">Cliente</label>
         <select asp-for="id_Cliente" class="form-control" asp-items="ViewBag.Clientes"></select>
+        <span asp-validation-for="id_Cliente" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label class="form-label">Estado Cita</label>

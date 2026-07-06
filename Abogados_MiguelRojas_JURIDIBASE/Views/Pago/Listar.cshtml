@@ -3,7 +3,6 @@
 @{
     if (User.Identity.IsAuthenticated)
     {
-        // Usamos los roles exactos definidos en tu switch del Login
         if (User.IsInRole("Administrador"))
         {
             Layout = "~/Views/Shared/_Layout_Admin.cshtml";

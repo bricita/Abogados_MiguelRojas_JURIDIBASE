@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Abogados_MiguelRojas_JURIDIBASE.Models
@@ -16,11 +16,9 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Models
         [Required]
         public bool estadoCita { get; set; }
 
-        //Conexion de muchos a uno con Abogados
         public int id_Abogado { get; set; }
         public Abogado abogado {  get; set; }
 
-        //Conexion de muchos a uno con Cliente
         public int id_Cliente { get; set; }
         public Cliente cliente { get; set; }
     }

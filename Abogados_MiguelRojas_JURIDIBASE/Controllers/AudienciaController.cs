@@ -70,6 +70,10 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
             {
                 _context.audiencia.Add(audiencia);
                 await _context.SaveChangesAsync();
+
+                var caso = await _context.caso.FindAsync(audiencia.id_Caso);
+                await Services.NotificationService.NotificarAudienciaCreadaAsync(_context, audiencia.id_Abogado, caso?.tituloCaso ?? "—", audiencia.fechaAudiencia);
+
                 TempData["Success"] = "Audiencia registrada correctamente.";
                 return RedirectToAction(nameof(Index));
             }
@@ -141,6 +145,10 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
                 {
                     _context.Update(audiencia);
                     await _context.SaveChangesAsync();
+
+                    var caso = await _context.caso.FindAsync(audiencia.id_Caso);
+                    await Services.NotificationService.NotificarAudienciaCreadaAsync(_context, audiencia.id_Abogado, caso?.tituloCaso ?? "—", audiencia.fechaAudiencia);
+
                     TempData["Success"] = "Audiencia actualizada.";
                 }
                 catch (DbUpdateConcurrencyException)

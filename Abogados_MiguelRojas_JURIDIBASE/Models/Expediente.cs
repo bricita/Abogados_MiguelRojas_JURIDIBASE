@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Abogados_MiguelRojas_JURIDIBASE.Models
@@ -19,16 +19,14 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Models
         public string victima {  get; set; }
         [Required, StringLength(100)]
         public string victimario {  get; set; }
-        [Required, StringLength(10)]
+        [Required]
         public DateOnly fechaInicio { get; set; }
-        [Required, StringLength(10)]
+        [Required]
         public DateOnly fechaCierre { get; set; }
 
-        //Conexion de uno a uno con Caso
         public int id_Caso { get; set; }
         public Caso caso { get; set; }
 
-        //Conexion de uno a muchos con DocumentosLegales
         public ICollection<DocumentosLegales> documentosLegales { get; set; }
 
     }

@@ -64,6 +64,10 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
             {
                 _context.cita.Add(cita);
                 await _context.SaveChangesAsync();
+
+                var cliente = await _context.cliente.FindAsync(cita.id_Cliente);
+                await Services.NotificationService.NotificarCitaCreadaAsync(_context, cita.id_Abogado, cliente?.nombreCliente ?? "—", cita.fechaHoraCita);
+
                 TempData["Success"] = "Cita creada correctamente.";
                 return RedirectToAction(nameof(Index));
             }

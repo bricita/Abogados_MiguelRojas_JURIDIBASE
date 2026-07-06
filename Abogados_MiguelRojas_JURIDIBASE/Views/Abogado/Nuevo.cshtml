@@ -1,9 +1,8 @@
-﻿@model Abogados_MiguelRojas_JURIDIBASE.Models.Abogado
+@model Abogados_MiguelRojas_JURIDIBASE.Models.Abogado
 
 @{
     if (User.Identity.IsAuthenticated)
     {
-        // Usamos los roles exactos definidos en tu switch del Login
         if (User.IsInRole("Administrador"))
         {
             Layout = "~/Views/Shared/_Layout_Admin.cshtml";
@@ -33,7 +32,6 @@
 
             <form asp-controller="Abogado" asp-action="Nuevo" method="post" autocomplete="off">
 
-                <!-- Campo de Selección de Usuario Vinculado -->
                 <div class="mb-3">
                     <label class="form-label">Asignar Usuario de Sistema</label>
                     <select class="form-select" asp-for="id_Usuario" asp-items="ViewBag.Usuarios" required>
@@ -82,7 +80,6 @@
                     <span asp-validation-for="especialidadAbogado" class="text-danger"></span>
                 </div>
 
-                <!-- Checkbox de Estado -->
                 <div class="mb-4 form-check">
                     <input asp-for="estadoAbogado" type="checkbox" class="form-check-input" id="estadoAbogadoCheck" />
                     <label class="form-check-label" for="estadoAbogadoCheck">Abogado Activo</label>

@@ -13,13 +13,13 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Models
         public string descripcionEspecialista { get; set; }
         [Required, StringLength(30)]
         public string estadoEspecialista { get; set; }
-        [Required, StringLength(8)]
+        [Required, StringLength(8), RegularExpression(@"^\d{8}$", ErrorMessage = "El DNI debe tener 8 dígitos numéricos.")]
         public string dniEspecialista { get; set; }
         [Required]
         public bool disponibilidadEspecialista { get; set; }
-        [Required, StringLength(9)]
+        [Required, StringLength(9), RegularExpression(@"^\d{9}$", ErrorMessage = "El teléfono debe tener 9 dígitos numéricos.")]
         public string telefonoEspecialista { get; set; }
-        [Required, StringLength(20)]
+        [Required, StringLength(50), EmailAddress(ErrorMessage = "El correo no tiene un formato válido.")]
         public string correoEspecialista { get; set; }
     }
 }

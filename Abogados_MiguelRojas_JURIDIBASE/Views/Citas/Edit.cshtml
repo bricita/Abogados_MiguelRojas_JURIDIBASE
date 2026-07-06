@@ -3,7 +3,6 @@
 @{
     if (User.Identity.IsAuthenticated)
     {
-        // Usamos los roles exactos definidos en tu switch del Login
         if (User.IsInRole("Administrador"))
         {
             Layout = "~/Views/Shared/_Layout_Admin.cshtml";
@@ -29,30 +28,32 @@
 <form asp-action="Edit" method="post">
     <input type="hidden" asp-for="idCita" />
     <div class="form-group">
-        <label asp-for="asuntoLegalCita"></label>
+        <label class="form-label">Asunto legal</label>
         <input asp-for="asuntoLegalCita" class="form-control" />
         <span asp-validation-for="asuntoLegalCita" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="detallesAdicionalesCita"></label>
+        <label class="form-label">Detalles de la Cita</label>
         <textarea asp-for="detallesAdicionalesCita" class="form-control"></textarea>
         <span asp-validation-for="detallesAdicionalesCita" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="fechaHoraCita"></label>
+        <label class="form-label">Fecha de la Cita</label>
         <input asp-for="fechaHoraCita" type="date" class="form-control" />
         <span asp-validation-for="fechaHoraCita" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="id_Abogado">Abogado</label>
+        <label class="form-label">Abogado</label>
         <select asp-for="id_Abogado" class="form-control" asp-items="ViewBag.Abogados"></select>
+        <span asp-validation-for="id_Abogado" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="id_Cliente">Cliente</label>
         <select asp-for="id_Cliente" class="form-control" asp-items="ViewBag.Clientes"></select>
+        <span asp-validation-for="id_Cliente" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="estadoCita"></label>
+        <label asp-for="estadoCita">Estado</label>
         <input asp-for="estadoCita" type="checkbox" />
     </div>
     <button type="submit" class="btn btn-primary">Guardar</button>

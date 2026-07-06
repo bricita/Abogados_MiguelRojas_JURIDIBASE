@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Abogados_MiguelRojas_JURIDIBASE.Models
@@ -14,7 +14,6 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Models
         [Required]
         public bool estadoAreaDerecho { get; set; }
 
-        //Conexion de uno a muchos con AbogadoArea
         public ICollection<AbogadoArea> abogadoArea { get; set; }
 
     }

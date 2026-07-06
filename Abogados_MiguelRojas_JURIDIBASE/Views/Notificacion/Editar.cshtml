@@ -1,4 +1,4 @@
-﻿@model Abogados_MiguelRojas_JURIDIBASE.Models.Notificacion
+@model Abogados_MiguelRojas_JURIDIBASE.Models.Notificacion
 
 @{
     
@@ -40,11 +40,13 @@
                         <div class="mb-3">
                             <label class="form-label">Título de la Notificación</label>
                             <input asp-for="tituloNotificacion" class="form-control" required maxlength="70" />
+                            <span asp-validation-for="tituloNotificacion" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Mensaje</label>
                             <textarea asp-for="mensajeNotificacion" class="form-control" rows="4" required maxlength="500"></textarea>
+                            <span asp-validation-for="mensajeNotificacion" class="text-danger"></span>
                         </div>
 
                         <div class="row mb-3">
@@ -52,6 +54,7 @@
                                 <label class="form-label">Fecha de Notificación</label>
                                 <!-- Para DateOnly, type="date" funciona perfectamente -->
                                 <input asp-for="fechaNotificacion" class="form-control" type="date" required />
+                                <span asp-validation-for="fechaNotificacion" class="text-danger"></span>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">Estado de Lectura</label>
@@ -59,10 +62,12 @@
                                     <input asp-for="leido" class="form-check-input" type="checkbox" />
                                     <label class="form-check-label">Marcar como leído</label>
                                 </div>
+                                <span asp-validation-for="leido" class="text-danger"></span>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">ID Usuario Destino</label>
                                 <input asp-for="id_Usuario" class="form-control" type="number" required />
+                                <span asp-validation-for="id_Usuario" class="text-danger"></span>
                             </div>
                         </div>
 
@@ -76,3 +81,5 @@
         </div>
     </div>
 </div>
+
+@section Scripts{ <partial name="_ValidationScriptsPartial" /> }

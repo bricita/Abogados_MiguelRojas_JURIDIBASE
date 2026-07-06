@@ -1,8 +1,7 @@
-﻿@model Abogados_MiguelRojas_JURIDIBASE.Models.Abogado;
+@model Abogados_MiguelRojas_JURIDIBASE.Models.Abogado;
 @{
     if (User.Identity.IsAuthenticated)
     {
-        // Usamos los roles exactos definidos en tu switch del Login
         if (User.IsInRole("Administrador"))
         {
             Layout = "~/Views/Shared/_Layout_Admin.cshtml";
@@ -25,29 +24,36 @@
     <div class=" col-sm-8 offset-sm-2">
         <h2> Registro de Abogado</h2>
         <form asp-controller="Abogado" asp-action="Editar" method="post">
+            <input type="hidden" asp-for="idAbogado" />
             <div class="mb-3">
                 <label>Nombres</label>
                 <input class="form-control" type="text" asp-for="nombreAbogado" required />
+                <span asp-validation-for="nombreAbogado" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label>Apellidos</label>
                 <input class="form-control" type="text" asp-for="apellidoAbogado" required />
+                <span asp-validation-for="apellidoAbogado" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label>Teléfono</label>
                 <input class="form-control" type="text" asp-for="telefonoAbogado" required />
+                <span asp-validation-for="telefonoAbogado" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label>DNI</label>
                 <input class="form-control" type="text" asp-for="dniAbogado" required />
+                <span asp-validation-for="dniAbogado" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label>Correo</label>
                 <input class="form-control" type="email" asp-for="correoAbogado" required />
+                <span asp-validation-for="correoAbogado" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label>Especialidad</label>
                 <input class="form-control" type="text" asp-for="especialidadAbogado" required />
+                <span asp-validation-for="especialidadAbogado" class="text-danger"></span>
             </div>
 
             <div class="mb-3 form-check">
@@ -64,4 +70,4 @@
     </div>
 </div>
 
-
+@section Scripts{ <partial name="_ValidationScriptsPartial" /> }

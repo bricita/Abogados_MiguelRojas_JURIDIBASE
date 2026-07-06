@@ -3,7 +3,6 @@
 @{
     if (User.Identity.IsAuthenticated)
     {
-        // Usamos los roles exactos definidos en tu switch del Login
         if (User.IsInRole("Administrador"))
         {
             Layout = "~/Views/Shared/_Layout_Admin.cshtml";
@@ -27,7 +26,7 @@
 <h1>Documentos Legales</h1>
 
 <p>
-    <a class="btn btn-primary" asp-action="Create">Agregar Documento</a>
+    <a class="btn btn-primary" asp-action="Create">Subir Documento</a>
 </p>
 
 @if (TempData["Success"] != null)
@@ -41,6 +40,7 @@
             <th>Nombre</th>
             <th>Expediente</th>
             <th>Fecha</th>
+            <th>PDF</th>
             <th></th>
         </tr>
     </thead>
@@ -61,7 +61,10 @@
         <td>@(item.expediente != null ? item.expediente.tituloExpediente : "-")</td>
         <td>@item.fechaCreacion.ToString()</td>
         <td>
-            <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.idDocumentoLegal">Ver</a>
+            <a class="btn btn-sm btn-success" asp-action="VerPdf" asp-route-id="@item.idDocumentoLegal" target="_blank">Ver PDF</a>
+        </td>
+        <td>
+            <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.idDocumentoLegal">Detalle</a>
             <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.idDocumentoLegal">Eliminar</a>
         </td>
     </tr>

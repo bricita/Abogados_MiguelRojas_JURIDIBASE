@@ -27,13 +27,11 @@
 <h1>Agenda de Citas</h1>
 
 <p>
-    <!-- Redirige a 'Create' según los métodos de tu controlador -->
     <a class="btn btn-primary" asp-controller="Citas" asp-action="Create">
         <i class="bi bi-calendar-plus me-1"></i> Nueva Cita
     </a>
 </p>
 
-<!-- Control de alertas del TempData puesto en tu CitasController -->
 @if (TempData["Success"] != null)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -69,15 +67,12 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <!-- Propiedad del modelo: fechaHoraCita -->
                     <td class="fw-semibold">
                         @item.fechaHoraCita.ToString("dd/MM/yyyy")
                     </td>
-                    <!-- Navegación: cliente.nombreCliente -->
                     <td>
                         @(item.cliente != null ? item.cliente.nombreCliente : "No asignado")
                     </td>
-                    <!-- Navegación: abogado.nombreAbogado y apellidoAbogado -->
                     <td>
                         @if (item.abogado != null)
                         {
@@ -88,19 +83,16 @@
                             <span class="text-muted">Por asignar</span>
                         }
                     </td>
-                    <!-- Propiedad: asuntoLegalCita -->
                     <td>
                         <span class="text-truncate d-inline-block" style="max-width: 200px;" title="@item.asuntoLegalCita">
                             @item.asuntoLegalCita
                         </span>
                     </td>
-                    <!-- Propiedad: detallesAdicionalesCita -->
                     <td>
                         <span class="text-muted text-truncate d-inline-block" style="max-width: 250px;" title="@item.detallesAdicionalesCita">
                             @item.detallesAdicionalesCita
                         </span>
                     </td>
-                    <!-- Propiedad: estadoCita (Boolean) -->
                     <td>
                         @if (item.estadoCita)
                         {
@@ -111,7 +103,6 @@
                             <span class="badge bg-secondary"><i class="bi bi-clock-history me-1"></i> Pendiente</span>
                         }
                     </td>
-                    <!-- Acciones alineadas con las rutas GET del controlador -->
                     <td>
                         <div class="d-flex gap-1">
                             <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.idCita" title="Ver Detalles">

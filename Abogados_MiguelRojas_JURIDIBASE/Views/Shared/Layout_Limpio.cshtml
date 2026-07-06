@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8" />
@@ -28,7 +28,6 @@
                 height: 100vh;
             }
 
-            /* --- SIDEBAR BLOQUEADO --- */
             #sidebar {
                 min-width: 260px;
                 max-width: 260px;
@@ -37,7 +36,6 @@
                 display: flex;
                 flex-direction: column;
                 border-right: 1px solid var(--gris-acero);
-                /* Opacidad sutil para dar la sensación visual de estar deshabilitado */
                 opacity: 0.85;
             }
 
@@ -65,7 +63,6 @@
                     padding: 2px 15px;
                 }
 
-                    /* Estilo para los enlaces bloqueados */
                     #sidebar ul li a.disabled-link {
                         padding: 12px 15px;
                         font-size: 0.95rem;
@@ -78,7 +75,6 @@
                         pointer-events: none; /* Desactiva la acción de clic por completo */
                     }
 
-            /* --- CONTENIDO PRINCIPAL --- */
             #content {
                 width: 100%;
                 overflow-y: auto;
@@ -104,14 +100,12 @@
 <body>
 
     <div class="wrapper">
-        <!-- BARRA LATERAL BLOQUEADA -->
         <nav id="sidebar">
             <div class="sidebar-header">
                 <h3>JURIDIBASE</h3>
                 <small class="text-muted" style="font-size: 0.75rem;">Estudio Miguel Rojas</small>
             </div>
 
-            <!-- Los enlaces no tienen atributos asp-controller ni asp-action, y están bloqueados por CSS -->
             <ul class="list-unstyled components">
                 <li>
                     <a class="disabled-link">
@@ -136,7 +130,6 @@
             </ul>
         </nav>
 
-        <!-- AREA DE TRABAJO DEL FORMULARIO -->
         <div id="content">
             <div class="top-navbar">
                 

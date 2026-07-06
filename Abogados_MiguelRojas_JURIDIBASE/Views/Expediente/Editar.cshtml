@@ -1,9 +1,8 @@
-﻿@model Abogados_MiguelRojas_JURIDIBASE.Models.Expediente
+@model Abogados_MiguelRojas_JURIDIBASE.Models.Expediente
 
 @{
     if (User.Identity.IsAuthenticated)
     {
-        // Usamos los roles exactos definidos en tu switch del Login
         if (User.IsInRole("Administrador"))
         {
             Layout = "~/Views/Shared/_Layout_Admin.cshtml";
@@ -37,37 +36,44 @@
                     <div class="col-md-6">
                         <label class="form-label">Título del Expediente</label>
                         <input asp-for="tituloExpediente" class="form-control" required maxlength="70" />
+                        <span asp-validation-for="tituloExpediente" class="text-danger"></span>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Tipo de Expediente</label>
                         <input asp-for="tipoExpediente" class="form-control" required maxlength="70" />
+                        <span asp-validation-for="tipoExpediente" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Resumen del Expediente</label>
                     <textarea asp-for="resumenExpediente" class="form-control" rows="3" required maxlength="200"></textarea>
+                    <span asp-validation-for="resumenExpediente" class="text-danger"></span>
                 </div>
 
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label">Víctima</label>
-                        <input asp-for="victima" class="form-control" required maxlength="20" />
+                        <input asp-for="victima" class="form-control" required maxlength="100" />
+                        <span asp-validation-for="victima" class="text-danger"></span>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Victimario</label>
-                        <input asp-for="victimario" class="form-control" required maxlength="20" />
+                        <input asp-for="victimario" class="form-control" required maxlength="100" />
+                        <span asp-validation-for="victimario" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label class="form-label">Fecha de Inicio</label>
-                        <input asp-for="fechaInicio" class="form-control" type="date" required maxlength="10" />
+                        <input asp-for="fechaInicio" class="form-control" type="date" required />
+                        <span asp-validation-for="fechaInicio" class="text-danger"></span>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Fecha de Cierre</label>
-                        <input asp-for="fechaCierre" class="form-control" type="date" required maxlength="10" />
+                        <input asp-for="fechaCierre" class="form-control" type="date" required />
+                        <span asp-validation-for="fechaCierre" class="text-danger"></span>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Estado</label>
@@ -75,6 +81,7 @@
                             <option value="true">Activo</option>
                             <option value="false">Cerrado</option>
                         </select>
+                        <span asp-validation-for="estadoExpediente" class="text-danger"></span>
                     </div>
                 </div>
 
@@ -82,6 +89,7 @@
                     <div class="col-md-6">
                         <label class="form-label">ID Caso Asociado</label>
                         <input asp-for="id_Caso" class="form-control" type="number" required />
+                        <span asp-validation-for="id_Caso" class="text-danger"></span>
                     </div>
                 </div>
 
@@ -93,3 +101,5 @@
         </div>
     </div>
 </div>
+
+@section Scripts{ <partial name="_ValidationScriptsPartial" /> }

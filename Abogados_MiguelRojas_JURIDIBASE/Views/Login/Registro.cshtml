@@ -1,4 +1,4 @@
-﻿@model Abogados_MiguelRojas_JURIDIBASE.ViewModels.AbogadoVM;
+@model Abogados_MiguelRojas_JURIDIBASE.ViewModels.AbogadoVM;
 
 @{
     if (User.Identity.IsAuthenticated)
@@ -38,14 +38,22 @@
                     </div>
                     <div class="card-body">
                         <form asp-controller="Login" asp-action="Registro" method="post" autocomplete="off">
-                            <input class="form-control mb-3" type="text" placeholder="Nombres" required asp-for="Nombre" /> 
+                            <input class="form-control mb-3" type="text" placeholder="Nombres" required asp-for="Nombre" />
+                            <span asp-validation-for="Nombre" class="text-danger small"></span>
                             <input class="form-control mb-3" type="text" placeholder="Apellidos" required asp-for="Apellido" />
+                            <span asp-validation-for="Apellido" class="text-danger small"></span>
                             <input class="form-control mb-3" type="text" placeholder="Telefono" required asp-for="Telefono" />
+                            <span asp-validation-for="Telefono" class="text-danger small"></span>
                             <input class="form-control mb-3" type="text" placeholder="DNI" required asp-for="DNI" />
+                            <span asp-validation-for="DNI" class="text-danger small"></span>
                             <input class="form-control mb-3" type="text" placeholder="Especialidad" required asp-for="Especialidad" />
+                            <span asp-validation-for="Especialidad" class="text-danger small"></span>
                             <input class="form-control mb-3" type="email" placeholder="Correo" required asp-for="Correo" />
+                            <span asp-validation-for="Correo" class="text-danger small"></span>
                             <input class="form-control mb-3" type="password" placeholder="Contraseña" required asp-for="Password" />
+                            <span asp-validation-for="Password" class="text-danger small"></span>
                             <input class="form-control mb-3" type="password" placeholder="Repetir Contraseña" required asp-for="RepPassword" />
+                            <span asp-validation-for="RepPassword" class="text-danger small"></span>
                             <div class="d-grid gap-2 mb-3">
                                 <button class="btn btn-primary" type="submit">Registrarse</button>
                             </div>
@@ -63,3 +71,7 @@
         </div>
     </body>
     </html>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+

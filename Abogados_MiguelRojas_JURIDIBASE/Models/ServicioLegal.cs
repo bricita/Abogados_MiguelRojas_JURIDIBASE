@@ -13,7 +13,7 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Models
         public string descripcionServicio {  get; set; }
         [Required, StringLength(100)]
         public string estadoServicio { get; set; }
-        [Required]
+        [Required, Range(0, 999999, ErrorMessage = "El costo base no puede ser negativo.")]
         public float costoBase { get; set; }
         public ICollection<AbogadoServicio> abogadoServicio { get; set; }
     }

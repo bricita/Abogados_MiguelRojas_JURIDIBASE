@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Abogados_MiguelRojas_JURIDIBASE.Models
@@ -11,40 +11,32 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Models
         public string nombreAbogado { get; set; }
         [Required, StringLength(150)]
         public string apellidoAbogado { get; set; }
-        [Required, StringLength(50)]
+        [Required, StringLength(50), RegularExpression(@"^\d{9}$", ErrorMessage = "El teléfono debe tener 9 dígitos numéricos.")]
         public string telefonoAbogado { get; set; }
-        [Required, StringLength(20)]
+        [Required, StringLength(20), RegularExpression(@"^\d{8}$", ErrorMessage = "El DNI debe tener 8 dígitos numéricos.")]
         public string dniAbogado { get; set; }
-        [Required, StringLength(100)]
+        [Required, StringLength(100), EmailAddress(ErrorMessage = "El correo no tiene un formato válido.")]
         public string correoAbogado { get; set; }
         [Required, StringLength(50)]
         public string especialidadAbogado { get; set; }
         [Required]
         public bool estadoAbogado { get; set; }
 
-        //Conexion de uno a uno con usuario
         public int id_Usuario { get; set; }
         public Usuario usuario { get; set; }
 
-        //Conexion de uno a muchos con AbogadoArea
         public ICollection<AbogadoArea> abogadoArea { get; set; }
 
-        //Conexion de uno a muchos con AbogadoServicio
         public ICollection<AbogadoServicio> abogadoServicio { get; set; }
 
-        //Conexion de uno a muchos con Citas
         public ICollection<Cita> cita { get; set; }
 
-        //Conexion de uno a muchos con Audiencia
         public ICollection<Audiencia> audiencia { get; set; }
 
-        //Conexion de uno a muchos con caso
         public ICollection<Caso> caso { get; set; }
 
-        //Conexion de uno a muchos con clientes
         public ICollection<Cliente> cliente { get; set; }
 
-        //Conexion de uno a muchos con pagos
         public ICollection<Pago> pago { get; set; }
     }
 }

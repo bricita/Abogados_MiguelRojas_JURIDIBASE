@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Abogados_MiguelRojas_JURIDIBASE.Models
@@ -16,7 +16,6 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Models
         [Required]
         public DateOnly fechaNotificacion { get; set; }
 
-        //Conexion de muchos a uno con usuario
         public int id_Usuario { get; set; }
         public Usuario usuario { get; set; }
         

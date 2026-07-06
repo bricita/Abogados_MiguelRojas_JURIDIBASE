@@ -69,6 +69,10 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
             {
                 _context.pago.Add(pago);
                 await _context.SaveChangesAsync();
+
+                var cliente = await _context.cliente.FindAsync(pago.idCliente);
+                await Services.NotificationService.NotificarPagoAsync(_context, pago.idAbogado, cliente?.nombreCliente ?? "—", (decimal)pago.monto);
+
                 TempData["Success"] = "Pago registrado correctamente.";
                 return RedirectToAction(nameof(Listar));
             }

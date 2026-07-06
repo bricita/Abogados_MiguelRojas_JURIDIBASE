@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  web_app:
+    container_name: juridibase_web
+    image: juridibase_web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9090:8080"
+    depends_on:
+      - sql_db
+    environment:
+      - ConnectionStrings__CadenaSQL=Server=sql_db;Database=DB_JURIDIBASE_MIGUELROJAS;User Id=sa;Password=Upn_2026_Juridibase#;TrustServerCertificate=True;
+
+  sql_db:
+    container_name: juridibase_db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    user: "0:0"
+    ports:
+      - "1434:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Upn_2026_Juridibase#
+    volumes:
+      - mssql_data:/var/opt/mssql/data
+
+volumes:
+  mssql_data:

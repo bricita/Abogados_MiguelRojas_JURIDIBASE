@@ -88,6 +88,52 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
             return RedirectToAction(nameof(Listar));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ObtenerNotificaciones()
+        {
+            var idUsuario = ObtenerIdUsuarioActual();
+            if (idUsuario == null) return Json(new { noLeidas = 0, items = new List<object>() });
+
+            var noLeidas = await _context.notificacion.CountAsync(n => n.id_Usuario == idUsuario && !n.leido);
+
+            var items = await _context.notificacion
+                .Where(n => n.id_Usuario == idUsuario)
+                .OrderByDescending(n => n.fechaNotificacion)
+                .Take(8)
+                .Select(n => new
+                {
+                    n.idNotificacion,
+                    n.tituloNotificacion,
+                    n.mensajeNotificacion,
+                    n.leido,
+                    fecha = n.fechaNotificacion.ToString("dd/MM/yyyy")
+                })
+                .ToListAsync();
+
+            return Json(new { noLeidas, items });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> MarcarLeido(int id)
+        {
+            var notif = await _context.notificacion.FindAsync(id);
+            if (notif == null) return NotFound();
+            notif.leido = true;
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> MarcarTodoLeido()
+        {
+            var idUsuario = ObtenerIdUsuarioActual();
+            if (idUsuario == null) return Ok();
+            await _context.notificacion
+                .Where(n => n.id_Usuario == idUsuario && !n.leido)
+                .ExecuteUpdateAsync(setters => setters.SetProperty(n => n.leido, true));
+            return Ok();
+        }
+
         private int? ObtenerIdUsuarioActual()
         {
             var idUsuarioClaim = User.FindFirst("IdUsuario")?.Value;

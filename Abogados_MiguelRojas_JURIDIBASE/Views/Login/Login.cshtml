@@ -1,4 +1,4 @@
-﻿@model Abogados_MiguelRojas_JURIDIBASE.ViewModels.LoginVM
+@model Abogados_MiguelRojas_JURIDIBASE.ViewModels.LoginVM
 
 @{
     Layout = null;
@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
     <style>
-            /* Paleta de colores idéntica al Layout */
             :root {
                 --deep-dark-blue: #1B263B;
                 --solid-grey-blue: #415A77;
@@ -23,7 +22,6 @@
             }
 
             body {
-                /* Degradado sutil usando los tonos azulados de la paleta */
                 background: linear-gradient(135deg, #415A77 0%, var(--deep-dark-blue) 100%);
                 height: 100vh;
                 display: flex;
@@ -62,13 +60,11 @@
                 font-weight: 400;
             }
 
-            /* Enfoque de inputs usando Solid Grey-Blue */
             .form-control:focus {
                 border-color: var(--solid-grey-blue);
                 box-shadow: 0 0 0 0.25rem rgba(65, 90, 119, 0.25);
             }
 
-            /* Botón institucional */
             .btn-legal {
                 background-color: var(--deep-dark-blue);
                 color: #ffffff;
@@ -89,7 +85,6 @@
                 font-size: 0.9rem;
             }
 
-            /* Enlace inferior estilizado */
             .register-link {
                 color: var(--solid-grey-blue);
                 text-decoration: none;
@@ -142,7 +137,6 @@
                             </div>
                         }
 
-                        <!-- Enlace de registro mejor alineado y con los estilos del sistema -->
                         <div class="text-center mt-3 small text-muted">
                             ¿No tienes una cuenta? <a asp-controller="Usuario" asp-action="Nuevo" asp-route-publico="true" class="register-link">Regístrate aquí</a>
                         </div>
@@ -156,5 +150,9 @@
             </div>
         </div>
     </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>

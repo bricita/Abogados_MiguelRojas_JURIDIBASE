@@ -312,7 +312,8 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
 
                     b.Property<string>("tipoCliente")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("idCliente");
 
@@ -342,8 +343,8 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
 
                     b.Property<string>("rutaDocumento")
                         .IsRequired()
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("idDocumentoLegal");
 
@@ -362,8 +363,8 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
 
                     b.Property<string>("correoEspecialista")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("descripcionEspecialista")
                         .IsRequired()
@@ -410,11 +411,9 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
                         .HasColumnType("bit");
 
                     b.Property<DateOnly>("fechaCierre")
-                        .HasMaxLength(10)
                         .HasColumnType("date");
 
                     b.Property<DateOnly>("fechaInicio")
-                        .HasMaxLength(10)
                         .HasColumnType("date");
 
                     b.Property<int>("id_Caso")
@@ -437,13 +436,13 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Migrations
 
                     b.Property<string>("victima")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("victimario")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("idExpediente");
 

@@ -91,6 +91,9 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
             {
                 _context.caso.Add(caso);
                 await _context.SaveChangesAsync();
+
+                await Services.NotificationService.NotificarCasoEstadoAsync(_context, caso.id_Abogado, caso.tituloCaso, caso.estadoCaso);
+
                 TempData["Success"] = "Caso registrado correctamente.";
                 return RedirectToAction(nameof(Index));
             }
@@ -160,8 +163,15 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Controllers
             {
                 try
                 {
+                    var casoAnterior = await _context.caso.AsNoTracking().FirstOrDefaultAsync(c => c.idCaso == caso.idCaso);
                     _context.Update(caso);
                     await _context.SaveChangesAsync();
+
+                    if (casoAnterior != null && casoAnterior.estadoCaso != caso.estadoCaso)
+                    {
+                        await Services.NotificationService.NotificarCasoEstadoAsync(_context, caso.id_Abogado, caso.tituloCaso, caso.estadoCaso);
+                    }
+
                     TempData["Success"] = "Caso actualizado.";
                 }
                 catch (DbUpdateConcurrencyException)

@@ -1,4 +1,4 @@
-﻿using Abogados_MiguelRojas_JURIDIBASE.Models;
+using Abogados_MiguelRojas_JURIDIBASE.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Abogados_MiguelRojas_JURIDIBASE.Data
@@ -32,122 +32,100 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Data
                 .HasOne(u => u.rol)
                 .WithMany(r => r.usuarios)
                 .HasForeignKey(u => u.RolId);
-            // Abogado (1) -> (M) AbogadoArea
             modelBuilder.Entity<AbogadoArea>()
                 .HasOne(u => u.abogado)
                 .WithMany(r => r.abogadoArea)
                 .HasForeignKey(u => u.id_Abogado);
 
-            // AreaDerecho (1) -> (M) AbogadoArea
             modelBuilder.Entity<AbogadoArea>()
                 .HasOne(u => u.areaDerecho)
                 .WithMany(r => r.abogadoArea)
                 .HasForeignKey(u => u.id_AreaDerecho);
 
-            // Abogado (1) -> (M) AbogadoServicio
             modelBuilder.Entity<AbogadoServicio>()
                 .HasOne(u => u.abogado)
                 .WithMany(r => r.abogadoServicio)
                 .HasForeignKey(u => u.id_Abogado);
 
-            // ServicioLegal (1) -> (M) AbogadoServicio
             modelBuilder.Entity<AbogadoServicio>()
                 .HasOne(u => u.servicioLegal)
                 .WithMany(r => r.abogadoServicio)
                 .HasForeignKey(u => u.id_ServicioLegal);
 
-            // Usuario (1) -> (M) Notificacion
             modelBuilder.Entity<Notificacion>()
                 .HasOne(u => u.usuario)
                 .WithMany(r => r.notificacion)
                 .HasForeignKey(u => u.id_Usuario);
 
-            // Usuario (1) -> (1) Abogado (FK en Abogado: id_Usuario)
             modelBuilder.Entity<Abogado>()
                 .HasOne(a => a.usuario)
                 .WithOne(u => u.abogado)
                 .HasForeignKey<Abogado>(a => a.id_Usuario);
 
-            // ==========================================
-            // CONFIGURACIONES PROTEGIDAS CONTRA CASCADA
-            // ==========================================
 
-            // Abogado (1) -> (M) Cita
             modelBuilder.Entity<Cita>()
                 .HasOne(u => u.abogado)
                 .WithMany(r => r.cita)
                 .HasForeignKey(u => u.id_Abogado)
-                .OnDelete(DeleteBehavior.Restrict); // SOLUCIÓN: Restringido
+                .OnDelete(DeleteBehavior.Restrict);
 
-            // Cliente (1) -> (M) Cita
             modelBuilder.Entity<Cita>()
                 .HasOne(u => u.cliente)
                 .WithMany(r => r.cita)
                 .HasForeignKey(u => u.id_Cliente)
-                .OnDelete(DeleteBehavior.Restrict); // SOLUCIÓN: Restringido
+                .OnDelete(DeleteBehavior.Restrict);
 
-            // Abogado (1) -> (M) Audiencia
             modelBuilder.Entity<Audiencia>()
                 .HasOne(u => u.abogado)
                 .WithMany(r => r.audiencia)
                 .HasForeignKey(u => u.id_Abogado);
 
-            // Caso (1) -> (M) Audiencia
             modelBuilder.Entity<Audiencia>()
                 .HasOne(u => u.caso)
                 .WithMany(r => r.audiencia)
                 .HasForeignKey(u => u.id_Caso);
 
-            // Abogado (1) -> (M) Caso
             modelBuilder.Entity<Caso>()
                 .HasOne(u => u.abogado)
                 .WithMany(r => r.caso)
                 .HasForeignKey(u => u.id_Abogado)
-                .OnDelete(DeleteBehavior.Restrict); // SOLUCIÓN: Restringido
+                .OnDelete(DeleteBehavior.Restrict);
 
-            // Cliente (1) -> (M) Caso
             modelBuilder.Entity<Caso>()
                 .HasOne(u => u.cliente)
                 .WithMany(r => r.caso)
                 .HasForeignKey(u => u.id_Cliente)
-                .OnDelete(DeleteBehavior.Restrict); // SOLUCIÓN: Restringido
+                .OnDelete(DeleteBehavior.Restrict);
 
-            // Abogado (1) -> (M) Cliente
             modelBuilder.Entity<Cliente>()
                 .HasOne(u => u.abogado)
                 .WithMany(r => r.cliente)
                 .HasForeignKey(u => u.idAbogado)
-                .OnDelete(DeleteBehavior.Restrict); // SOLUCIÓN: Restringido
+                .OnDelete(DeleteBehavior.Restrict);
 
-            // ==========================================
 
-            // Caso (1) -> (M) Pago
             modelBuilder.Entity<Pago>()
                 .HasOne(u => u.caso)
                 .WithMany(r => r.pago)
                 .HasForeignKey(u => u.id_Caso);
 
-            // Cliente (1) -> (M) Pago
             modelBuilder.Entity<Pago>()
                 .HasOne(u => u.cliente)
                 .WithMany(r => r.pago)
                 .HasForeignKey(u => u.idCliente)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Abogado (1) -> (M) Pago
             modelBuilder.Entity<Pago>()
                 .HasOne(u => u.abogado)
                 .WithMany(r => r.pago)
                 .HasForeignKey(u => u.idAbogado)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Caso (1) -> (1) Expediente
             modelBuilder.Entity<Expediente>()
                 .HasOne(u => u.caso)
                 .WithOne(r => r.expediente)
                 .HasForeignKey<Expediente>(u => u.id_Caso);
 
-            // Expediente (1) -> (M) DocumentosLegales
             modelBuilder.Entity<DocumentosLegales>()
                 .HasOne(u => u.expediente)
                 .WithMany(r => r.documentosLegales)
@@ -167,3 +145,4 @@ namespace Abogados_MiguelRojas_JURIDIBASE.Data
         }
     }
 }
+

@@ -1,9 +1,8 @@
-﻿@model Abogados_MiguelRojas_JURIDIBASE.Models.Especialista
+@model Abogados_MiguelRojas_JURIDIBASE.Models.Especialista
 
 @{
     if (User.Identity.IsAuthenticated)
     {
-        // Usamos los roles exactos definidos en tu switch del Login
         if (User.IsInRole("Administrador"))
         {
             Layout = "~/Views/Shared/_Layout_Admin.cshtml";
@@ -22,7 +21,6 @@
         Layout = "~/Views/Shared/Layout_Limpio.cshtml";
     }
     ViewData["Title"] = "Detalle Especialista";
-    // Estilos en línea para simular tu diseño de Figma rápidamente
 }
 
 <style>
@@ -41,8 +39,6 @@
 
         <form asp-action="Editar" method="post" class="mt-5">
             <input type="hidden" asp-for="idEspecialista" />
-            <!-- Campos ocultos necesarios para que no se pierdan al editar -->
-            <input type="hidden" asp-for="dniEspecialista" />
             <input type="hidden" asp-for="disponibilidadEspecialista" />
 
             <div class="row mb-4 align-items-center">
@@ -56,6 +52,15 @@
                 <div class="col-md-3 text-md-end figma-label">Nombre completo:</div>
                 <div class="col-md-7">
                     <input asp-for="nombreEspecialista" class="form-control figma-input" placeholder="Ingresar nombre completo" required />
+                    <span asp-validation-for="nombreEspecialista" class="text-danger small"></span>
+                </div>
+            </div>
+
+            <div class="row mb-4 align-items-center">
+                <div class="col-md-3 text-md-end figma-label">DNI:</div>
+                <div class="col-md-7">
+                    <input asp-for="dniEspecialista" class="form-control figma-input" placeholder="8 dígitos" required />
+                    <span asp-validation-for="dniEspecialista" class="text-danger small"></span>
                 </div>
             </div>
 
@@ -66,10 +71,12 @@
                         <option value="Activo">Activo</option>
                         <option value="Inactivo">Inactivo</option>
                     </select>
+                    <span asp-validation-for="estadoEspecialista" class="text-danger small"></span>
                 </div>
                 <div class="col-md-1 text-md-end figma-label">Teléfono:</div>
                 <div class="col-md-3">
                     <input asp-for="telefonoEspecialista" class="form-control figma-input" placeholder="Ingresar teléfono" required />
+                    <span asp-validation-for="telefonoEspecialista" class="text-danger small"></span>
                 </div>
             </div>
 
@@ -77,6 +84,7 @@
                 <div class="col-md-3 text-md-end figma-label">Correo Electrónico:</div>
                 <div class="col-md-7">
                     <input asp-for="correoEspecialista" type="email" class="form-control figma-input" placeholder="Ingresar correo electrónico" required />
+                    <span asp-validation-for="correoEspecialista" class="text-danger small"></span>
                 </div>
             </div>
 
@@ -84,13 +92,13 @@
                 <div class="col-md-3 text-md-end figma-label">Descripción/Perfil:</div>
                 <div class="col-md-7">
                     <input asp-for="descripcionEspecialista" class="form-control figma-input" placeholder="Ingresar descripción" required />
+                    <span asp-validation-for="descripcionEspecialista" class="text-danger small"></span>
                 </div>
             </div>
 
             <div class="row mt-5">
                 <div class="col-12 d-flex justify-content-center gap-4">
                     <button type="submit" class="figma-btn">Guardar Cambios</button>
-                    <!-- El botón de ver citas podría ser un link a otra vista en el futuro -->
                     <button type="button" class="figma-btn">Ver Citas Asociadas</button>
                     <a asp-action="Eliminar" asp-route-id="@Model.idEspecialista" class="figma-btn" style="text-decoration: none;" onclick="return confirm('¿Está seguro de eliminar este perfil?');">Eliminar Perfil</a>
                 </div>
@@ -98,3 +106,5 @@
         </form>
     </div>
 </div>
+
+@section Scripts{ <partial name="_ValidationScriptsPartial" /> }

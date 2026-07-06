@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8" />
@@ -6,7 +6,6 @@
     <title>@ViewData["Title"] - JURIDIBASE</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
-    <!-- Iconos oficiales de Bootstrap para los menús -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
@@ -26,14 +25,12 @@
                 overflow-x: hidden;
             }
 
-            /* Contenedor principal estilo Dashboard */
             .wrapper {
                 display: flex;
                 align-items: stretch;
                 height: 100vh;
             }
 
-            /* --- BARRA LATERAL (SIDEBAR) --- */
             #sidebar {
                 min-width: 260px;
                 max-width: 260px;
@@ -85,20 +82,17 @@
                             font-size: 1.2rem;
                         }
 
-                        /* Hover dinámico usando el ocre/gris de la estructura */
                         #sidebar ul li a:hover {
                             background-color: var(--solid-grey-blue);
                             color: #ffffff;
                         }
 
-                    /* Elemento activo de la vista actual */
                     #sidebar ul li.active > a {
                         background-color: var(--solid-grey-blue);
                         color: #ffffff;
                         font-weight: 600;
                     }
 
-            /* Footer de la Barra Lateral (Cerrar Sesión) */
             .sidebar-footer {
                 padding: 15px 20px;
                 border-top: 1px solid rgba(224, 225, 221, 0.1);
@@ -118,7 +112,6 @@
                         color: #ef4444;
                     }
 
-            /* --- CONTENIDO PRINCIPAL --- */
             #content {
                 width: 100%;
                 overflow-y: auto;
@@ -126,7 +119,6 @@
                 flex-direction: column;
             }
 
-            /* Barra superior de navegación interna */
             .top-navbar {
                 background-color: #ffffff;
                 padding: 15px 30px;
@@ -136,13 +128,11 @@
                 align-items: center;
             }
 
-            /* Zona de renderizado de las vistas hijas */
             .main-container {
                 padding: 30px;
                 flex-grow: 1;
             }
 
-            /* Clases globales reutilizables basadas en tu paleta */
             .text-secondary-juridico {
                 color: var(--gris-oxford);
             }
@@ -176,7 +166,6 @@
 <body>
 
     <div class="wrapper">
-        <!-- BARRA LATERAL (SIDEBAR) -->
         <nav id="sidebar">
             <div class="sidebar-header">
                 <h3>JURIDIBASE</h3>
@@ -239,9 +228,7 @@
             </div>
         </nav>
 
-        <!-- AREA DE CONTENIDO PRINCIPAL -->
         <div id="content">
-            <!-- Barra Superior Fija (Top Navbar) -->
             <div class="top-navbar">
                 <form asp-controller="Home" asp-action="Buscar" method="get" class="d-flex align-items-center gap-2 me-auto" style="max-width:400px;flex:1;">
                     <div class="input-group input-group-sm">
@@ -249,13 +236,27 @@
                         <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
                     </div>
                 </form>
-                <div class="user-profile d-flex align-items-center gap-2">
-                    <i class="bi bi-person-circle fs-5 text-secondary-juridico"></i>
-                    <span class="small fw-semibold text-secondary-juridico">@User.Identity?.Name</span>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="dropdown" id="notifDropdown">
+                        <button class="btn btn-sm position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background:none;border:none;">
+                            <i class="bi bi-bell fs-5 text-secondary-juridico"></i>
+                            <span id="notifBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:0.6rem;display:none;">0</span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end shadow-sm" style="width:360px;max-height:480px;overflow-y:auto;">
+                            <div class="d-flex justify-content-between align-items-center px-3 py-2 border-bottom">
+                                <h6 class="mb-0 fw-semibold">Notificaciones</h6>
+                                <button id="marcarTodoLeido" class="btn btn-sm btn-link text-decoration-none p-0">Marcar todo leído</button>
+                            </div>
+                            <div id="notifList"><div class="text-center text-secondary py-3"><small>Cargando...</small></div></div>
+                        </div>
+                    </div>
+                    <div class="user-profile d-flex align-items-center gap-2">
+                        <i class="bi bi-person-circle fs-5 text-secondary-juridico"></i>
+                        <span class="small fw-semibold text-secondary-juridico">@User.Identity?.Name</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Contenedor de las vistas del sistema -->
             <div class="main-container">
                 @RenderBody()
             </div>
@@ -265,5 +266,45 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        function cargarNotificaciones() {
+            $.get('@Url.Action("ObtenerNotificaciones", "Notificacion")', function (data) {
+                var badge = $('#notifBadge');
+                var list = $('#notifList');
+                if (data.noLeidas > 0) {
+                    badge.text(data.noLeidas).show();
+                } else {
+                    badge.hide();
+                }
+                if (data.items.length === 0) {
+                    list.html('<div class="text-center text-secondary py-3"><small>Sin notificaciones</small></div>');
+                    return;
+                }
+                var html = '';
+                $.each(data.items, function (i, n) {
+                    html += '<div class="dropdown-item' + (n.leido ? '' : ' fw-semibold bg-light') + '" style="white-space:normal;cursor:pointer;" data-id="' + n.idNotificacion + '">';
+                    html += '<div class="d-flex justify-content-between"><small class="fw-bold">' + n.tituloNotificacion + '</small><small class="text-muted">' + n.fecha + '</small></div>';
+                    html += '<small class="text-secondary">' + n.mensajeNotificacion + '</small>';
+                    html += '</div>';
+                });
+                list.html(html);
+                list.find('.dropdown-item').on('click', function () {
+                    var id = $(this).data('id');
+                    $.post('@Url.Action("MarcarLeido", "Notificacion")', { id: id }, function () {
+                        cargarNotificaciones();
+                    });
+                });
+            });
+        }
+        $(document).ready(function () {
+            cargarNotificaciones();
+            setInterval(cargarNotificaciones, 30000);
+            $('#marcarTodoLeido').on('click', function () {
+                $.post('@Url.Action("MarcarTodoLeido", "Notificacion")', function () {
+                    cargarNotificaciones();
+                });
+            });
+        });
+    </script>
 </body>
 </html>

@@ -3,7 +3,6 @@
 @{
     if (User.Identity.IsAuthenticated)
     {
-        // Usamos los roles exactos definidos en tu switch del Login
         if (User.IsInRole("Administrador"))
         {
             Layout = "~/Views/Shared/_Layout_Admin.cshtml";
@@ -98,7 +97,6 @@
                     </div>
                 }
 
-                <!-- Checkbox de Estado -->
                 <div class="mb-4 form-check">
                     <input asp-for="estadoCliente" type="checkbox" class="form-check-input" id="estadoClienteCheck" />
                     <label class="form-check-label" for="estadoClienteCheck">Cliente Activo</label>
